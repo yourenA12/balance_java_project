@@ -1,4 +1,4 @@
-package com.trkj.balance.modules.attendance_management;
+package com.trkj.code.modules.attendance_management;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
