@@ -17,16 +17,17 @@ import java.util.List;
  * </p>
  *
  * @author 友人A
- * @since 2021-12-28
+ * @since 2021-12-29
  */
 @RestController
 @RequestMapping("/staff")
 public class StaffController {
+
     @Autowired
     private StaffService staffService;
 
-    @GetMapping("/tyui")
-    public List<Staff> list(){
+    @GetMapping("tyui")
+    private List<Staff> list(){
         return staffService.list();
     }
 
