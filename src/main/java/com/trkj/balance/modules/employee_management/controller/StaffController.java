@@ -3,6 +3,7 @@ package com.trkj.balance.modules.employee_management.controller;
 
 import com.trkj.balance.modules.employee_management.entity.Staff;
 import com.trkj.balance.modules.employee_management.service.StaffService;
+import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,11 @@ public class StaffController {
     @GetMapping("tyui")
     private List<Staff> list(){
         return staffService.list();
+    }
+
+    @GetMapping("tyui1")
+    private AjaxResponse list1(){
+        return AjaxResponse.success(staffService.list());
     }
 
 }
