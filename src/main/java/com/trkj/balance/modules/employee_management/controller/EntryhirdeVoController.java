@@ -29,4 +29,13 @@ public class EntryhirdeVoController {
 
     }
 
+    @GetMapping("/selectEntryhirdeVo/{currenPage}/{pagesize}")
+    public IPage<EntryhirdeVo> selectEntryhirdeVo1(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+
+        Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
+        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirde1(page);
+        return list;
+
+    }
+
 }
