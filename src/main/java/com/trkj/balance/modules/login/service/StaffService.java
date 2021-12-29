@@ -11,8 +11,10 @@ import java.util.List;
  * </p>
  *
  * @author 友人A
- * @since 2021-12-28
+ * @since 2021-12-29
  */
 public interface StaffService extends IService<Staff> {
+
     List<Staff> list();
+
 }

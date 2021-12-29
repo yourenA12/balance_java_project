@@ -19,7 +19,7 @@ public class MybatisPlusCode {
         //代码输出目录
         globalConfig.setOutputDir(property + "/src/main/java/");
         /*生成作者的信息*/
-        globalConfig.setAuthor("友人A");
+        globalConfig.setAuthor("林落。");
         //是否打开资源管理器
         globalConfig.setOpen(false);
         //是否覆盖原来生成的文件

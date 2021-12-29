@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 友人A
- * @since 2021-12-28
+ * @since 2021-12-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -131,6 +131,10 @@ public class Staff implements Serializable {
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
 
+    @ApiModelProperty(value = "员工状态")
+    @TableField("STAFF_STATE")
+    private Long staffState;
+
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
@@ -146,9 +150,6 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
-
-    @TableField("POST_ID")
-    private Long postId;
 
 
 }
