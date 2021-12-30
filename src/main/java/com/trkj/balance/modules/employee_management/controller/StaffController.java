@@ -31,5 +31,10 @@ public class StaffController {
         return AjaxResponse.success(staff1);
     }
 
+    @GetMapping("tyui1")
+    private AjaxResponse list1(){
+        return AjaxResponse.success(staffService.list());
+    }
+
 }
 
