@@ -86,7 +86,7 @@ public class MybatisPlusCode {
         //4、策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         //数据库表名 自己写自己模块的表名
-        strategyConfig.setInclude("ATTENDANCE_SHEET");// 不写默认生成所有的表！！！
+        strategyConfig.setInclude("CLASSES");// 不写默认生成所有的表！！！
         //包的命名规则，
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         //列的名字

@@ -18,12 +18,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {//extends??
     public void insertFill(MetaObject metaObject) {
         log.info("==start insert ······==新增");
         //setFieldValByName(java.lang.String fieldName, java.lang.Object fieldVal, org.apache.ibatis.reflection.MetaObject metaObject)
-        this.setFieldValByName("createTime",new Date(),metaObject);
-        this.setFieldValByName("updateTime",new Date(),metaObject);
+        this.setFieldValByName("createdTime",new Date(),metaObject);
+        this.setFieldValByName("updatedTime",new Date(),metaObject);
     }
     @Override//更新时的填充策略
     public void updateFill(MetaObject metaObject) {
         log.info("==start update ······==修改");
-        this.setFieldValByName("updateTime",new Date(),metaObject);
+        this.setFieldValByName("updatedTime",new Date(),metaObject);
     }
 }
