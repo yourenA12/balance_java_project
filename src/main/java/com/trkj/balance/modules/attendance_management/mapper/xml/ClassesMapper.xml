@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.attendance_management.mapper.ClassesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.attendance_management.entity.Classes">
+        <id column="CLASSES_ID" property="classesId" />
+        <result column="CLASSES_NAME" property="classesName" />
+        <result column="CLASSES_BEGIN_DATE" property="classesBeginDate" />
+        <result column="CLASSES_END_DATE" property="classesEndDate" />
+        <result column="CLASSES_STATE" property="classesState" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CLASSES_ID, CLASSES_NAME, CLASSES_BEGIN_DATE, CLASSES_END_DATE, CLASSES_STATE, REVISION, IS_DELETED, CREATED_TIME, UPDATED_TIME
+    </sql>
+
+</mapper>
