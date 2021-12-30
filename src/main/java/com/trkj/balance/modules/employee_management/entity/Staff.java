@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.employee_management.entity;
 
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,6 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("STAFF")
+@KeySequence(value = "SEQ_TRAVEL_APPLY",clazz = Long.class)
 @ApiModel(value="Staff对象", description="员工表")
 public class Staff implements Serializable {
 
