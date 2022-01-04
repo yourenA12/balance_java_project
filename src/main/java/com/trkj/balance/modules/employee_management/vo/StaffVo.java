@@ -1,13 +1,16 @@
-package com.trkj.balance.modules.employee_management.entity;
-
+package com.trkj.balance.modules.employee_management.vo;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -19,12 +22,11 @@ import lombok.experimental.Accessors;
  * @since 2021-12-29
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("STAFF")
+@AllArgsConstructor
+@NoArgsConstructor
 @KeySequence(value = "STAFF_ID",clazz = Long.class)
-@ApiModel(value="Staff对象", description="员工表")
-public class Staff implements Serializable {
+
+public class StaffVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,6 +54,7 @@ public class Staff implements Serializable {
     @TableField("STAFF_PICTURE")
     private String staffPicture;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "出生日期")
     @TableField("STAFF_BIRTHDAY")
     private Date staffBirthday;
@@ -72,6 +75,7 @@ public class Staff implements Serializable {
     @TableField("STAFF_PASS")
     private String staffPass;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
@@ -153,6 +157,14 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POST_NAME")
+    private String postName;
 
 
 }

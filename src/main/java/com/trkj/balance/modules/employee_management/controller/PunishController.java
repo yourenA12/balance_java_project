@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 简历表 前端控制器
+ * 惩罚表 前端控制器
  * </p>
  *
- * @author 林落
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-04
  */
 @RestController
-@RequestMapping("/resume")
-public class ResumeController {
+@RequestMapping("/punish")
+public class PunishController {
 
 }
 

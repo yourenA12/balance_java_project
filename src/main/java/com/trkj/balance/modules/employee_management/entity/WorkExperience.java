@@ -1,9 +1,8 @@
 package com.trkj.balance.modules.employee_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,20 +16,21 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 林落。
- * @since 2021-12-29
+ * @since 2021-12-31
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("WORK_EXPERIENCESS")
-@ApiModel(value="WorkExperiencess对象", description="工作经历表")
-public class WorkExperiencess implements Serializable {
+@TableName("WORK_EXPERIENCE")
+@KeySequence(value = "WORK_EXPERIENCE_ID",clazz = Long.class)
+@ApiModel(value="WorkExperience对象", description="工作经历表")
+public class WorkExperience implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "编号")
-    @TableId("WORK_EXPERIENCESS_ID")
-    private Long workExperiencessId;
+    @TableId("WORK_EXPERIENCE_ID")
+    private Long workExperienceId;
 
     @ApiModelProperty(value = "开始时间")
     @TableField("WORK_STARE_TIME")
@@ -40,9 +40,9 @@ public class WorkExperiencess implements Serializable {
     @TableField("WORK_END_TIME")
     private Date workEndTime;
 
-    @ApiModelProperty(value = "简历编号外键")
-    @TableField("RESUME_ID")
-    private Long resumeId;
+    @ApiModelProperty(value = "员工编号外键")
+    @TableField("STAFF_ID")
+    private Long staffId;
 
     @ApiModelProperty(value = "公司名称")
     @TableField("COMPANY_NAME")
@@ -65,20 +65,25 @@ public class WorkExperiencess implements Serializable {
     private Long positionSqmonthly;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
 
+    @ApiModelProperty(value = "员工姓名")
+    @TableField("STAFF_NAME")
+    private String staffName;
 
 }

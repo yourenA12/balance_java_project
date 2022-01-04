@@ -1,6 +1,6 @@
 package com.trkj.balance.modules.employee_management.mapper;
 
-import com.trkj.balance.modules.employee_management.entity.Educationss;
+import com.trkj.balance.modules.employee_management.entity.Education;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author 林落。
- * @since 2021-12-29
+ * @since 2021-12-31
  */
 @Mapper
-public interface EducationssMapper extends BaseMapper<Educationss> {
+public interface EducationMapper extends BaseMapper<Education> {
 
 }

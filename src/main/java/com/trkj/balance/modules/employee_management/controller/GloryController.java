@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 录用表 前端控制器
+ * 荣誉/奖励表 前端控制器
  * </p>
  *
- * @author 林落
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-04
  */
 @RestController
-@RequestMapping("/employmentTable")
-public class EmploymentTableController {
+@RequestMapping("/glory")
+public class GloryController {
 
 }
 

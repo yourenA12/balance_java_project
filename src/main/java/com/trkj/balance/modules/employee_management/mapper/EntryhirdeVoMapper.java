@@ -14,4 +14,6 @@ public interface EntryhirdeVoMapper extends BaseMapper<EntryhirdeVo> {
          @Select("select * from EMPLOYMENT_TABLE e  left JOIN RESUME r on e.RESUME_ID=r.RESUME_ID LEFT JOIN RECRUITMENT_PLAN re on r.RECRUITMENT_PLAN_ID=re.RECRUITMENT_PLAN_ID LEFT JOIN dept d on re.DEPT_ID=d.DEPT_ID LEFT JOIN DEPT_POST dp on re.DEPT_POST_ID=dp.DEPT_POST_ID LEFT JOIN WORK_EXPERIENCESS w on r.RESUME_ID=w.RESUME_ID LEFT JOIN EDUCATIONSS ed on r.RESUME_ID=ed.RESUME_ID\n" +
                  "where e.EMPLOYMENT_STATE=0")
          IPage<EntryhirdeVo> selectEntryhirde(Page<EntryhirdeVo> page);
+
+
 }
