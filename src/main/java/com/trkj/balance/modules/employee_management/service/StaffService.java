@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.employee_management.service;
 
+import com.trkj.balance.modules.employee_management.entity.Dept;
 import com.trkj.balance.modules.employee_management.entity.Staff;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public interface StaffService extends IService<Staff> {
 
-    List<Staff> list();
+    //添加员工表
+    int insertStaff(Staff staff);
 
 }

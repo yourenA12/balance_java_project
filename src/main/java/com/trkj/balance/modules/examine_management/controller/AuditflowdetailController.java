@@ -1,4 +1,4 @@
-package com.trkj.balance.modules.employee_management.controller;
+package com.trkj.balance.modules.examine_management.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 招聘计划表 前端控制器
+ * 审批流明细表 前端控制器
  * </p>
  *
- * @author 林落
+ * @author jiejie
  * @since 2021-12-29
  */
 @RestController
-@RequestMapping("/recruitmentPlan")
-public class RecruitmentPlanController {
+@RequestMapping("/auditflowdetail")
+public class AuditflowdetailController {
 
 }
 

@@ -1,16 +1,16 @@
 package com.trkj.balance.modules.employee_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -24,6 +24,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("STAFF")
+@KeySequence(value = "SEQ_TRAVEL_APPLY",clazz = Long.class)
 @ApiModel(value="Staff对象", description="员工表")
 public class Staff implements Serializable {
 
@@ -132,6 +133,10 @@ public class Staff implements Serializable {
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
 
+    @ApiModelProperty(value = "员工状态")
+    @TableField("STAFF_STATE")
+    private Long staffState;
+
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
@@ -147,9 +152,6 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
-
-    @TableField("POST_ID")
-    private Long postId;
 
 
 }
