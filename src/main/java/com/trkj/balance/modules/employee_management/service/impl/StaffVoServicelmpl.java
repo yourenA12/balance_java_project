@@ -22,4 +22,9 @@ public class StaffVoServicelmpl extends ServiceImpl<StaffVoMapper, StaffVo> impl
     public IPage<StaffVo> selectStaffVo(Page<StaffVo> page) {
         return staffVoMapper.selectStaffVo(page);
     }
+
+    @Override
+    public StaffVo selectStaffId(Long id) {
+        return staffVoMapper.selectStaffId(id);
+    }
 }

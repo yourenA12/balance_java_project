@@ -62,5 +62,10 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         return 0;
     }
 
+    @Override
+    public Staff selectStaffId(Long id) {
+        return staffMapper.selectById(id);
+    }
+
 
 }

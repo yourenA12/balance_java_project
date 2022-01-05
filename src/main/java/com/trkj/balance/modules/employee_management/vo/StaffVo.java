@@ -166,5 +166,56 @@ public class StaffVo implements Serializable {
     @TableField("POST_NAME")
     private String postName;
 
+    @ApiModelProperty(value = "编号")
+    @TableId("WORK_EXPERIENCE_ID")
+    private Long workExperienceId;
+
+    @ApiModelProperty(value = "开始时间")
+    @TableField("WORK_STARE_TIME")
+    private Date workStareTime;
+
+    @ApiModelProperty(value = "结束时间")
+    @TableField("WORK_END_TIME")
+    private Date workEndTime;
+
+    @ApiModelProperty(value = "公司名称")
+    @TableField("COMPANY_NAME")
+    private String companyName;
+
+    @ApiModelProperty(value = "所属行业")
+    @TableField("POSITION_INDUSTRY")
+    private String positionIndustry;
+
+    @ApiModelProperty(value = "工作描述")
+    @TableField("POSITION_DESCRIBE")
+    private String positionDescribe;
+
+    @ApiModelProperty(value = "税前月薪")
+    @TableField("POSITION_SQMONTHLY")
+    private Long positionSqmonthly;
+
+    @ApiModelProperty(value = "编号")
+    @TableId("EDUCATION_ID")
+    private Long educationId;
+
+    @ApiModelProperty(value = "开始时间")
+    @TableField("EDUCATION_START_TIME")
+    private Date educationStartTime;
+
+    @ApiModelProperty(value = "结束时间")
+    @TableField("EDUCATION_END_TIME")
+    private Date educationEndTime;
+
+    @ApiModelProperty(value = "学校名称")
+    @TableField("EDUCATION_STUDENTNAME")
+    private String educationStudentname;
+
+    @ApiModelProperty(value = "所属专业")
+    @TableField("EDUCATION_MAJOR")
+    private String educationMajor;
+
+    @ApiModelProperty(value = "是否全日制")
+    @TableField("EDUCATION_FULL_TIME")
+    private Long educationFullTime;
 
 }

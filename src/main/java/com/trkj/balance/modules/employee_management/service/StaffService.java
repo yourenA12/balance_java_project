@@ -18,4 +18,6 @@ public interface StaffService extends IService<Staff> {
     //添加员工表
     int insertStaff(Staff staff, WorkExperience workExperience, Education education, EmploymentTable employmentTable);
 
+    //查询员工信息
+    Staff selectStaffId(Long id);
 }

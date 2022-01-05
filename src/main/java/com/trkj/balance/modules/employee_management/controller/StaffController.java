@@ -56,7 +56,13 @@ public class StaffController {
         Page<StaffVo> page = new Page<>(currenPage,pagesize);
         IPage<StaffVo> list=staffVoService.selectStaffVo(page);
         return AjaxResponse.success(list);
+    }
 
+    //根据id查询
+    @GetMapping("/selectStaffId/{id}")
+    public AjaxResponse selectStaffId(@PathVariable("id") Long id){
+        StaffVo staff=staffVoService.selectStaffId(id);
+        return AjaxResponse.success(staff);
     }
 
 
