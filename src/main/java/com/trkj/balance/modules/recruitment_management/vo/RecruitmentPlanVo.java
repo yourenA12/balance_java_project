@@ -1,15 +1,19 @@
-package com.trkj.balance.modules.organization_management.entity;
+package com.trkj.balance.modules.recruitment_management.vo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,13 +24,9 @@ import lombok.experimental.Accessors;
  * @since 2021-12-30
  */
 @Data
-
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("RECRUITMENT_PLAN")
-@ApiModel(value="RecruitmentPlan对象", description="招聘计划表")
-
-public class RecruitmentPlan implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class RecruitmentPlanVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,12 +35,16 @@ public class RecruitmentPlan implements Serializable {
     private Long recruitmentPlanId;
 
     @ApiModelProperty(value = "招聘计划名称")
-    @TableField("RECRUITMENT_NAME")
-    private String recruitmentName;
-//
-//    @ApiModelProperty(value = "部门编号")
-//    @TableField("DEPT_ID")
-//    private Long deptId;
+    @TableField("RECRUITMENT_PLAN_NAME")
+    private String recruitmentPlanName;
+
+    @ApiModelProperty(value = "部门编号")
+    @TableField("DEPT_ID")
+    private Long deptId;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
     @ApiModelProperty(value = "部门职位编号")
     @TableField("DEPT_POST_ID")
@@ -54,6 +58,7 @@ public class RecruitmentPlan implements Serializable {
     @TableField("RECRUITMENT_PLAN_NUMBER")
     private Long recruitmentPlanNumber;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "开始时间")
     @TableField("RECRUITMENT_PLAN_START_TIME")
     private Date recruitmentPlanStartTime;
@@ -85,6 +90,32 @@ public class RecruitmentPlan implements Serializable {
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
+
+    @ApiModelProperty(value = "状态;0：启用  1：禁用")
+    @TableField("DEPT_STATE")
+    private Long deptState;
+
+
+    @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
+    @TableField("STAFF_ID")
+    private Long staffId;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POST_NAME")
+    private String postName;
+
+    @ApiModelProperty(value = "编号")
+    @TableId("MONTHLY_SALARY_ID")
+    private Long monthlySalaryId;
+
+    @ApiModelProperty(value = "月薪起始金额")
+    @TableField("MONTHLY_SALARY_STAR")
+    private Double monthlySalaryStar;
+
+    @ApiModelProperty(value = "月薪结束金额")
+    @TableField("MONTHLY_SALARY_END")
+    private Double monthlySalaryEnd;
 
 
 }
