@@ -22,8 +22,6 @@ public class ResumeVoController {
     public AjaxResponse queryPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize) {
         Page<ResumeVo> page = new Page<>(currenPage, pagesize);
         return AjaxResponse.success(resumeVoService.ResumePage(page));
-
-
     }
     //新简历
     @GetMapping("/ResumePage_a/{currenPage}/{pagesize}")
