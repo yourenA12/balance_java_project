@@ -1,115 +1,84 @@
 package com.trkj.balance.modules.employee_management.vo;
-
 import com.baomidou.mybatisplus.annotation.*;
+
+import java.util.Date;
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.util.Date;
-
+/**
+ * <p>
+ * 员工表
+ * </p>
+ *
+ * @author 友人A
+ * @since 2021-12-29
+ */
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class EntryhirdeVo  implements Serializable {
+@KeySequence(value = "STAFF_ID",clazz = Long.class)
+
+public class StaffVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "编号")
-    @TableId("RESUME_ID")
-    private Long resumeId;
+    @ApiModelProperty(value = "获奖人编号")
+    @TableId("STAFF_ID")
+    private Long staffId;
 
-    @ApiModelProperty(value = "名字")
-    @TableField("RESUME_NAME")
-    private String resumeName;
+    @ApiModelProperty(value = "员工姓名")
+    @TableField("STAFF_NAME")
+    private String staffName;
 
     @ApiModelProperty(value = "性别")
-    @TableField("RESUME_SEX")
-    private String resumeSex;
+    @TableField("STAFF_SEX")
+    private String staffSex;
 
     @ApiModelProperty(value = "手机号码")
-    @TableField("RESUME_PHONE")
-    private Long resumePhone;
-
-    @ApiModelProperty(value = "学历名称")
-    @TableField("RESUME_EDUCATION")
-    private String resumeEducation;
+    @TableField("STAFF_PHONE")
+    private Long staffPhone;
 
     @ApiModelProperty(value = "邮箱")
-    @TableField("RESUME_MAILBOX")
-    private String resumeMailbox;
+    @TableField("STAFF_EMAIL")
+    private String staffEmail;
 
     @ApiModelProperty(value = "照片")
-    @TableField("RESUME_PHOTO")
-    private String resumePhoto;
-
-    @ApiModelProperty(value = "介绍")
-    @TableField("RESUME_INTRODUCE")
-    private String resumeIntroduce;
-
-    @ApiModelProperty(value = "出生日期")
-    @TableField("RESUME_BIRTHDAY")
-    private Date resumeBirthday;
-
-    @ApiModelProperty(value = "户口所在地")
-    @TableField("RESUME_RESIDENCE")
-    private String resumeResidence;
-
-    @ApiModelProperty(value = "招聘计划编号")
-    @TableField("RECRUITMENT_PLAN_ID")
-    private Long recruitmentPlanId;
-
-    @ApiModelProperty(value = "政治面貌")
-    @TableField("RESUME_POLITICAL_OUTLOOK")
-    private String resumePoliticalOutlook;
-
-
-    @ApiModelProperty(value = "编号")
-    @TableId("EMPLOYMENT_ID")
-    private Long employmentId;
-
-    @ApiModelProperty(value = "状态 0:待入职 1:已入职 2：淘汰")
-    @TableField("EMPLOYMENT_STATE")
-    private Long employmentState;
-
-
-    @ApiModelProperty(value = "备注")
-    @TableField("REMARKS")
-    private String remarks;
+    @TableField("STAFF_PICTURE")
+    private String staffPicture;
 
     @JsonFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "入职时间")
-    @TableField("HIREDATE")
-    private Date hiredate;
+    @ApiModelProperty(value = "出生日期")
+    @TableField("STAFF_BIRTHDAY")
+    private Date staffBirthday;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableId("DEPT_ID")
-    private Long deptId;
+    @ApiModelProperty(value = "政治面貌")
+    @TableField("STAFF_OUTLOOK")
+    private String staffOutlook;
 
+    @ApiModelProperty(value = "学历")
+    @TableField("STAFF_EDUCATION")
+    private String staffEducation;
 
-    @ApiModelProperty(value = "部门名称")
-    @TableField("DEPT_NAME")
-    private String deptName;
-
-
-    @ApiModelProperty(value = "部门职位编号")
-    @TableId("DEPT_POST_ID")
+    @ApiModelProperty(value = "部门职位编号外键")
+    @TableField("DEPT_POST_ID")
     private Long deptPostId;
-
-
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
-
-
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;
 
-
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "入职日期")
+    @TableField("STAFF_HIREDATE")
+    private Date staffHiredate;
 
     @ApiModelProperty(value = "转正编号")
     @TableField("WORKER_ID")
@@ -119,6 +88,9 @@ public class EntryhirdeVo  implements Serializable {
     @TableField("STAFF_IDENTITY")
     private String staffIdentity;
 
+    @ApiModelProperty(value = "部门编号")
+    @TableField("DEPT_ID")
+    private Long deptId;
 
     @ApiModelProperty(value = "专业")
     @TableField("STAFF_MAJOR")
@@ -151,6 +123,9 @@ public class EntryhirdeVo  implements Serializable {
     @TableField("STAFF_MARITAL")
     private String staffMarital;
 
+    @ApiModelProperty(value = "户口所在地")
+    @TableField("STAFF_REGISTERED")
+    private String staffRegistered;
 
     @ApiModelProperty(value = "毕业学校")
     @TableField("STAFF_SCHOOL")
@@ -183,10 +158,17 @@ public class EntryhirdeVo  implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POST_NAME")
+    private String postName;
 
     @ApiModelProperty(value = "编号")
-    @TableId("WORK_EXPERIENCESS_ID")
-    private Long workExperiencessId;
+    @TableId("WORK_EXPERIENCE_ID")
+    private Long workExperienceId;
 
     @ApiModelProperty(value = "开始时间")
     @TableField("WORK_STARE_TIME")
@@ -199,10 +181,6 @@ public class EntryhirdeVo  implements Serializable {
     @ApiModelProperty(value = "公司名称")
     @TableField("COMPANY_NAME")
     private String companyName;
-
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POSITION_NAME")
-    private String positionName;
 
     @ApiModelProperty(value = "所属行业")
     @TableField("POSITION_INDUSTRY")
@@ -217,8 +195,8 @@ public class EntryhirdeVo  implements Serializable {
     private Long positionSqmonthly;
 
     @ApiModelProperty(value = "编号")
-    @TableId("EDUCATIONSS_ID")
-    private Long educationssId;
+    @TableId("EDUCATION_ID")
+    private Long educationId;
 
     @ApiModelProperty(value = "开始时间")
     @TableField("EDUCATION_START_TIME")
@@ -239,6 +217,5 @@ public class EntryhirdeVo  implements Serializable {
     @ApiModelProperty(value = "是否全日制")
     @TableField("EDUCATION_FULL_TIME")
     private Long educationFullTime;
-
 
 }
