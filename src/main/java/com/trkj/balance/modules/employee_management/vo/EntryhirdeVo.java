@@ -2,10 +2,13 @@ package com.trkj.balance.modules.employee_management.vo;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -69,10 +72,6 @@ public class EntryhirdeVo  implements Serializable {
     @ApiModelProperty(value = "编号")
     @TableId("EMPLOYMENT_ID")
     private Long employmentId;
-
-    @ApiModelProperty(value = "状态 0:待入职 1:已入职 2：淘汰")
-    @TableField("EMPLOYMENT_STATE")
-    private Long employmentState;
 
 
     @ApiModelProperty(value = "备注")
@@ -241,4 +240,40 @@ public class EntryhirdeVo  implements Serializable {
     private Long educationFullTime;
 
 
-}
+    @ApiModelProperty(value = "毕业学校")
+    @TableField("RESUME_SCOLLER")
+    private String resumeScoller;
+
+    @ApiModelProperty(value = "婚姻状况：已婚、未婚、离婚")
+    @TableField("RESUME_HY")
+    private String resumeHy;
+
+
+    @ApiModelProperty(value = "状态  0:新简历  1、候选人 2：已邀约  3:已淘汰 4:面试中 5:面试通过 6:复试中 7:待接受 8:已接受 9：已入职 10:已拒绝 11：放弃入职 12：已离职")
+    @TableField("RESUME_ZT")
+    private String resumeZt;
+
+
+        @ApiModelProperty(value = "试用期")
+        @TableField("PROBATION")
+        private String probation;
+
+        @ApiModelProperty(value = "试用期月薪")
+        @TableField("PROBATIONARY")
+        private Long probationary;
+
+    @ApiModelProperty(value = "正式月薪")
+        @TableField("POSITIVE_MONTHLY")
+        private Long positiveMonthly;
+
+        @ApiModelProperty(value = "放弃原因")
+        @TableField("WAIVE_REASON")
+        private String waiveReason;
+
+
+
+
+    }
+
+
+

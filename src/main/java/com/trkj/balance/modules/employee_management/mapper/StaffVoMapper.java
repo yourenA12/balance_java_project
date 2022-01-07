@@ -18,4 +18,8 @@ public interface StaffVoMapper extends BaseMapper<StaffVo> {
 
     @Select("select * from staff s LEFT JOIN dept d on s.DEPT_ID=d.DEPT_ID LEFT JOIN DEPT_POST dp on s.DEPT_POST_ID=dp.DEPT_POST_ID where s.STAFF_ID=#{id}")
     StaffVo selectStaffId(@Param("id") Long id);
+
+    //查询试用期人员
+    @Select("select * from staff s left JOIN dept d on s.DEPT_ID=d.DEPT_ID left JOIN  DEPT_POST dp on s.DEPT_POST_ID=dp.DEPT_POST_ID where s.STAFF_STATE=2")
+    IPage<StaffVo> selectProbation (Page<StaffVo> page);
 }

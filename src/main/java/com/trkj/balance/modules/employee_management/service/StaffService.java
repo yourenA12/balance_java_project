@@ -1,7 +1,10 @@
 package com.trkj.balance.modules.employee_management.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.employee_management.entity.*;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.trkj.balance.modules.employee_management.vo.GloryPunishVo;
 
 import java.util.List;
 
@@ -16,8 +19,13 @@ import java.util.List;
 public interface StaffService extends IService<Staff> {
 
     //添加员工表
-    int insertStaff(Staff staff, WorkExperience workExperience, Education education, EmploymentTable employmentTable);
+    int insertStaff(Staff staff, WorkExperience workExperience, Education education, Resume resume);
+
+    //修改简历表状态和录用表放弃原应
+    int updateResumen(Resume resume,EmploymentTable employment_table);
 
     //查询员工信息
     Staff selectStaffId(Long id);
+
+
 }

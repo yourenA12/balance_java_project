@@ -43,10 +43,19 @@ public class StaffController {
         Staff staff = JSON.parseObject(JSON.toJSONString(map.get("Staff")), Staff.class); // 取map中的 员工表数据 转换为实体类
         WorkExperience workExperience = JSON.parseObject(JSON.toJSONString(map.get("Work")), WorkExperience.class);
         Education education = JSON.parseObject(JSON.toJSONString(map.get("Education")), Education.class);
-        EmploymentTable employmentTable = JSON.parseObject(JSON.toJSONString(map.get("EmploymentTable")), EmploymentTable.class);
+        Resume resume = JSON.parseObject(JSON.toJSONString(map.get("Resume")), Resume.class);
 
         //调用入职方法，
-        return AjaxResponse.success(staffService.insertStaff(staff,workExperience,education,employmentTable));
+        return AjaxResponse.success(staffService.insertStaff(staff,workExperience,education,resume));
+    }
+
+
+    //修改简历状态和录用原因
+    @PostMapping("/updateResume")
+    public AjaxResponse updateResume(@RequestBody Map<Object, Object> map) {
+        Resume resume = JSON.parseObject(JSON.toJSONString(map.get("Resume")), Resume.class);
+        EmploymentTable employmentTable = JSON.parseObject(JSON.toJSONString(map.get("EmploymentTable")), EmploymentTable.class);
+        return AjaxResponse.success(staffService.updateResumen(resume,employmentTable));
     }
 
     //查询员工信息
@@ -64,6 +73,16 @@ public class StaffController {
         StaffVo staff=staffVoService.selectStaffId(id);
         return AjaxResponse.success(staff);
     }
+
+    //查询试用期信息
+    @GetMapping("/selectProbation/{currenPage}/{pagesize}")
+    public AjaxResponse selectProbation(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+
+        Page<StaffVo> page = new Page<>(currenPage,pagesize);
+        IPage<StaffVo> list=staffVoService.selectProbation(page);
+        return AjaxResponse.success(list);
+    }
+
 
 
     }
