@@ -48,5 +48,12 @@ public class NoticeController {
     }
 
 
+    // 查询所有部门id与名称
+    @GetMapping("/selectAllDept")
+    public AjaxResponse selectAllDept(){
+        return AjaxResponse.success( noticeService.selectAllDeptName() );
+    }
+
+
 }
 
