@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
  * 简历表 Mapper 接口
  * </p>
  *
- * @author 林落
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-05
  */
 @Mapper
 public interface ResumeMapper extends BaseMapper<Resume> {

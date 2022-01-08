@@ -52,14 +52,14 @@ public class MybatisPlusCode {
         autoGenerator.setDataSource(dataSourceConfig);
 
         // 配置模板 自定义模板
-//        TemplateConfig templateConfig = new TemplateConfig();
-//        templateConfig.setXml(null); // 不生成xml文件
+        TemplateConfig templateConfig = new TemplateConfig();
+        templateConfig.setXml(null); // 不生成xml文件
 //        templateConfig.setEntity(null); // 不生成实体类
-//        templateConfig.setMapper(null);//不生成mapper
-//        templateConfig.setService(null);//不生成service
-//        templateConfig.setServiceImpl(null);//不生成serviceImpl
-//        templateConfig.setController(null);//不生成controller
-//        autoGenerator.setTemplate(templateConfig);
+        templateConfig.setMapper(null);//不生成mapper
+        templateConfig.setService(null);//不生成service
+        templateConfig.setServiceImpl(null);//不生成serviceImpl
+        templateConfig.setController(null);//不生成controller
+        autoGenerator.setTemplate(templateConfig);
 
         //3.包的配置
         PackageConfig packageConfig = new PackageConfig();
@@ -70,7 +70,7 @@ public class MybatisPlusCode {
 
       // 不写会默认一个包名
         //实体类的名字
-//        packageConfig.setEntity("entity");
+        packageConfig.setEntity("entity");
         //Mapper的名字
 //        packageConfig.setMapper("mapper");
         //服务层的名字
@@ -86,7 +86,7 @@ public class MybatisPlusCode {
         //4、策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         //数据库表名 自己写自己模块的表名
-        strategyConfig.setInclude("EDUCATIONSS");// 不写默认生成所有的表！！！
+        strategyConfig.setInclude("EMPLOYMENT_TABLE");// 不写默认生成所有的表！！！
         //包的命名规则
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         //列的名字

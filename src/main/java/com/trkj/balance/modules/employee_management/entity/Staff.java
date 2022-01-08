@@ -1,10 +1,8 @@
 package com.trkj.balance.modules.employee_management.entity;
 
-import com.baomidou.mybatisplus.annotation.KeySequence;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,7 +22,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("STAFF")
-@KeySequence(value = "SEQ_TRAVEL_APPLY",clazz = Long.class)
+@KeySequence(value = "STAFF_ID",clazz = Long.class)
 @ApiModel(value="Staff对象", description="员工表")
 public class Staff implements Serializable {
 
@@ -137,18 +135,21 @@ public class Staff implements Serializable {
     @TableField("STAFF_STATE")
     private Long staffState;
 
+
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
+    @TableLogic // 逻辑删除注解
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
 
+    @Version // 乐观锁注解
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
