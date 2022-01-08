@@ -2,7 +2,9 @@ package com.trkj.balance.modules.examine_management.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,10 +44,12 @@ public class AuditflowdataVo implements Serializable {
     @TableField("AUDITFLOW_STATE")
     private Long auditflowState;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "修改时间")
     @TableField("UPDATED_TIME")
     private Date updatedTime;
@@ -54,6 +58,7 @@ public class AuditflowdataVo implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
