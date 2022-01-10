@@ -7,6 +7,7 @@ import com.trkj.balance.modules.attendance_management.entity.Classes;
 import com.trkj.balance.modules.attendance_management.service.ClassesService;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +27,9 @@ public class ClassesController {
     public ClassesService classesService;
 
     //分页查询
-    @GetMapping("/fy")
-    public AjaxResponse clafy(@RequestParam("currenPage") int page, @RequestParam("pagesize") int pagesize){
-        Page<Classes> pageable = new Page<>(page,pagesize);
+    @GetMapping("/fy/{currenPage}/{pagesize}")
+    public AjaxResponse clafy(@PathVariable("currenPage") int page, @PathVariable("pagesize") int pagesize) {
+        Page<Classes> pageable = new Page<>(page, pagesize);
         IPage<Classes> page1 = classesService.selsefy(pageable);
         return AjaxResponse.success(page1);
     }
@@ -36,30 +37,66 @@ public class ClassesController {
 
     //新增
     @PostMapping("/add")
-    public String add(@RequestBody Classes classes){
-        try {
-            if (classesService.selsetj(classes) >=1){
-                return "成功！";
-            }else{
-                return "失败！";
-            }
-        }catch (Exception e){
-                return "失败！";
+    public AjaxResponse add(@RequestBody Classes classes) {
+
+        if (classesService.selsetj(classes) >= 1) {
+            return AjaxResponse.success("成功");
         }
+
+        return AjaxResponse.success("失败");
+
     }
 
     //删除
-    @PostMapping("/delete")
-    public AjaxResponse selectsc(@RequestBody Classes classes){
-        if (classesService.selsesc(classes.getClassesId())>0){
+    @DeleteMapping("/delete/{id}")
+    public AjaxResponse selectsc(@PathVariable Long id) {
+
+        if (classesService.selsesc(id) >= 1) {
             return AjaxResponse.success("成功");
-        }else {
-            return AjaxResponse.success("失败");
         }
+        return AjaxResponse.success("失败");
+    }
+
+    //修改
+    @PutMapping("/amend")
+    public AjaxResponse amend(@RequestBody Classes classes) {
+        if (classesService.amend(classes) >= 1) {
+            return AjaxResponse.success("成功");
+        }
+        return AjaxResponse.success("失败");
+    }
 
 
+    //模糊搜索
+    @GetMapping("/dim/{currenPage}/{pagesize}/{input}")
+    public AjaxResponse search(@PathVariable("currenPage") int page, @PathVariable("pagesize") int size,@PathVariable("input") String classesName){
+        IPage<Classes> sss = classesService.dimsearch(page,size,classesName);
+        return AjaxResponse.success(sss);
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

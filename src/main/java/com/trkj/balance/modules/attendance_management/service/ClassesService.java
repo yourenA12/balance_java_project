@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.attendance_management.entity.Classes;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 班次方案表 服务类
@@ -22,4 +24,12 @@ public interface ClassesService extends IService<Classes> {
 
     //逻辑删除
     public int selsesc(Long id);
+
+    //修改
+    int amend(Classes classes);
+
+    //模糊搜索
+    IPage<Classes> dimsearch(int page,int size,String classesName);
+
+
 }
