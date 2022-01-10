@@ -7,12 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * <p>
  * 部门表 Mapper 接口
- * </p>j
+ * </p>
  *
  * @author 友人A
  * @since 2022-01-06
  */
 @Mapper
-public interface DeptMapper_Notice extends BaseMapper<Dept> {
+public interface Dept_NoticeMapper extends BaseMapper<Dept> {
 
 }

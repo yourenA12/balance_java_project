@@ -12,44 +12,44 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 部门表
+ * 公告员工表
  * </p>
  *
  * @author 友人A
- * @since 2022-01-04
+ * @since 2022-01-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("DEPT")
+@TableName("NOTICE_STAFF")
 //value=自增序列名 calzz=实体类的数据类型
-@KeySequence(value = "DEPT_ID",clazz = Long.class)
-@ApiModel(value="Dept对象", description="部门表")
-public class Dept implements Serializable {
+@KeySequence(value = "NOTICE_STAFF_ID",clazz = Long.class)
+@ApiModel(value="NoticeStaff对象", description="公告员工表")
+public class NoticeStaff implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableId("DEPT_ID")
-    private Long deptId;
+    @ApiModelProperty(value = "公告员工编号")
+    @TableId("NOTICE_STAFF_ID")
+    private Long noticeStaffId;
 
-    @ApiModelProperty(value = "状态;0：启用  1：禁用")
-    @TableField("DEPT_STATE")
-    private Long deptState;
-
-    @ApiModelProperty(value = "部门名称")
-    @TableField("DEPT_NAME")
-    private String deptName;
-
-    @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
+    @ApiModelProperty(value = "员工编号")
     @TableField("STAFF_ID")
     private Long staffId;
 
-    @ApiModelProperty(value = "创建时间")
-    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "公告编号")
+    @TableField("NOTICE_ID")
+    private Long noticeId;
+
+    @ApiModelProperty(value = "公告状态")
+    @TableField("NOTICE_STATE")
+    private Long noticeState;
+
+    @ApiModelProperty(value = "创建时间 精确到秒")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty(value = "修改时间 精确到秒")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
@@ -59,7 +59,7 @@ public class Dept implements Serializable {
     private Long revision;
 
     @TableLogic
-    @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
+    @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
 

@@ -22,7 +22,7 @@ public interface NoticeService extends IService<Notice> {
     IPage<Notice> selectAllPage(Page<Notice> page);
 
     // 删除某条公告 、、 先删除公告部门表中的数据（和公告员工表的数据），再删除公告表中的数据， 、、
-    int deleteOneNotice(Long id);
+    int deleteOneNotice(Long NoticeId);
 
     // 新增一条公告 、、 增加公告表后 还需要新增公告部门表 -- 部门id数据
     int insertOneNotice(Notice notice);
@@ -35,7 +35,7 @@ public interface NoticeService extends IService<Notice> {
     List<Map<Object,Object>> selectAllDeptName();
 
     // 按照公告表中的公告id 查询公告部门表中的部门名称
-    List<Map<Object,Object>> deptNameByNoticeId(Long NoticeId);
+    List<Map<Object,Object>> selectAllDeptByNoticeId(Long NoticeId);
 
 
 }

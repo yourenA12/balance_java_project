@@ -33,9 +33,9 @@ public class NoticeController {
     }
 
     // 按id删除某条公告
-    @DeleteMapping("/deleteOneNotice/{id}")
-    public AjaxResponse deleteOneNotice(@PathVariable Long id){
-        return AjaxResponse.success( noticeService.deleteOneNotice(id) );
+    @DeleteMapping("/deleteOneNotice/{NoticeId}")
+    public AjaxResponse deleteOneNotice(@PathVariable Long NoticeId){
+        return AjaxResponse.success( noticeService.deleteOneNotice(NoticeId) );
     }
 
     // 新增一条公告
@@ -52,6 +52,12 @@ public class NoticeController {
     @GetMapping("/selectAllDept")
     public AjaxResponse selectAllDept(){
         return AjaxResponse.success( noticeService.selectAllDeptName() );
+    }
+
+    // 按公告id查询部门id 与 部门名称
+    @GetMapping("/selectAllDeptByNoticeId/{NoticeId}")
+    public AjaxResponse selectAllDeptByNoticeId(@PathVariable("NoticeId") Long NoticeId ){
+        return AjaxResponse.success( noticeService.selectAllDeptByNoticeId(NoticeId) );
     }
 
 
