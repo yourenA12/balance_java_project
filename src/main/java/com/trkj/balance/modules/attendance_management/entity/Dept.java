@@ -14,44 +14,36 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 考勤表
+ * 部门表
  * </p>
  *
- * @author 友人A
- * @since 2021-12-29
+ * @author 晚风
+ * @since 2022-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("ATTENDANCE_SHEET")
-@ApiModel(value="AttendanceSheet对象", description="考勤表")
-public class AttendanceSheet implements Serializable {
+@TableName("DEPT")
+@ApiModel(value="Dept对象", description="部门表")
+public class Dept implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "考勤编号")
-    @TableId("ATTENDANCE_SHEET_ID")
-    private Long attendanceSheetId;
+    @ApiModelProperty(value = "部门编号")
+    @TableId("DEPT_ID")
+    private Long deptId;
 
-    @ApiModelProperty(value = "打卡记录编号")
-    @TableField("CLOCK_RECORD_ID")
-    private Long clockRecordId;
+    @ApiModelProperty(value = "状态;0：启用  1：禁用")
+    @TableField("DEPT_STATE")
+    private Long deptState;
 
-    @ApiModelProperty(value = "考勤状态")
-    @TableField("CHECK_STATE")
-    private String checkState;
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
-    @ApiModelProperty(value = "考勤扣款编号")
-    @TableField("CHECK_DEDUCT_ID")
-    private Long checkDeductId;
-
-    @ApiModelProperty(value = "班次方案编号")
-    @TableField("CLASSES_ID")
-    private Long classesId;
-
-    @ApiModelProperty(value = "乐观锁")
-    @TableField("REVISION")
-    private Long revision;
+    @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
+    @TableField("STAFF_ID")
+    private Long staffId;
 
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
@@ -61,8 +53,12 @@ public class AttendanceSheet implements Serializable {
     @TableField("UPDATED_TIME")
     private Date updatedTime;
 
+    @ApiModelProperty(value = "乐观锁")
+    @TableField("REVISION")
+    private Long revision;
+
     @TableLogic
-    @ApiModelProperty(value = "逻辑删除")
+    @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
 

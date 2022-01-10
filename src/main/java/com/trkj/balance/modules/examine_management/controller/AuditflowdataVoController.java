@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,20 +29,13 @@ public class AuditflowdataVoController {
     @Autowired
     private AuditflowdataVoService auditflowdataVoService;
 
-//    @GetMapping("/findSelectPage/{currenPage}/{pagesize}")
-//    public AjaxResponse findSelectPage(@PathVariable("currentPage") int currentPage, @PathVariable("pagesize") int pagesize){
-//        Page<AuditflowdataVo> page= new Page<>(currentPage,pagesize);
-//        IPage<AuditflowdataVo> list=auditflowdataVoService.findSelectPage(page);
-//        return AjaxResponse.success(list);
-//    }
-@GetMapping("/findSelectPage/{currenPage}/{pagesize}")
-public AjaxResponse findSelectPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
-
-    Page<AuditflowdataVo> page = new Page<>(currenPage,pagesize);
-    IPage<AuditflowdataVo> list=auditflowdataVoService.findSelectPage(page);
-    return AjaxResponse.success(list);
-
-}
+    //分页查询
+    @GetMapping("/findSelectPage/{currenPage}/{pagesize}")
+    public AjaxResponse findSelectPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+        Page<AuditflowdataVo> page = new Page<>(currenPage,pagesize);
+        IPage<AuditflowdataVo> list=auditflowdataVoService.findSelectPage(page);
+        return AjaxResponse.success(list);
+    }
 
 }
 

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,6 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("CLASSES")
+@KeySequence(value = "CLASSES_ID",clazz = Long.class) // id 自增
 @ApiModel(value="Classes对象", description="班次方案表")
 public class Classes implements Serializable {
 
@@ -35,10 +38,12 @@ public class Classes implements Serializable {
     @TableField("CLASSES_NAME")
     private String classesName;
 
+//    @JsonFormat(pattern="HH:mm:ss")
     @ApiModelProperty(value = "上班时间")
     @TableField("CLASSES_BEGIN_DATE")
     private Date classesBeginDate;
 
+//    @JsonFormat(pattern="HH:mm:ss")
     @ApiModelProperty(value = "下班时间")
     @TableField("CLASSES_END_DATE")
     private Date classesEndDate;
