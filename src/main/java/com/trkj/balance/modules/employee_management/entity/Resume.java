@@ -16,8 +16,8 @@ import lombok.experimental.Accessors;
  * 简历表
  * </p>
  *
- * @author 林落
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -48,6 +48,34 @@ public class Resume implements Serializable {
     @TableField("RESUME_EDUCATION")
     private String resumeEducation;
 
+    @ApiModelProperty(value = "毕业学校")
+    @TableField("RESUME_SCOLLER")
+    private String resumeScoller;
+
+    @ApiModelProperty(value = "婚姻状况：已婚、未婚、离婚")
+    @TableField("RESUME_HY")
+    private String resumeHy;
+
+    @ApiModelProperty(value = "年龄")
+    @TableField("RESUME_AGE")
+    private Long resumeAge;
+
+    @ApiModelProperty(value = "期望薪资")
+    @TableField("RESUME_QXINGZ")
+    private String resumeQxingz;
+
+    @ApiModelProperty(value = "期望职位")
+    @TableField("RESUME_QZHIW")
+    private String resumeQzhiw;
+
+    @ApiModelProperty(value = "身高")
+    @TableField("RESUME_SHENGG")
+    private String resumeShengg;
+
+    @ApiModelProperty(value = "最近职位")
+    @TableField("RESUME_ZJZW")
+    private String resumeZjzw;
+
     @ApiModelProperty(value = "邮箱")
     @TableField("RESUME_MAILBOX")
     private String resumeMailbox;
@@ -56,7 +84,7 @@ public class Resume implements Serializable {
     @TableField("RESUME_PHOTO")
     private String resumePhoto;
 
-    @ApiModelProperty(value = "介绍")
+    @ApiModelProperty(value = "自我评价")
     @TableField("RESUME_INTRODUCE")
     private String resumeIntroduce;
 
@@ -74,12 +102,9 @@ public class Resume implements Serializable {
     @TableField("RESUME_POLITICAL_OUTLOOK")
     private String resumePoliticalOutlook;
 
-    @ApiModelProperty(value = "0:待阅 1:以阅 3、候选人 4：淘汰")
+    @ApiModelProperty(value = "状态  0:新简历  1、候选人 2：已邀约  3:已淘汰 4:面试中 5:面试通过 6:复试中 7:待接受 8:已接受 9：已入职 10:已拒绝 11：放弃入职 12：已离职")
     @TableField("RESUME_ZT")
     private String resumeZt;
-
-    @TableField("INVITE_STATE")
-    private String inviteState;
 
     @ApiModelProperty(value = "投简时间")
     @TableField("TOUJ_TIME")

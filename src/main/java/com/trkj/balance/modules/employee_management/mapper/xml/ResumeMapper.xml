@@ -9,6 +9,13 @@
         <result column="RESUME_SEX" property="resumeSex" />
         <result column="RESUME_PHONE" property="resumePhone" />
         <result column="RESUME_EDUCATION" property="resumeEducation" />
+        <result column="RESUME_SCOLLER" property="resumeScoller" />
+        <result column="RESUME_HY" property="resumeHy" />
+        <result column="RESUME_AGE" property="resumeAge" />
+        <result column="RESUME_QXINGZ" property="resumeQxingz" />
+        <result column="RESUME_QZHIW" property="resumeQzhiw" />
+        <result column="RESUME_SHENGG" property="resumeShengg" />
+        <result column="RESUME_ZJZW" property="resumeZjzw" />
         <result column="RESUME_MAILBOX" property="resumeMailbox" />
         <result column="RESUME_PHOTO" property="resumePhoto" />
         <result column="RESUME_INTRODUCE" property="resumeIntroduce" />
@@ -17,7 +24,6 @@
         <result column="RECRUITMENT_PLAN_ID" property="recruitmentPlanId" />
         <result column="RESUME_POLITICAL_OUTLOOK" property="resumePoliticalOutlook" />
         <result column="RESUME_ZT" property="resumeZt" />
-        <result column="INVITE_STATE" property="inviteState" />
         <result column="TOUJ_TIME" property="toujTime" />
         <result column="CREATED_TIME" property="createdTime" />
         <result column="UPDATED_TIME" property="updatedTime" />
@@ -27,7 +33,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_PHONE, RESUME_EDUCATION, RESUME_MAILBOX, RESUME_PHOTO, RESUME_INTRODUCE, RESUME_BIRTHDAY, RESUME_RESIDENCE, RECRUITMENT_PLAN_ID, RESUME_POLITICAL_OUTLOOK, RESUME_ZT, INVITE_STATE, TOUJ_TIME, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+        RESUME_ID, RESUME_NAME, RESUME_SEX, RESUME_PHONE, RESUME_EDUCATION, RESUME_SCOLLER, RESUME_HY, RESUME_AGE, RESUME_QXINGZ, RESUME_QZHIW, RESUME_SHENGG, RESUME_ZJZW, RESUME_MAILBOX, RESUME_PHOTO, RESUME_INTRODUCE, RESUME_BIRTHDAY, RESUME_RESIDENCE, RECRUITMENT_PLAN_ID, RESUME_POLITICAL_OUTLOOK, RESUME_ZT, TOUJ_TIME, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
     </sql>
 
 </mapper>

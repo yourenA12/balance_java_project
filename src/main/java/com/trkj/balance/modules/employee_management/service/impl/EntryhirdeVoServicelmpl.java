@@ -19,4 +19,9 @@ public class EntryhirdeVoServicelmpl extends ServiceImpl<EntryhirdeVoMapper, Ent
     public IPage<EntryhirdeVo> selectEntryhirde1(Page<EntryhirdeVo> page) {
         return entryhirdeMapper.selectEntryhirde(page);
     }
+
+    @Override
+    public IPage<EntryhirdeVo> selectEntryhirdeFQ(Page<EntryhirdeVo> page) {
+        return entryhirdeMapper.selectEntryhirdeFQ(page);
+    }
 }

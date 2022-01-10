@@ -2,7 +2,12 @@ package com.trkj.balance.modules.employee_management.mapper;
 
 import com.trkj.balance.modules.employee_management.entity.Staff;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * <p>
