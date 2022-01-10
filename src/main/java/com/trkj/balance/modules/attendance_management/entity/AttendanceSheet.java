@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.attendance_management.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -60,6 +61,7 @@ public class AttendanceSheet implements Serializable {
     @TableField("UPDATED_TIME")
     private Date updatedTime;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
