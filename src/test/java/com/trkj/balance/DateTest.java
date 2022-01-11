@@ -6,94 +6,50 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateTest {
 
-/*
+    // 计算三个月后的日期
     @Test
-    public void dateTest() {
+    public void a(){
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        System.out.println(df.format(date));   // 当前系统时间
+//        Date newDate = stepMonth(date, 3);
 
-        Date d = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("今天的日期：" + df.format(d));
-        System.out.println("两天前的日期：" + df.format(new Date(d.getTime() - 2 * 24 * 60 * 60 * 1000)));
-        System.out.println("三天后的日期：" + df.format(new Date(d.getTime() + 30 * 24 * 60 * 60 * 1000)));
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.MONTH, 3);
 
-
+        System.out.println("当前时间3个月后的日期：" + df.format(c.getTime()));
     }
 
-*/
 
-        public void dateDiff(String startTime, String endTime, String format) {
+    /**
+     * 计算2个日期之间相差的  相差多少年月日
+     * 比如：2011-02-02 到  2017-03-02 相差 6年，1个月，0天
+     * @param fromDate YYYY-MM-DD
+     * @param toDate YYYY-MM-DD
+     * @return 年,月,日 例如 1,1,1
+     */
 
-//按照传入的格式生成一个simpledateformate对象
+    public static String dayComparePrecise(String fromDate, String toDate){
 
-            SimpleDateFormat sd = new SimpleDateFormat(format);
-
-            long ye = 1000 * 24 * 60 * 60 * 365; // 年
-
-            long mo = 1000 * 24 * 60 * 60 * 30; // 月
-
-            long nd = 1000 * 24 * 60 * 60;//一天的毫秒数
-
-            long nh = 1000 * 60 * 60;//一小时的毫秒数
-
-            long nm = 1000 * 60;//一分钟的毫秒数
-
-            long ns = 1000;//一秒钟的毫秒数
-
-            long diff;
-
-            try {
-
-                //获得两个时间的毫秒时间差异
-
-                diff = sd.parse(endTime).getTime() - sd.parse(startTime).getTime();
-
-                long year = diff / ye; // 年
-
-                long month = diff / mo; // 月
-
-                long day = diff / nd;//计算差多少天
-
-                long hour = diff % nd / nh;//计算差多少小时
-
-                long min = diff % nd % nh / nm;//计算差多少分钟
-
-                long sec = diff % nd % nh % nm / ns;//计算差多少秒
-
-                //输出结果
-
-                System.out.println("时间相差：" + year + "年" + month + "月" + day + "天" + hour + "小时" + min + "分钟" + sec + "秒。");
-
-            } catch (ParseException e) {
-
-                e.printStackTrace();
-
-            }
-
-        }
-
-        @Test
-        public void aaa() {
-
-            this.dateDiff("2021-11-16",new SimpleDateFormat("yyyy-MM-dd").format(new Date()),"yyyy-MM-dd");
-
-        }
-
-
-        @Test
-        public void dayComparePrecise(){
-
-        Period period = Period.between(LocalDate.parse("2020-12-12"), LocalDate.parse("2022-01-21"));
+        Period period = Period.between(LocalDate.parse(fromDate), LocalDate.parse(toDate));
 
         StringBuffer sb = new StringBuffer();
         sb.append(period.getYears()).append(",")
                 .append(period.getMonths()).append(",")
                 .append(period.getDays());
-            System.out.println( sb.toString());
+        return sb.toString();
     }
 
+    @Test
+    public void b() throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        System.out.println(dayComparePrecise("2021-12-12","2022-09-12"));
+    }
 
 }

@@ -16,8 +16,8 @@ import lombok.experimental.Accessors;
  * 录用表
  * </p>
  *
- * @author 林落
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,11 +32,7 @@ public class EmploymentTable implements Serializable {
     @TableId("EMPLOYMENT_ID")
     private Long employmentId;
 
-    @ApiModelProperty(value = "状态 0:待入职 1:已入职 2：淘汰")
-    @TableField("EMPLOYMENT_STATE")
-    private Long employmentState;
-
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "简历编号")
     @TableField("RESUME_ID")
     private Long resumeId;
 
@@ -44,9 +40,22 @@ public class EmploymentTable implements Serializable {
     @TableField("REMARKS")
     private String remarks;
 
+    @ApiModelProperty(value = "入职时间")
     @TableField("HIREDATE")
     private Date hiredate;
 
+    @ApiModelProperty(value = "试用期")
+    @TableField("PROBATION")
+    private String probation;
+
+    @ApiModelProperty(value = "试用期月薪")
+    @TableField("PROBATIONARY")
+    private Long probationary;
+
+    @TableField("POSITIVE_MONTHLY")
+    private Long positiveMonthly;
+
+    @ApiModelProperty(value = "放弃原因")
     @TableField("WAIVE_REASON")
     private String waiveReason;
 

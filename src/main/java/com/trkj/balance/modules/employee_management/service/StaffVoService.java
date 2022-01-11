@@ -13,4 +13,7 @@ public interface StaffVoService extends IService<StaffVo> {
     IPage<StaffVo> selectStaffVo (Page<StaffVo> page);
     //根据id查询员工信息
     StaffVo selectStaffId(Long id);
+
+    //查询试用期人员
+    IPage<StaffVo> selectProbation (Page<StaffVo> page);
 }

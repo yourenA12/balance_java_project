@@ -1,9 +1,8 @@
 package com.trkj.balance.modules.system_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,6 +22,8 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("DEPT")
+//value=自增序列名 calzz=实体类的数据类型
+@KeySequence(value = "DEPT_ID",clazz = Long.class)
 @ApiModel(value="Dept对象", description="部门表")
 public class Dept implements Serializable {
 
@@ -45,17 +46,19 @@ public class Dept implements Serializable {
     private Long staffId;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
