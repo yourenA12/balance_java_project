@@ -1,7 +1,5 @@
 package com.trkj.balance.modules.organization_management.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.trkj.balance.modules.organization_management.mapper.DeptMapper;
 import com.trkj.balance.modules.organization_management.service.DeptService;
@@ -15,16 +13,22 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author 晚风
- * @since 2022-01-10
+ * @since 2022-01-12
  */
 @Service
 public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements DeptService {
     @Autowired
     public DeptMapper deptMapper;
 
-    //分页查询
+    //删除
     @Override
-    public IPage<Dept> deptfy(Page<Dept> page) {
-        return deptMapper.selectPage(page,null);
+    public int deptdelete(Long id) {
+        return deptMapper.deleteById(id);
+    }
+
+    //添加
+    @Override
+    public int insert(Dept dept) {
+        return deptMapper.insert(dept);
     }
 }

@@ -2,6 +2,7 @@ package com.trkj.balance.modules.system_management.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -83,5 +84,8 @@ public class Notice implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
+    // 部门id
+    @TableField(exist = false)
+    private ArrayList<Long> deptIds;
 
 }

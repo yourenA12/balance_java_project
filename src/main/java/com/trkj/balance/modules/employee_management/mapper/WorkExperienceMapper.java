@@ -21,4 +21,5 @@ public interface WorkExperienceMapper extends BaseMapper<WorkExperience> {
 
     @Select("select * from WORK_EXPERIENCE w left join staff s on w.staff_id=s.staff_id")
     IPage<WorkExperience> selectWorkExperience (IPage<WorkExperience> page);
+
 }
