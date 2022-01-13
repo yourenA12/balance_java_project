@@ -52,7 +52,6 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
                 education.setStaffId(staff.getStaffId());
                 // 添加教育经历表
                 if (educationMapper.insert(education) > 0) {
-
                     // 修改简历表状态为，已入职
                     return resumeMapper.updateById(resume);
 

@@ -8,5 +8,5 @@ import com.trkj.balance.modules.examine_management.vo.AuditflowdataVo;
 * 审批明细表与审批主表
 * */
 public interface AuditflowdataVoService extends IService<AuditflowdataVo> {
-    IPage<AuditflowdataVo> findSelectPage(Page<AuditflowdataVo> page);
+
 }

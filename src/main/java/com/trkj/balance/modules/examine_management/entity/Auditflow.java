@@ -1,9 +1,8 @@
 package com.trkj.balance.modules.examine_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("AUDITFLOW")
 @ApiModel(value="Auditflow对象", description="审批主表")
+@KeySequence(value = "AUDITFLOW_ID",clazz = Long.class)
 public class Auditflow implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,17 +53,19 @@ public class Auditflow implements Serializable {
     private Long auditflowState;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
+    @Version // 乐观锁注解
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic // 逻辑删除注解
     @ApiModelProperty(value = "逻辑删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
