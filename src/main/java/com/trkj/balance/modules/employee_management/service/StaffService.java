@@ -27,5 +27,8 @@ public interface StaffService extends IService<Staff> {
     //查询员工信息
     Staff selectStaffId(Long id);
 
+    //修改员工
+    int updateStaff(Staff staff);
+
 
 }

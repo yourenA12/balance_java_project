@@ -14,6 +14,11 @@ import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import com.alibaba.fastjson.JSON; // Map 转实体类
 
@@ -51,7 +56,7 @@ public class StaffController {
 
 
     //修改简历状态和录用原因
-    @PostMapping("/updateResume")
+    @PutMapping("/updateResume")
     public AjaxResponse updateResume(@RequestBody Map<Object, Object> map) {
         Resume resume = JSON.parseObject(JSON.toJSONString(map.get("Resume")), Resume.class);
         EmploymentTable employmentTable = JSON.parseObject(JSON.toJSONString(map.get("EmploymentTable")), EmploymentTable.class);
@@ -65,6 +70,13 @@ public class StaffController {
         Page<StaffVo> page = new Page<>(currenPage,pagesize);
         IPage<StaffVo> list=staffVoService.selectStaffVo(page);
         return AjaxResponse.success(list);
+    }
+
+    //查询员工的名称、部门、职位
+    @GetMapping("/selectStaffXX")
+    public AjaxResponse selectStaffXX(){
+
+        return AjaxResponse.success(staffVoService.selectStaffXX());
     }
 
     //根据id查询
@@ -83,9 +95,36 @@ public class StaffController {
         return AjaxResponse.success(list);
     }
 
+    //历史花名册 查询状态为离职的员工
+    @GetMapping("/selectHistorical/{currenPage}/{pagesize}")
+    public AjaxResponse selectHistorical(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
 
-
+        Page<StaffVo> page = new Page<>(currenPage,pagesize);
+        IPage<StaffVo> list=staffVoService.selectStaffHistorical(page);
+        return AjaxResponse.success(list);
     }
+
+    //查询部门名称
+    @GetMapping("/selectDeptName")
+    public AjaxResponse selectDeptName(){
+        List<Map<String, Object>> list=staffVoService.selectDeptName();
+        return AjaxResponse.success(list);
+    }
+
+    //查询部门职位名称
+    @GetMapping("/selectDeptPostName")
+    public AjaxResponse selectDeptPostName(){
+        List<Map<String, Object>> list=staffVoService.selectDeptPostName();
+        return AjaxResponse.success(list);
+    }
+
+    //修改员工
+    @PutMapping("/updateStaff")
+    public AjaxResponse updateStaff(@RequestBody Staff staff){
+        return AjaxResponse.success(staffService.updateStaff(staff));
+    }
+
+}
 
 
 

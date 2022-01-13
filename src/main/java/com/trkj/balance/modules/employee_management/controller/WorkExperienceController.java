@@ -7,12 +7,11 @@ import com.trkj.balance.modules.employee_management.entity.WorkExperience;
 import com.trkj.balance.modules.employee_management.service.WorkExperienceService;
 import com.trkj.balance.modules.employee_management.vo.EntryhirdeVo;
 import com.trkj.balance.vo.AjaxResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 林落。
  * @since 2021-12-31
  */
+@Slf4j
 @RestController
 @RequestMapping("/workExperience")
 public class WorkExperienceController {
@@ -35,6 +35,31 @@ public class WorkExperienceController {
         IPage<WorkExperience> list=workExperienceService.selectWorkExperience(page);
         return AjaxResponse.success(list);
 
+    }
+
+    //花名册 编辑里根据id查询工作经历
+    @GetMapping("/selectWorkExperienceId/{id}")
+    public AjaxResponse selectWorkExperienceId(@PathVariable("id") Long id){
+        return AjaxResponse.success(workExperienceService.selectWorkExperienceId(id));
+    }
+
+    //修改工作经历
+    @PutMapping("/updateWorkExperienceId")
+    public AjaxResponse updateWorkExperienceId(@RequestBody WorkExperience workExperience){
+        return AjaxResponse.success(workExperienceService.updateWorkExperienceId(workExperience));
+    }
+
+    //删除工作经历
+    @DeleteMapping("/deleteWorkExperienceId/{id}")
+    public AjaxResponse deleteWorkExperienceId(@PathVariable("id") Long id){
+        return AjaxResponse.success(workExperienceService.deleteWorkExperienceId(id));
+    }
+
+    //添加工作经历
+    @PostMapping("/insertWorkExperience")
+    public AjaxResponse insertWorkExperience(@RequestBody WorkExperience workExperience){
+        log.debug(workExperience.toString());
+        return AjaxResponse.success(workExperienceService.insertWorkExperience(workExperience));
     }
 }
 
