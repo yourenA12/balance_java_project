@@ -2,6 +2,7 @@ package com.trkj.balance.modules.recruitment_management.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.employee_management.vo.StaffVo;
 import com.trkj.balance.modules.recruitment_management.service.ResumeVoService;
 import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
 import com.trkj.balance.vo.AjaxResponse;
@@ -47,6 +48,36 @@ public class ResumeVoController {
     @GetMapping("/ResumePage_Y/{currenPage}/{pagesize}")
     public AjaxResponse YPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize) {
         Page<ResumeVo> page = new Page<>(currenPage, pagesize);
-        return AjaxResponse.success(resumeVoService.ResumePage_D(page));
+        return AjaxResponse.success(resumeVoService.ResumePage_Y(page));
     }
+
+    //面试中
+    @GetMapping("/ResumePage_Z/{currenPage}/{pagesize}")
+    public AjaxResponse ZPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize) {
+        Page<ResumeVo> page = new Page<>(currenPage, pagesize);
+        return AjaxResponse.success(resumeVoService.ResumePage_Z(page));
+    }
+
+    //复试中
+    @GetMapping("/ResumePage_F/{currenPage}/{pagesize}")
+    public AjaxResponse FPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+        Page<ResumeVo> page = new Page<>(currenPage, pagesize);
+        return AjaxResponse.success(resumeVoService.ResumePage_F(page));
+    }
+
+    //面试通过
+    @GetMapping("/ResumePage_T/{currenPage}/{pagesize}")
+    public AjaxResponse TPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+        Page<ResumeVo> page = new Page<>(currenPage, pagesize);
+        return AjaxResponse.success(resumeVoService.ResumePage_T(page));
+    }
+
+    //简历详情
+
+    @GetMapping("/SelectRexumeId/{id}")
+    public AjaxResponse SelectRexumeId(@PathVariable("id") Long id){
+        ResumeVo resume= resumeVoService.SelectRexumeId(id);
+        return AjaxResponse.success(resume);
+    }
+
 }

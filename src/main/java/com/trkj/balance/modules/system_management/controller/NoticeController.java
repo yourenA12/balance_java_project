@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.system_management.entity.Notice;
 import com.trkj.balance.modules.system_management.service.NoticeService;
 import com.trkj.balance.vo.AjaxResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * @author 友人A
  * @since 2022-01-05
  */
+@Slf4j
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
@@ -25,17 +29,19 @@ public class NoticeController {
     private NoticeService noticeService;
 
     // 查询所有公告
-    @GetMapping("/selectAllPage/{currentPage}/{pagesize}")
-    public AjaxResponse selectAllPage(@PathVariable("currentPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    @GetMapping("/selectAllPage")
+    public AjaxResponse selectAllPage(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                      @RequestParam("noticeTitle") String noticeTitle,@RequestParam("noticePeople") String noticePeople,
+                                      @RequestParam("noticeType") String noticeType){
         Page<Notice> page = new Page<>(currenPage,pagesize);
-        IPage<Notice> list = noticeService.selectAllPage(page);
+        IPage<Notice> list = noticeService.selectAllPage(page,noticeTitle,noticePeople,noticeType);
         return AjaxResponse.success(list);
     }
 
-    // 按id删除某条公告
-    @DeleteMapping("/deleteOneNotice/{id}")
-    public AjaxResponse deleteOneNotice(@PathVariable Long id){
-        return AjaxResponse.success( noticeService.deleteOneNotice(id) );
+    // 按id删除某条公告,或删除多条公告
+    @DeleteMapping("/deleteNotices/{deleteNoticeIds}")
+    public AjaxResponse deleteNotices(@PathVariable("deleteNoticeIds") ArrayList<Long> noticeIds){
+        return AjaxResponse.success( noticeService.deleteNotices(noticeIds) );
     }
 
     // 新增一条公告
@@ -48,10 +54,23 @@ public class NoticeController {
     }
 
 
+    // 修改某条公告
+    @PutMapping("/updateOneNotice")
+    public AjaxResponse updateOneNotice(@RequestBody Notice notice){
+        return AjaxResponse.success( noticeService.updateOneNotice(notice) );
+    }
+
+
     // 查询所有部门id与名称
     @GetMapping("/selectAllDept")
     public AjaxResponse selectAllDept(){
         return AjaxResponse.success( noticeService.selectAllDeptName() );
+    }
+
+    // 按公告id查询部门id 与 部门名称
+    @GetMapping("/selectAllDeptByNoticeId/{noticeId}")
+    public AjaxResponse selectAllDeptByNoticeId(@PathVariable("noticeId") Long noticeId ){
+        return AjaxResponse.success( noticeService.selectAllDeptByNoticeId(noticeId) );
     }
 
 

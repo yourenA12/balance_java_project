@@ -24,7 +24,6 @@ public class ResumeVoServiceImpl extends ServiceImpl<ResumeVoMapper, ResumeVo> i
     @Override
     public IPage<ResumeVo> ResumePage_a(Page<ResumeVo> page) { return resumeVoMapper.ResumePage_a(page);}
 
-
     @Override
     public IPage<ResumeVo> ResumePage_D(Page<ResumeVo> page) {
         return resumeVoMapper.ResumePage_D(page);
@@ -38,6 +37,26 @@ public class ResumeVoServiceImpl extends ServiceImpl<ResumeVoMapper, ResumeVo> i
     @Override
     public IPage<ResumeVo> ResumePage_Y(Page<ResumeVo> page) {
         return resumeVoMapper.ResumePage_Y(page);
+    }
+
+    @Override
+    public IPage<ResumeVo> ResumePage_Z(Page<ResumeVo> page) {
+        return resumeVoMapper.ResumePage_Z(page);
+    }
+
+    @Override
+    public IPage<ResumeVo> ResumePage_F(Page<ResumeVo> page) {
+        return resumeVoMapper.ResumePage_F(page);
+    }
+
+    @Override
+    public IPage<ResumeVo> ResumePage_T(Page<ResumeVo> page) {
+        return resumeVoMapper.ResumePage_T(page);
+    }
+
+    @Override
+    public ResumeVo SelectRexumeId(Long id) {
+        return resumeVoMapper.SelectRexumeId(id);
     }
 
 

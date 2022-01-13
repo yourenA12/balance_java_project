@@ -28,7 +28,7 @@ public class Auditflowdetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-     @ApiModelProperty(value = "审批流明细编号")
+    @ApiModelProperty(value = "审批流明细编号")
     @TableId("AUDITFLOWDETAIL_ID")
     private Long auditflowdetailId;
 

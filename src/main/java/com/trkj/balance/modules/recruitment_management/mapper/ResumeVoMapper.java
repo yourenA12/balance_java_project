@@ -1,10 +1,11 @@
 package com.trkj.balance.modules.recruitment_management.mapper;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.recruitment_management.vo.RecruitmentPlanVo;
 import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -42,4 +43,33 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID " +
             "where R.RESUME_ZT=2")
     IPage<ResumeVo> ResumePage_Y(Page<ResumeVo> page);
+
+    //面试中
+    @Select("select  R.*,P.POST_NAME  from RESUME R " +
+            "LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID " +
+            "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID " +
+            "where R.RESUME_ZT=4")
+    IPage<ResumeVo> ResumePage_Z(Page<ResumeVo> page);
+
+ //复试中
+    @Select("select  R.*,P.POST_NAME  from RESUME R " +
+         "LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID " +
+         "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID " +
+         "where R.RESUME_ZT=6")
+    IPage<ResumeVo> ResumePage_F(Page<ResumeVo> page);
+
+    //面试通过
+    @Select("select  R.*,P.POST_NAME  from RESUME R " +
+            "LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID " +
+            "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID " +
+            "where R.RESUME_ZT=5")
+    IPage<ResumeVo> ResumePage_T(Page<ResumeVo> page);
+
+    //简历详情
+    @Select("select  R.*,P.POST_NAME  from RESUME R " +
+            "LEFT JOIN RECRUITMENT_PLAN Z ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID " +
+            "LEFT JOIN DEPT_POST P ON Z.DEPT_POST_ID = P.DEPT_POST_ID  where R.RESUME_ID=#{id}")
+    ResumeVo SelectRexumeId(@Param("id") Long id);
+
+
 }
