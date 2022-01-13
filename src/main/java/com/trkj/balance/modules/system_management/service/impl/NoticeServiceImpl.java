@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.system_management.entity.Notice;
+import com.trkj.balance.modules.system_management.entity.NoticeDept;
 import com.trkj.balance.modules.system_management.mapper.Dept_NoticeMapper;
 import com.trkj.balance.modules.system_management.mapper.NoticeDeptMapper;
 import com.trkj.balance.modules.system_management.mapper.NoticeMapper;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -46,29 +49,49 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
 
     // 分页查询公告
     @Override
-    public IPage<Notice> selectAllPage(Page<Notice> page) {
-        return noticeMapper.selectPage(page,null);
+    public IPage<Notice> selectAllPage(Page<Notice> page,String noticeTitle,String noticePeople,String noticeType) {
+
+        QueryWrapper<Notice> wrapper = new QueryWrapper<>();
+        if(noticeTitle!=null && noticeTitle!=""){
+            wrapper.like("NOTICE_TITLE",noticeTitle);
+        }
+
+        if(noticePeople!=null && noticePeople!=""){
+            wrapper.like("NOTICE_PEOPLE",noticePeople);
+        }
+
+        if(noticeType!=null && noticeType!=""){
+            wrapper.eq("NOTICE_TYPE",noticeType);
+        }
+
+        return noticeMapper.selectPage(page,wrapper);
     }
 
     // 删除某条公告 、、 先删除公告部门表中的数据（和公告员工表的数据），再删除公告表中的数据， 、、
+    // 多删
     @Override
     @Transactional
-    public int deleteOneNotice(Long NoticeId) {
+    public int deleteNotices(ArrayList<Long> noticeIds) {
 
-        // 先删除公告部门表
-        QueryWrapper noticeDeptWrapper = new QueryWrapper<>();
-        // 删除公告部门表中，带公告ID的数据
-        noticeDeptWrapper.eq("NOTICE_ID",NoticeId);
-        noticeDeptMapper.delete(noticeDeptWrapper);
+        if(noticeIds.size()<1){
+            return 0;
+        }
 
-        // 再删除公告员工表
-        QueryWrapper noticeStaffWrapper = new QueryWrapper<>();
-        // 删除公告部门表中，带公告ID的数据
-        noticeStaffWrapper.eq("NOTICE_ID",NoticeId);
-        noticeStaffMapper.delete(noticeStaffWrapper);
+        for (Long noticeId : noticeIds) {
+            // 先删除公告部门表
+            // 删除公告部门表中，带公告ID的数据
+            noticeDeptMapper.deleteNoticeDept(noticeId);
 
-        // 再按照公告ID删除公告表
-        return noticeMapper.deleteById(NoticeId);
+            // 再删除公告员工表
+            // 删除公告部门表中，带公告ID的数据
+            noticeStaffMapper.deleteNoticeStaff(noticeId);
+
+            // 再按照公告ID删除公告表
+            noticeMapper.deleteById(noticeId);
+        }
+
+        return 1;
+
     }
 
     // 新增一条公告 、、 增加公告表后 还需要新增公告部门表 -- 部门id数据
@@ -85,33 +108,28 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
     public int updateOneNotice(Notice notice) {
 
         // 先删除公告部门表
-        QueryWrapper noticeDeptWrapper = new QueryWrapper<>();
         // 删除公告部门表中，带公告ID的数据
-        noticeDeptWrapper.eq("NOTICE_ID",notice.getNoticeId());
-        noticeDeptMapper.delete(noticeDeptWrapper);
+        noticeDeptMapper.deleteNoticeDept(notice.getNoticeId());
 
         // 再删除公告员工表
-        QueryWrapper noticeStaffWrapper = new QueryWrapper<>();
         // 删除公告部门表中，带公告ID的数据
-        noticeStaffWrapper.eq("NOTICE_ID",notice.getNoticeId());
-        noticeStaffMapper.delete(noticeStaffWrapper);
+        noticeStaffMapper.deleteNoticeStaff(notice.getNoticeId());
 
         // 修改原公告表中的数据
         noticeMapper.updateById(notice);
 
         // 再添加公告部门表
-       /* for( int i =0;部门id.size();i++ ){
+        for( int i =0;i<notice.getDeptIds().size();i++ ){
 
             // 新建一个部门公告表对象
             NoticeDept noticeDept = new NoticeDept();
             noticeDept.setNoticeId( notice.getNoticeId() );// 公告表id
-            noticeDept.setDeptId(部门id[i]);// 部门表id
+            noticeDept.setDeptId(notice.getDeptIds().get(i));// 部门表id
             // 添加公告部门表
             noticeDeptMapper.insert(noticeDept);
 
         }
-*/
-        return 0;
+        return 1;
     }
 
     // 查询所有部门id 与 部门名称
@@ -126,7 +144,7 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
 
     // 按公告id查询部门id 与 部门名称
     @Override
-    public List<Map<Object, Object>> selectAllDeptByNoticeId(Long NoticeId) {
+    public List<Map<Object, Object>> selectAllDeptByNoticeId(Long noticeId) {
         // SELECT DEPT_ID,DEPT_NAME  FROM DEPT
         //      WHERE DEPT_ID IN (
         //            select DEPT_ID from NOTICE_DEPT
@@ -136,7 +154,7 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
         //        AND IS_DELETED = ?
         QueryWrapper wrapper = new QueryWrapper<>();
         wrapper.select("DEPT_ID","DEPT_NAME");
-        wrapper.inSql("DEPT_ID","select DEPT_ID from NOTICE_DEPT where NOTICE_ID="+NoticeId);
+        wrapper.inSql("DEPT_ID","select DEPT_ID from NOTICE_DEPT where NOTICE_ID="+noticeId);
         wrapper.eq("IS_DELETED",0);
         return deptMapper_notice.selectMaps(wrapper);
     }

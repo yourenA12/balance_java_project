@@ -2,7 +2,10 @@ package com.trkj.balance.modules.system_management.mapper;
 
 import com.trkj.balance.modules.system_management.entity.NoticeDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface NoticeDeptMapper extends BaseMapper<NoticeDept> {
+    
+    // 按公告id 删除公告部门表的数据
+    @Delete("DELETE FROM NOTICE_DEPT WHERE NOTICE_ID = #{NOTICE_ID}")
+    int deleteNoticeDept(@Param("NOTICE_ID") Long noticeId);
 
 }

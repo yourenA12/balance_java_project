@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.system_management.entity.Notice;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +20,10 @@ import java.util.Map;
 public interface NoticeService extends IService<Notice> {
 
     // 分页查询公告
-    IPage<Notice> selectAllPage(Page<Notice> page);
+    IPage<Notice> selectAllPage(Page<Notice> page,String noticeTitle,String noticePeople,String noticeType);
 
     // 删除某条公告 、、 先删除公告部门表中的数据（和公告员工表的数据），再删除公告表中的数据， 、、
-    int deleteOneNotice(Long NoticeId);
+    int deleteNotices(ArrayList<Long> noticeIds);
 
     // 新增一条公告 、、 增加公告表后 还需要新增公告部门表 -- 部门id数据
     int insertOneNotice(Notice notice);
@@ -31,11 +32,14 @@ public interface NoticeService extends IService<Notice> {
     int updateOneNotice(Notice notice);
 
 
+    // 按公告id查询公告详情
+
+
+
     // 查询所有部门id 以及部门名称
     List<Map<Object,Object>> selectAllDeptName();
 
     // 按照公告表中的公告id 查询公告部门表中的部门名称
-    List<Map<Object,Object>> selectAllDeptByNoticeId(Long NoticeId);
-
+    List<Map<Object,Object>> selectAllDeptByNoticeId(Long noticeId);
 
 }
