@@ -80,6 +80,16 @@ public class StaffVo implements Serializable {
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
 
+    @ApiModelProperty(value = "工龄 显示：xx年xx月xx日")
+    @TableField("STAFF_WORKING_YEARS")
+    private String staffWorkingYears;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "转正日期")
+    @TableField("WORKER_DATE")
+    private Date workerDate;
+
+
     @ApiModelProperty(value = "转正编号")
     @TableField("WORKER_ID")
     private Long workerId;
@@ -114,6 +124,10 @@ public class StaffVo implements Serializable {
     @ApiModelProperty(value = "血型")
     @TableField("STAFF_BLOOD")
     private String staffBlood;
+
+    @ApiModelProperty(value = "年龄")
+    @TableField("STAFF_AGE")
+    private String staffAge;
 
     @ApiModelProperty(value = "星座")
     @TableField("STAFF_SIGN")
@@ -217,5 +231,13 @@ public class StaffVo implements Serializable {
     @ApiModelProperty(value = "是否全日制")
     @TableField("EDUCATION_FULL_TIME")
     private Long educationFullTime;
+
+    @ApiModelProperty(value = "离职原因")
+    @TableField("QUIT_EXPLAIN")
+    private String quitExplain;
+
+    @ApiModelProperty(value = "正式离职日期")
+    @TableField("FORMAL_QUIT_DATE")
+    private Date formalQuitDate;
 
 }

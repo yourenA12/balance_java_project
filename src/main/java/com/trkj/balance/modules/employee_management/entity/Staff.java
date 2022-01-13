@@ -15,8 +15,8 @@ import lombok.experimental.Accessors;
  * 员工表
  * </p>
  *
- * @author 友人A
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -76,6 +76,10 @@ public class Staff implements Serializable {
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
 
+    @ApiModelProperty(value = "转正日期")
+    @TableField("WORKER_DATE")
+    private Date workerDate;
+
     @ApiModelProperty(value = "转正编号")
     @TableField("WORKER_ID")
     private Long workerId;
@@ -115,6 +119,10 @@ public class Staff implements Serializable {
     @TableField("STAFF_SIGN")
     private String staffSign;
 
+    @ApiModelProperty(value = "年龄")
+    @TableField("STAFF_AGE")
+    private String staffAge;
+
     @ApiModelProperty(value = "婚姻状态")
     @TableField("STAFF_MARITAL")
     private String staffMarital;
@@ -131,10 +139,13 @@ public class Staff implements Serializable {
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
 
-    @ApiModelProperty(value = "员工状态")
+    @ApiModelProperty(value = "员工状态;0：在职，1：离职，2：实习，3：正式")
     @TableField("STAFF_STATE")
     private Long staffState;
 
+    @ApiModelProperty(value = "工龄 显示：xx年xx月xx日")
+    @TableField("STAFF_WORKING_YEARS")
+    private String staffWorkingYears;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
