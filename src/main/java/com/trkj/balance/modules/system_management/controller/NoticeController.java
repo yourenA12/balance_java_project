@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -73,6 +75,11 @@ public class NoticeController {
         return AjaxResponse.success( noticeService.selectAllDeptByNoticeId(noticeId) );
     }
 
+    // 按公告id查询公告员工表
+    @GetMapping("/selectNoticeStaffByNoticeId/{noticeId}/{staffId}")
+    public AjaxResponse selectNoticeStaffByNoticeId(@PathVariable("noticeId") Long noticeId,@PathVariable("staffId") Long staffId ){
+        return AjaxResponse.success( noticeService.selectNoticeStaffByNoticeId(noticeId,staffId) );
+    }
 
 }
 

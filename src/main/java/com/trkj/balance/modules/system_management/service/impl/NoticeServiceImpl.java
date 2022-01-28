@@ -96,6 +96,7 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
 
     // 新增一条公告 、、 增加公告表后 还需要新增公告部门表 -- 部门id数据
     @Override
+    @Transactional
     public int insertOneNotice(Notice notice) {
 
         // 先新增公告表
@@ -105,6 +106,7 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
 
     // 修改某条公告 、、首先删除在进行添加？ 还是直接修改，重新读取一遍， ？、详情见删除公告
     @Override
+    @Transactional
     public int updateOneNotice(Notice notice) {
 
         // 先删除公告部门表
@@ -158,4 +160,11 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
         wrapper.eq("IS_DELETED",0);
         return deptMapper_notice.selectMaps(wrapper);
     }
+
+    // 按公告id查询公告员工表
+    @Override
+    public List<Map<Object, Object>> selectNoticeStaffByNoticeId(Long noticeId, Long staffId) {
+        return noticeStaffMapper.selectNoticeStaffByNoticeId(noticeId , staffId);
+    }
+
 }

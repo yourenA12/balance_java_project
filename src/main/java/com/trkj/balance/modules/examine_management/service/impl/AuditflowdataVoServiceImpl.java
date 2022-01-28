@@ -16,13 +16,4 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 @Service
 public class AuditflowdataVoServiceImpl extends ServiceImpl<AuditflowdataVoMapper, AuditflowdataVo> implements AuditflowdataVoService {
-    @Autowired
-    private AuditflowdataVoMapper auditflowdataVoMapper;
-    //分页查询明细表和审批主表
-    @Override
-    public IPage<AuditflowdataVo> findSelectPage(Page<AuditflowdataVo> page) {
-        //调用mapper里的方法
-        return auditflowdataVoMapper.findSelectPage(page);
-    }
-
 }

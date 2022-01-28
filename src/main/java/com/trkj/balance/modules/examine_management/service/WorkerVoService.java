@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.*;
 
 public interface WorkerVoService extends IService<WorkerVo> {
-    IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page);
+    IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page,String auditflowTitle,
+            String auditflowdetaiState,String staffName);
     List<WorkerVo> findSelectById(Long id);
 }
