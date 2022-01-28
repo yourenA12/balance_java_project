@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.social_management.mapper.DefInsuredMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.social_management.entity.DefInsured">
+        <id column="DEF_INSURED_ID" property="defInsuredId" />
+        <result column="DEF_INSURED_NAME" property="defInsuredName" />
+        <result column="DEF_INSURED_STATE" property="defInsuredState" />
+        <result column="DEF_INSURED_NUMBER" property="defInsuredNumber" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        DEF_INSURED_ID, DEF_INSURED_NAME, DEF_INSURED_STATE, DEF_INSURED_NUMBER, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>
