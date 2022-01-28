@@ -52,14 +52,14 @@ public class MybatisPlusCode {
         autoGenerator.setDataSource(dataSourceConfig);
 
         // 配置模板 自定义模板
-//        TemplateConfig templateConfig = new TemplateConfig();
+        TemplateConfig templateConfig = new TemplateConfig();
 //        templateConfig.setXml(null); // 不生成xml文件
 //        templateConfig.setEntity(null); // 不生成实体类
 //        templateConfig.setMapper(null);//不生成mapper
-//        templateConfig.setService(null);//不生成service
-//        templateConfig.setServiceImpl(null);//不生成serviceImpl
-//        templateConfig.setController(null);//不生成controller
-//        autoGenerator.setTemplate(templateConfig);
+/*        templateConfig.setService(null);//不生成service
+        templateConfig.setServiceImpl(null);//不生成serviceImpl
+        templateConfig.setController(null);//不生成controller
+        autoGenerator.setTemplate(templateConfig);*/
 
         //3.包的配置
         PackageConfig packageConfig = new PackageConfig();

@@ -1,6 +1,5 @@
 package com.trkj.balance.modules.employee_management.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.employee_management.entity.*;
 import com.trkj.balance.modules.employee_management.mapper.*;
 import com.trkj.balance.modules.employee_management.service.StaffService;
@@ -9,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * <p>
@@ -37,9 +37,23 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
     @Autowired
     private EmploymentTableMapper employmentTableMapper;
 
+
     @Override
     @Transactional
     public int insertStaff(Staff staff, WorkExperience workExperience, Education education, Resume resume) {
+
+        //设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        //
+        Calendar c = Calendar.getInstance();
+        // 员工入职日期
+        c.setTime( staff.getStaffHiredate() );
+        // 加三个月
+        c.add(Calendar.MONTH, 3);
+
+        // 将入职日期后三个月 写入 转正日期中
+        staff.setWorkerDate( c.getTime() );
+
         // 添加员工表
         if (staffMapper.insert(staff) > 0) {
 
@@ -52,7 +66,6 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
                 education.setStaffId(staff.getStaffId());
                 // 添加教育经历表
                 if (educationMapper.insert(education) > 0) {
-
                     // 修改简历表状态为，已入职
                     return resumeMapper.updateById(resume);
 
@@ -81,7 +94,11 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         return staffMapper.selectById(id);
     }
 
-
+    //修改员工
+    @Override
+    public int updateStaff(Staff staff) {
+        return staffMapper.updateById(staff);
+    }
 
 
 }

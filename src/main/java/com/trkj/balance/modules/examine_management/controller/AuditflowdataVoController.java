@@ -26,16 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class AuditflowdataVoController {
-    @Autowired
-    private AuditflowdataVoService auditflowdataVoService;
-
-    //分页查询
-    @GetMapping("/findSelectPage/{currenPage}/{pagesize}")
-    public AjaxResponse findSelectPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
-        Page<AuditflowdataVo> page = new Page<>(currenPage,pagesize);
-        IPage<AuditflowdataVo> list=auditflowdataVoService.findSelectPage(page);
-        return AjaxResponse.success(list);
-    }
 
 }
 

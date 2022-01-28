@@ -1,8 +1,6 @@
 package com.trkj.balance.modules.organization_management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.attendance_management.entity.Classes;
 import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,11 +10,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 晚风
- * @since 2022-01-10
+ * @since 2022-01-12
  */
 public interface DeptService extends IService<Dept> {
+    //删除
+    public int deptdelete (Long id);
 
-    //分页查询
-    public IPage<Dept>deptfy(Page<Dept>page);
+    // 新增
+    int insert(Dept dept);
+
 
 }
