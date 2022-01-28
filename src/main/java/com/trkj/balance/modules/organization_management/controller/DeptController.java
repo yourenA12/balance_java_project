@@ -40,5 +40,15 @@ public class DeptController {
         return AjaxResponse.success("失败");
     }
 
+    //修改
+    @PutMapping("/deptamend")
+     public AjaxResponse deptxg(@RequestBody Dept dept){
+        if (deptService.amend(dept) >= 1){
+            return AjaxResponse.success("成功");
+        }
+            return AjaxResponse.success("失败");
+     }
+
+
 }
 
