@@ -45,4 +45,11 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
     public int deleteDefInsured(Long id) {
         return 0;
     }
+
+    // 修改参保方案状态
+    @Override
+    @Transactional
+    public int updateDefInsuredState(DefInsured defInsured) {
+        return defInsuredMapper.updateById(defInsured);
+    }
 }
