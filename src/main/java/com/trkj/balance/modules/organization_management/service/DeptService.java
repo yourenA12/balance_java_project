@@ -19,5 +19,9 @@ public interface DeptService extends IService<Dept> {
     // 新增
     int insert(Dept dept);
 
+    //修改
+    int amend(Dept dept);
+
+
 
 }

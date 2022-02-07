@@ -31,10 +31,8 @@ public interface NoticeService extends IService<Notice> {
     // 修改某条公告 、、首先删除在进行添加？ 还是直接修改，重新读取一遍， ？、详情见删除公告
     int updateOneNotice(Notice notice);
 
-
-    // 按公告id查询公告详情
-
-
+    // 按公告id查询公告员工表
+    public List<Map<Object, Object>> selectNoticeStaffByNoticeId(Long noticeId, Long staffId);
 
     // 查询所有部门id 以及部门名称
     List<Map<Object,Object>> selectAllDeptName();

@@ -31,4 +31,10 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     public int insert(Dept dept) {
         return deptMapper.insert(dept);
     }
+
+    //修改
+    @Override
+    public int amend(Dept dept) {
+        return deptMapper.updateById(dept);
+    }
 }

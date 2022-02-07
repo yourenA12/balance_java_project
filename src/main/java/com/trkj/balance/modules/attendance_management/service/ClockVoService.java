@@ -12,7 +12,7 @@ public interface ClockVoService extends IService<ClockVo> {
 
     //模糊分页查询
     //模糊搜索
-    IPage<ClockVo> dimsearch(int page, int size, String staffName,Object optionsDeptId,Date clockTimeStart,Date clockTimeEnd);
+        IPage<ClockVo> dimsearch(int page, int size, String staffName,Object optionsDeptId,Date clockTimeStart,Date clockTimeEnd);
 
     //查询所有部门
     List<Map<Object,Object>> selectAllDept();

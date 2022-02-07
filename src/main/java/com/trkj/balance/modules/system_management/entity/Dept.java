@@ -46,7 +46,7 @@ public class Dept implements Serializable {
     private Long staffId;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
