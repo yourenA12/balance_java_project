@@ -93,14 +93,14 @@ public class EntryhirdeVo  implements Serializable {
     private String deptName;
 
 
-    @ApiModelProperty(value = "部门职位编号")
-    @TableId("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
 
 
     @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+    @TableField("POSITION_NAME")
+    private String positionName;
 
 
 
@@ -198,10 +198,6 @@ public class EntryhirdeVo  implements Serializable {
     @ApiModelProperty(value = "公司名称")
     @TableField("COMPANY_NAME")
     private String companyName;
-
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POSITION_NAME")
-    private String positionName;
 
     @ApiModelProperty(value = "所属行业")
     @TableField("POSITION_INDUSTRY")

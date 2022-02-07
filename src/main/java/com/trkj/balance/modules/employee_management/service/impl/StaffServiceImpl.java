@@ -22,25 +22,36 @@ import java.util.Calendar;
 @Service
 public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements StaffService {
 
+    //员工表
     @Autowired
     private StaffMapper staffMapper;
 
+    //工作经历表 员工
     @Autowired
     private WorkExperienceMapper workExperienceMapper;
 
+    //教育经历  员工
     @Autowired
     private EducationMapper educationMapper;
 
+    //简历表
     @Autowired
     private ResumeMapper resumeMapper;
 
+    //录用表
     @Autowired
     private EmploymentTableMapper employmentTableMapper;
+
+    //固定工资表
+    @Autowired
+    private FixedwageMapper fixedwageMapper;
+
+
 
 
     @Override
     @Transactional
-    public int insertStaff(Staff staff, WorkExperience workExperience, Education education, Resume resume) {
+    public int insertStaff(Staff staff, WorkExperience workExperience, Education education, Resume resume,Fixedwage fixedwage) {
 
         //设置日期格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,8 +77,14 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
                 education.setStaffId(staff.getStaffId());
                 // 添加教育经历表
                 if (educationMapper.insert(education) > 0) {
-                    // 修改简历表状态为，已入职
-                    return resumeMapper.updateById(resume);
+                    //将新加的员工表id 作为固定工资表的外键
+                    fixedwage.setStaffId(staff.getStaffId());
+                    //添加固定工资表
+                    if(fixedwageMapper.insert(fixedwage)>0){
+                        // 修改简历表状态为，已入职
+                        return resumeMapper.updateById(resume);
+
+                    }
 
                 }
                 ;

@@ -7,22 +7,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.trkj.balance.modules.employee_management.entity.Dept;
 import com.trkj.balance.modules.employee_management.entity.DeptPost;
-import com.trkj.balance.modules.employee_management.entity.Staff;
+import com.trkj.balance.modules.employee_management.entity.Position;
 import com.trkj.balance.modules.employee_management.mapper.*;
-import com.trkj.balance.modules.employee_management.service.EntryhirdeVoService;
 import com.trkj.balance.modules.employee_management.service.StaffVoService;
-import com.trkj.balance.modules.employee_management.vo.EntryhirdeVo;
 import com.trkj.balance.modules.employee_management.vo.StaffVo;
 
-import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -41,34 +33,60 @@ public class StaffVoServicelmpl extends ServiceImpl<StaffVoMapper, StaffVo> impl
    private DeptNameMapper deptNameMapper;
 
    @Autowired
-   //部门职位名称
-    private Dept_Post_NameMapper deptPostNameMapper;
+   //职位名称
+    private PositionMapper positionMapper;
 
 
     @Override
-    public IPage<StaffVo> selectStaffVo(Page<StaffVo> page) {
+    public IPage<StaffVo> selectStaffVo(Page<StaffVo> page,String staffNameSearch,String deptSearch,String stateSearch,Date clockTimeStart,Date clockTimeEnd) {
 
-        IPage<StaffVo> list=staffVoMapper.selectStaffVo(page);
+        // 声明一个条件构造器
+        QueryWrapper<StaffVo> wrapper = new QueryWrapper<>();
 
-        for (StaffVo staffVo : list.getRecords()) {
-
-            //设置日期格式
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            // 放入 入职日期 与 当前日期
-            Period period = Period.between( LocalDate.parse( df.format(staffVo.getStaffHiredate()) ),
-                    LocalDate.parse( df.format(new Date()) ));
-            // 将 计算好的工龄 放入 vo 视图中
-            staffVo.setStaffWorkingYears( period.getYears()+"年"+period.getMonths()+"月"+period.getDays()+"日" );
-
-            //往数据库做修改
-            Staff staff=new Staff();
-            //取当前循环的员工id
-            staff.setStaffId(staffVo.getStaffId());
-            //取当前循环员工的工龄
-            staff.setStaffWorkingYears(staffVo.getStaffWorkingYears());
-            staffMapper.updateById(staff);
-
+        if(staffNameSearch!="" && staffNameSearch!=null ){
+            // 按员工名称进行模糊查询
+            wrapper.like("s.STAFF_NAME",staffNameSearch);
         }
+
+        if(deptSearch!="" && deptSearch!=null){
+            // 按部门id查询
+            wrapper.eq("d.DEPT_ID",deptSearch);
+        }
+
+        if(stateSearch!="" && stateSearch!=null){
+            // 按员工状态
+            wrapper.eq("s.STAFF_STATE",stateSearch);
+        }
+
+        if(clockTimeStart+"" !="" &&  clockTimeEnd+"" !="" && clockTimeStart !=null &&  clockTimeEnd !=null){
+            // 按入职时间段进行查询
+            wrapper.between("s.STAFF_HIREDATE",clockTimeStart,clockTimeEnd);
+        }
+
+        // 员工当前状态不为离职
+        wrapper.ne("s.STAFF_STATE",1);
+
+        IPage<StaffVo> list=staffVoMapper.selectStaffVo(page,wrapper);
+
+//        for (StaffVo staffVo : list.getRecords()) {
+//
+//            //设置日期格式
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//            // 放入 入职日期 与 当前日期
+//            Period period = Period.between( LocalDate.parse( df.format(staffVo.getStaffHiredate()) ),
+//                    LocalDate.parse( df.format(new Date()) ));
+//            // 将 计算好的工龄 放入 vo 视图中
+//            staffVo.setStaffWorkingYears( period.getYears()+"年"+period.getMonths()+"月"+period.getDays()+"日" );
+//
+//            //往数据库做修改
+//            Staff staff=new Staff();
+//            //取当前循环的员工id
+//            staff.setStaffId(staffVo.getStaffId());
+//            //取当前循环员工的工龄
+//            staff.setStaffWorkingYears(staffVo.getStaffWorkingYears());
+//            staffMapper.updateById(staff);
+//
+//        }
         return list;
     }
 
@@ -88,8 +106,30 @@ public class StaffVoServicelmpl extends ServiceImpl<StaffVoMapper, StaffVo> impl
     }
 
     @Override
-    public IPage<StaffVo> selectStaffHistorical(Page<StaffVo> page) {
-        return staffVoMapper.selectStaffHistorical(page);
+    public IPage<StaffVo> selectStaffHistorical(Page<StaffVo> page,String staffNameSearch,String deptSearch,String postSearch) {
+        // 声明一个条件构造器
+        QueryWrapper<StaffVo> wrapper = new QueryWrapper<>();
+
+        if(staffNameSearch!="" && staffNameSearch!=null ){
+            // 按员工名称进行模糊查询
+            wrapper.like("s.STAFF_NAME",staffNameSearch);
+        }
+
+        if(deptSearch!="" && deptSearch!=null){
+            // 按部门id查询
+            wrapper.eq("d.DEPT_ID",deptSearch);
+        }
+        if(postSearch!="" && postSearch!=null){
+            // 按职位id查询
+            wrapper.eq("p.POSITION_ID",postSearch);
+        }
+
+        // 员工当前状态为离职
+        wrapper.eq("s.STAFF_STATE",1);
+
+
+        wrapper.eq("q.IS_DELETED",0);
+        return staffVoMapper.selectStaffHistorical(page,wrapper);
     }
 
     @Override
@@ -103,13 +143,13 @@ public class StaffVoServicelmpl extends ServiceImpl<StaffVoMapper, StaffVo> impl
     }
 
     @Override
-    public List<Map<String, Object>> selectDeptPostName() {
-        QueryWrapper<DeptPost> queryWrapper = new QueryWrapper<>();
+    public List<Map<String, Object>>selectPositionName() {
+        QueryWrapper<Position> queryWrapper = new QueryWrapper<>();
 
-        queryWrapper.select("DEPT_POST_ID","POST_NAME");
+        queryWrapper.select("POSITION_ID","POSITION_NAME");
         queryWrapper.eq("IS_DELETED",0);
 
-        return deptPostNameMapper.selectMaps(queryWrapper);
+        return positionMapper.selectMaps(queryWrapper);
     }
 
 }

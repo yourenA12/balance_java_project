@@ -43,13 +43,22 @@ public class TransferController {
     }
 
     //查询调动记录
-    @GetMapping("/selectTransfer/{currenPage}/{pagesize}")
-    public AjaxResponse selectHistorical(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    @GetMapping("/selectTransfer")
+    public AjaxResponse selectHistorical(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                         @RequestParam("staffNameSearch") String staffNameSearch,
+                                         @RequestParam("moveTypeSearch") String moveTypeSearch){
 
         Page<Transfer> page = new Page<>(currenPage,pagesize);
-        IPage<Transfer> list=transferService.selectTransfer(page);
+        IPage<Transfer> list=transferService.selectTransfer(page,staffNameSearch,moveTypeSearch);
         return AjaxResponse.success(list);
     }
+
+    //花名册 编辑里根据id查询查询调动记录表信息
+    @GetMapping("/selectTransferId/{id}")
+    public AjaxResponse selectTransferId(@PathVariable("id") Long id){
+        return AjaxResponse.success(transferService.selectTransferId(id));
+    }
+
 
 
 }

@@ -12,13 +12,14 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 
 public interface StaffVoService extends IService<StaffVo> {
     //分页查询员工信息
-    IPage<StaffVo> selectStaffVo (Page<StaffVo> page);
+    IPage<StaffVo> selectStaffVo (Page<StaffVo> page, String staffNameSearch, String deptSearch, String stateSearch, Date clockTimeStart, Date clockTimeEnd);
     //查询员工的姓名、职位、部门
     List<StaffVo> selectStaffXX();
     //根据id查询员工信息
@@ -28,12 +29,12 @@ public interface StaffVoService extends IService<StaffVo> {
     IPage<StaffVo> selectProbation (Page<StaffVo> page);
 
     //历史花名册 查询状态为离职的员工
-    IPage<StaffVo> selectStaffHistorical (Page<StaffVo> page);
+    IPage<StaffVo> selectStaffHistorical (Page<StaffVo> page,String staffNameSearch, String deptSearch,String postSearch);
 
     //查询部门名称
     List<Map<String, Object>> selectDeptName();
 
     //查询部门职位名称
-    List<Map<String, Object>> selectDeptPostName();
+    List<Map<String, Object>> selectPositionName();
 
 }

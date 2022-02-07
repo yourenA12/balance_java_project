@@ -67,9 +67,9 @@ public class StaffVo implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "部门职位编号外键")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
@@ -177,8 +177,8 @@ public class StaffVo implements Serializable {
     private String deptName;
 
     @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+    @TableField("POSITION_NAME")
+    private String positionName;
 
     @ApiModelProperty(value = "编号")
     @TableId("WORK_EXPERIENCE_ID")

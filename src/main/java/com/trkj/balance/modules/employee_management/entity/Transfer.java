@@ -94,8 +94,8 @@ public class Transfer implements Serializable {
     private String deptName;
 
     @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+    @TableField("POSITION_NAME")
+    private String positionName;
 
     // 变动后
     @ApiModelProperty(value = "部门名称")
@@ -103,8 +103,8 @@ public class Transfer implements Serializable {
     private String deptName2;
 
     @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName2;
+    @TableField("POSITION_NAME")
+    private String positionName2;
 
     @ApiModelProperty(value = "员工姓名")
     @TableField("STAFF_NAME")

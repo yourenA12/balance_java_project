@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -60,10 +62,12 @@ public class Quit implements Serializable {
     @TableField("QUIT_STATE")
     private Long quitState;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "申请离职日期")
     @TableField("APPLY_QUIT_DATE")
     private Date applyQuitDate;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "正式离职日期")
     @TableField("FORMAL_QUIT_DATE")
     private Date formalQuitDate;

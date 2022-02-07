@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -52,6 +54,7 @@ public class Staff implements Serializable {
     @TableField("STAFF_PICTURE")
     private String staffPicture;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "出生日期")
     @TableField("STAFF_BIRTHDAY")
     private Date staffBirthday;
@@ -64,18 +67,20 @@ public class Staff implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "部门职位编号外键")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "转正日期")
     @TableField("WORKER_DATE")
     private Date workerDate;
