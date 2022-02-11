@@ -26,7 +26,7 @@ public interface StaffVoService extends IService<StaffVo> {
     StaffVo selectStaffId(Long id);
 
     //转正管理 查询试用期人员
-    IPage<StaffVo> selectProbation (Page<StaffVo> page);
+    IPage<StaffVo> selectProbation (Page<StaffVo> page,String staffNameSearch, String deptSearch,String postSearch,Date clockTimeStart, Date clockTimeEnd);
 
     //历史花名册 查询状态为离职的员工
     IPage<StaffVo> selectStaffHistorical (Page<StaffVo> page,String staffNameSearch, String deptSearch,String postSearch);

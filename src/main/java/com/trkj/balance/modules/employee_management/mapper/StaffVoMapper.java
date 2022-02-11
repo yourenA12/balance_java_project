@@ -32,8 +32,8 @@ public interface StaffVoMapper extends BaseMapper<StaffVo> {
     StaffVo selectStaffId(@Param("id") Long id);
 
     //转正管理 查询试用期人员
-    @Select("select * from staff s left JOIN dept d on s.DEPT_ID=d.DEPT_ID left JOIN  POSITION p  on s.POSITION_ID=p.POSITION_ID where s.STAFF_STATE=2")
-    IPage<StaffVo> selectProbation (Page<StaffVo> page);
+    @Select("select * from staff s left JOIN dept d on s.DEPT_ID=d.DEPT_ID left JOIN  POSITION p  on s.POSITION_ID=p.POSITION_ID ${ew.customSqlSegment}")
+    IPage<StaffVo> selectProbation (Page<StaffVo> page,@Param(Constants.WRAPPER) QueryWrapper<StaffVo> wrapper);
 
     //历史花名册 查询状态为离职的员工
     @Select("select * from staff s left JOIN dept d on s.DEPT_ID=d.DEPT_ID left JOIN  POSITION p  on s.POSITION_ID=p.POSITION_ID LEFT JOIN QUIT q on s.STAFF_ID=q.STAFF_ID  ${ew.customSqlSegment}")

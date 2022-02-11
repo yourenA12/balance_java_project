@@ -101,8 +101,34 @@ public class StaffVoServicelmpl extends ServiceImpl<StaffVoMapper, StaffVo> impl
     }
 
     @Override
-    public IPage<StaffVo> selectProbation(Page<StaffVo> page) {
-        return staffVoMapper.selectProbation(page);
+    public IPage<StaffVo> selectProbation(Page<StaffVo> page,String staffNameSearch, String deptSearch,String postSearch,Date clockTimeStart, Date clockTimeEnd) {
+        // 声明一个条件构造器
+        QueryWrapper<StaffVo> wrapper = new QueryWrapper<>();
+
+        if (staffNameSearch != "" && staffNameSearch != null) {
+            // 按员工名称进行模糊查询
+            wrapper.like("s.STAFF_NAME", staffNameSearch);
+        }
+
+        if (deptSearch != "" && deptSearch != null) {
+            // 按部门id查询
+            wrapper.eq("d.DEPT_ID", deptSearch);
+        }
+        if (postSearch != "" && postSearch != null) {
+            // 按职位id查询
+            wrapper.eq("p.POSITION_ID", postSearch);
+        }
+        if(clockTimeStart+"" !="" &&  clockTimeEnd+"" !="" && clockTimeStart !=null &&  clockTimeEnd !=null){
+            // 按入职时间段进行查询
+            wrapper.between("s.STAFF_HIREDATE",clockTimeStart,clockTimeEnd);
+        }
+
+        // 员工当前状态为试用期
+        wrapper.eq("s.STAFF_STATE", 2);
+
+
+        return staffVoMapper.selectProbation(page,wrapper);
+
     }
 
     @Override

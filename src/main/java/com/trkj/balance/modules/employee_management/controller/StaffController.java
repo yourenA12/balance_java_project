@@ -106,11 +106,16 @@ public class StaffController {
     }
 
     //查询试用期信息
-    @GetMapping("/selectProbation/{currenPage}/{pagesize}")
-    public AjaxResponse selectProbation(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    @GetMapping("/selectProbation")
+    public AjaxResponse selectProbation(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                        @RequestParam("staffNameSearch") String staffNameSearch,
+                                        @RequestParam("deptSearch") String deptSearch,
+                                        @RequestParam("postSearch") String postSearch,
+                                        @RequestParam("clockTimeStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeStart,
+                                        @RequestParam("clockTimeEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeEnd){
 
         Page<StaffVo> page = new Page<>(currenPage,pagesize);
-        IPage<StaffVo> list=staffVoService.selectProbation(page);
+        IPage<StaffVo> list=staffVoService.selectProbation(page,staffNameSearch,deptSearch,postSearch,clockTimeStart,clockTimeEnd);
         return AjaxResponse.success(list);
     }
 
