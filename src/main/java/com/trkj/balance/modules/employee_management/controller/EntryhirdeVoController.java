@@ -29,6 +29,15 @@ public class EntryhirdeVoController {
                                            @RequestParam("clockTimeStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeStart,
                                            @RequestParam("clockTimeEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeEnd){
 
+        log.debug("1111111111111111111");
+
+        log.debug(staffNameSearch);
+        log.debug(deptSearch);
+        log.debug(postSearch);
+        log.debug(clockTimeStart+"");
+        log.debug(clockTimeEnd+"");
+
+
         Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
         IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirde1(page,staffNameSearch,deptSearch,postSearch,clockTimeStart,clockTimeEnd);
         return AjaxResponse.success(list);
@@ -42,6 +51,12 @@ public class EntryhirdeVoController {
                                              @RequestParam("staffNameSearch") String staffNameSearch,
                                              @RequestParam("deptSearch") String deptSearch,
                                              @RequestParam("postSearch") String postSearch){
+
+        log.debug("222222222222222222");
+
+        log.debug(staffNameSearch);
+        log.debug(deptSearch);
+        log.debug(postSearch);
 
         Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
         IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirdeFQ(page,staffNameSearch,deptSearch,postSearch);

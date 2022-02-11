@@ -19,7 +19,7 @@ public interface EntryhirdeVoMapper extends BaseMapper<EntryhirdeVo> {
                  "                 LEFT JOIN DEPT d on rp.DEPT_ID=d.DEPT_ID\n" +
                  "                  LEFT JOIN POSITION p on rp.POSITION_ID=p.POSITION_ID\n" +
                  "                 LEFT JOIN WORK_EXPERIENCESS we on r.RESUME_ID=we.RESUME_ID\n" +
-                 "                  LEFT JOIN EDUCATIONSS e on r.RESUME_ID=e.RESUME_ID ")
+                 "                  LEFT JOIN EDUCATIONSS e on r.RESUME_ID=e.RESUME_ID ${ew.customSqlSegment}")
          IPage<EntryhirdeVo> selectEntryhirde(Page<EntryhirdeVo> page,@Param(Constants.WRAPPER) QueryWrapper<EntryhirdeVo> wrapper);
 
          //查询放弃入职员工
