@@ -7,6 +7,8 @@ import com.trkj.balance.modules.employee_management.entity.Transfer;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * <p>
  * 调动记录表 服务类
@@ -21,7 +23,10 @@ public interface TransferService extends IService<Transfer> {
     int insertTransfer(Transfer transfer, Staff staff);
 
     //查询调动记录
-    IPage<Transfer> selectTransfer (Page<Transfer> page);
+    IPage<Transfer> selectTransfer (Page<Transfer> page,String staffNameSearch,String moveTypeSearch);
+
+    //员工花名册点击编辑里的调动记录查询
+    List<Transfer> selectTransferId (Long id);
 
 
 }

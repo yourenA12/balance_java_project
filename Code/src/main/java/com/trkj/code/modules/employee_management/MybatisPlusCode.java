@@ -68,13 +68,13 @@ public class MybatisPlusCode {
         //放在哪一个包下
         packageConfig.setParent("com.trkj.balance.modules.employee_management");
 
-        //将包的配置放在自动生成器里面
+          //将包的配置放在自动生成器里面
         autoGenerator.setPackageInfo(packageConfig);
 
         //4、策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         //数据库表名 自己写自己模块的表名
-        strategyConfig.setInclude("TRANSFER");// 不写默认生成所有的表！！！
+        strategyConfig.setInclude("FIXEDWAGE");// 不写默认生成所有的表！！！
         //包的命名规则
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         //列的名字

@@ -23,4 +23,7 @@ public interface DefInsuredService extends IService<DefInsured> {
     // 删除参保方案
     int deleteDefInsured(Long id);
 
+    // 修改参保方案状态
+    int updateDefInsuredState(DefInsured defInsured);
+
 }

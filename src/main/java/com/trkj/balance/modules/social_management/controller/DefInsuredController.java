@@ -42,6 +42,12 @@ public class DefInsuredController {
         return AjaxResponse.success( defInsuredService.deleteDefInsured(id) );
     }
 
+    // 修改参保方案状态
+    @PutMapping("/updateDefInsuredState")
+    public AjaxResponse updateDefInsuredState(@RequestBody DefInsured defInsured){
+        return AjaxResponse.success( defInsuredService.updateDefInsuredState(defInsured) );
+    }
+
 
 }
 

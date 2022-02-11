@@ -19,7 +19,7 @@ import java.util.List;
 public interface StaffService extends IService<Staff> {
 
     //添加员工表
-    int insertStaff(Staff staff, WorkExperience workExperience, Education education, Resume resume);
+    int insertStaff(Staff staff, WorkExperience workExperience, Education education, Resume resume,Fixedwage fixedwage);
 
     //修改简历表状态和录用表放弃原应
     int updateResumen(Resume resume,EmploymentTable employment_table);
