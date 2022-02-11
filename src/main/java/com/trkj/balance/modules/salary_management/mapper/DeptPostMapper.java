@@ -18,6 +18,6 @@ import org.apache.ibatis.annotations.Select;
 public interface DeptPostMapper extends BaseMapper<DeptPost> {
 
     @Select("SELECT DEPT_POST_ID FROM DEPT_POST WHERE DEPT_ID=#{deptId} and POSITION_ID=#{positionId}")
-    Long selectDeptPost(@Param("deptId") Long deptId,@Param("positionId") Long positionId);
+    Long selectDeptPost(@Param("deptId") int deptId,@Param("positionId") int positionId);
 
 }
