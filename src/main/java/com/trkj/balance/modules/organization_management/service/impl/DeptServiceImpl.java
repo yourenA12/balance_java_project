@@ -43,22 +43,50 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     }
 
 
+    /**
+     * 获取所有分类
+     * @return
+     */
     @Override
     public List<Dept> queryList() {
+
+//        ArrayList arr = new ArrayList<Object>();
+//        arr.add(1);
+//        arr.add(2);
+//        arr.add(4);
+//
+//        System.out.println("11111111111111111111111111");
+//        System.out.println(arr);
+//
+//        QueryWrapper queryWrapper = new QueryWrapper<>();
+//        queryWrapper.in("DEPT_ID",arr);
+
+        // 用boot获取分类数据   selectAll在springboot中是获取数据表里的所有数据
         List<Dept> data = deptMapper.selectList(null);
-        List<Dept> deptList = new ArrayList<>();
-        for (Dept dept : data){
-            if (dept.getDeptId()+""!="" && dept.getDeptId()!=null && dept.getDeptId() ==1){
-                deptList.add(dept);
+        //定义新的list
+        List<Dept> deptpList = new ArrayList<>();
+        //先找到所有的一级分类
+        for(Dept dept : data){
+            // 一级菜单的parentId是0
+            if(dept.getDeptPid()+""!="" && dept.getDeptPid()!=null && dept.getDeptPid() == 1){
+                deptpList.add(dept);
             }
         }
-        for (Dept dept : deptList){
-            dept.setChildren(getChilde(dept.getDeptId(),data));
+        // 为一级菜单设置子菜单，getChild是递归调用的
+        for(Dept dept : deptpList){
+            dept.setChildren(getChilde(dept.getDeptId(), data));
         }
-        return deptList;
+        return deptpList;
     }
 
 
+    /**
+     * 递归查找子菜单
+     *
+     * @param id 当前菜单id
+     * @param rootList 要查找的列表
+     * @return
+     */
     private List<Dept> getChilde(Long id, List<Dept> rootList){
         //子级
         List<Dept> childList = new ArrayList<>();
