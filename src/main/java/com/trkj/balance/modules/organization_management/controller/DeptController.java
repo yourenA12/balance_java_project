@@ -52,9 +52,9 @@ public class DeptController {
 
      //
      @GetMapping("/yyds")
-     public List<Dept> queryList(){
+     public AjaxResponse queryList(){
         List<Dept> list = deptService.queryList();
-        return list;
+        return AjaxResponse.success(list);
      }
 
 
