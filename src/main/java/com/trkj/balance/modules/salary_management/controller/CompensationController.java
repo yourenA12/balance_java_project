@@ -11,13 +11,10 @@ import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.AccessType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,6 +56,12 @@ public class CompensationController {
         return AjaxResponse.success(compensationService.insertCompensation(compensation,deptIds,postIds));
     }
 
+    //查询薪酬组名称
+    @GetMapping("/selectCompensationName")
+    public AjaxResponse selectCompensationName(){
+        List<Map<String, Object>> list=compensationService.selectCompensationName();
+        return AjaxResponse.success(list);
+    }
 
 }
 
