@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-02-13
  */
 @Mapper
-public interface PositionMapper extends BaseMapper<Position> {
+public interface PositionsMapper extends BaseMapper<Position> {
 
 }
