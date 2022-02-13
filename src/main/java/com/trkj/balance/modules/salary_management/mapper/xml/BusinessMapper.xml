@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.salary_management.mapper.BusinessMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.salary_management.entity.Business">
+        <id column="BUSINESS_ID" property="businessId" />
+        <result column="TRAVEL_ID" property="travelId" />
+        <result column="BUSINESS_NAME" property="businessName" />
+        <result column="BUSINESS_ONEMONEY" property="businessOnemoney" />
+        <result column="BUSINESS_STATE" property="businessState" />
+        <result column="BUSINESS_REMARK" property="businessRemark" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="IS_DELETED" property="isDeleted" />
+        <result column="REVISION" property="revision" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        BUSINESS_ID, TRAVEL_ID, BUSINESS_NAME, BUSINESS_ONEMONEY, BUSINESS_STATE, BUSINESS_REMARK, CREATED_TIME, UPDATED_TIME, IS_DELETED, REVISION
+    </sql>
+
+</mapper>
