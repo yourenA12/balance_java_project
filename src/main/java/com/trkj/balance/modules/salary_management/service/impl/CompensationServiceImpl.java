@@ -1,5 +1,7 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.trkj.balance.modules.employee_management.entity.Dept;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
 import com.trkj.balance.modules.salary_management.mapper.CompensationDeptPostMapper;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -71,5 +75,15 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
         }
         // 执行完成，添加成功
         return 1;
+    }
+
+    //查询薪酬组名称
+    @Override
+    public List<Map<String, Object>> selectCompensationName() {
+        QueryWrapper<Compensation> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.select("COMPENSATION_ID","COMPENSATION_NAME");
+        queryWrapper.eq("IS_DELETED",0);
+        return compensationMapper.selectMaps(queryWrapper);
     }
 }
