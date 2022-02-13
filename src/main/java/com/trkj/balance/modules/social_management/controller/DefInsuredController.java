@@ -71,6 +71,8 @@ public class DefInsuredController {
 
         ArrayList<Integer> deptIds = JSON.parseObject(JSON.toJSONString(map.get("deptIds")), ArrayList.class);
         ArrayList<Integer> postIds = JSON.parseObject(JSON.toJSONString(map.get("postIds")), ArrayList.class);
+        ArrayList<Integer> staffIds = JSON.parseObject(JSON.toJSONString(map.get("staffIds")), ArrayList.class);
+
 
         log.debug("1111111111111111111");
 
@@ -87,6 +89,9 @@ public class DefInsuredController {
         log.debug(deptIds.toString());
 
         log.debug(postIds.toString());
+
+        log.debug(staffIds.toString());
+
 
         return AjaxResponse.success("");
     }
