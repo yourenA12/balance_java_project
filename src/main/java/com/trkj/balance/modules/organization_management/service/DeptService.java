@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.organization_management.entity.Dept;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,8 +24,9 @@ public interface DeptService extends IService<Dept> {
     //修改
     int amend(Dept dept);
 
-    //
+    //上下级查询
     List<Dept> queryList();
+
 
 
 

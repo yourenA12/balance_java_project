@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,4 +21,6 @@ public interface CompensationService extends IService<Compensation> {
     //添加薪酬组
     int insertCompensation(Compensation compensation, ArrayList<Integer> deptIds, ArrayList<Integer> postIds );
 
+    //查询薪酬组名称
+    List<Map<String, Object>> selectCompensationName();
 }
