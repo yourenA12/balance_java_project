@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.organization_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.trkj.balance.modules.organization_management.mapper.DeptMapper;
 import com.trkj.balance.modules.organization_management.service.DeptService;
@@ -7,9 +8,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trkj.balance.modules.system_managementTest.entity.Deptp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -38,6 +41,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
 
     //修改
     @Override
+    @Transactional //事务注解
     public int amend(Dept dept) {
         return deptMapper.updateById(dept);
     }
@@ -109,4 +113,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         }
         return childList;
     }
+
+
+
+
+
 }
