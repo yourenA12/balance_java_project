@@ -26,4 +26,7 @@ public interface DefInsuredService extends IService<DefInsured> {
     // 修改参保方案状态
     int updateDefInsuredState(DefInsured defInsured);
 
+    // 新增参保方案
+    int insertDefInsured(DefInsured defInsured);
+
 }

@@ -52,4 +52,10 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
     public int updateDefInsuredState(DefInsured defInsured) {
         return defInsuredMapper.updateById(defInsured);
     }
+
+    // 新增参保方案状态
+    @Override
+    public int insertDefInsured(DefInsured defInsured) {
+        return 0;
+    }
 }
