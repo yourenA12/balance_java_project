@@ -1,9 +1,7 @@
 package com.trkj.balance.modules.organization_management.controller;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.trkj.balance.modules.organization_management.service.DeptVoService;
 import com.trkj.balance.modules.organization_management.vo.DeptVo;
 import com.trkj.balance.vo.AjaxResponse;

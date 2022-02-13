@@ -1,7 +1,7 @@
 package com.trkj.balance.modules.organization_management.mapper;
 
-import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.trkj.balance.modules.organization_management.entity.Dept;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

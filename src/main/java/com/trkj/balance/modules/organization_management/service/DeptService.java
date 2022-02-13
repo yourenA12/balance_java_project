@@ -1,8 +1,9 @@
 package com.trkj.balance.modules.organization_management.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.trkj.balance.modules.organization_management.entity.Dept;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,6 +22,9 @@ public interface DeptService extends IService<Dept> {
 
     //修改
     int amend(Dept dept);
+
+    //
+    List<Dept> queryList();
 
 
 

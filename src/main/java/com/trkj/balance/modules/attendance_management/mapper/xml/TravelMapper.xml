@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.attendance_management.mapper.TravelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.attendance_management.entity.Travel">
+        <id column="TRAVEL_ID" property="travelId" />
+        <result column="AUDITFLOW_ID" property="auditflowId" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="STAFF_NAME" property="staffName" />
+        <result column="DEPT_ID" property="deptId" />
+        <result column="TRAVEL_PLACE" property="travelPlace" />
+        <result column="TRAVEL_MATTER" property="travelMatter" />
+        <result column="TRAVEL_S_DATE" property="travelSDate" />
+        <result column="TRAVEL_E_DATE" property="travelEDate" />
+        <result column="TRAVEL_TOTAL_DATE" property="travelTotalDate" />
+        <result column="TRAVEL_STATE" property="travelState" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TRAVEL_ID, AUDITFLOW_ID, STAFF_ID, STAFF_NAME, DEPT_ID, TRAVEL_PLACE, TRAVEL_MATTER, TRAVEL_S_DATE, TRAVEL_E_DATE, TRAVEL_TOTAL_DATE, TRAVEL_STATE, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

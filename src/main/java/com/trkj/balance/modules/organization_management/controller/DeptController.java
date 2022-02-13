@@ -1,12 +1,13 @@
 package com.trkj.balance.modules.organization_management.controller;
 
 
-import com.trkj.balance.modules.attendance_management.entity.Classes;
 import com.trkj.balance.modules.organization_management.entity.Dept;
 import com.trkj.balance.modules.organization_management.service.DeptService;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -47,6 +48,13 @@ public class DeptController {
             return AjaxResponse.success("成功");
         }
             return AjaxResponse.success("失败");
+     }
+
+     //
+     @GetMapping("/yyds")
+     public AjaxResponse queryList(){
+        List<Dept> list = deptService.queryList();
+        return AjaxResponse.success(list);
      }
 
 
