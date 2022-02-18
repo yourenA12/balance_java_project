@@ -1,12 +1,19 @@
 package com.trkj.balance.modules.organization_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.attendance_management.vo.TravelVo;
 import com.trkj.balance.modules.organization_management.entity.Dept;
+import com.trkj.balance.modules.organization_management.entity.Staff;
 import com.trkj.balance.modules.organization_management.mapper.DeptMapper;
+import com.trkj.balance.modules.organization_management.mapper.Staff_DeptMapper;
 import com.trkj.balance.modules.organization_management.service.DeptService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.trkj.balance.modules.system_managementTest.entity.Deptp;
+import com.trkj.balance.modules.organization_management.vo.DeptStaffVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +31,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     @Autowired
     public DeptMapper deptMapper;
 
+    @Autowired
+    public Staff_DeptMapper staff_deptMapper;
+
     //删除
     @Override
     public int deptdelete(Long id) {
@@ -38,9 +48,33 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
 
     //修改
     @Override
+    @Transactional //事务注解
     public int amend(Dept dept) {
         return deptMapper.updateById(dept);
     }
+
+    //模糊搜索
+    @Override
+    public IPage<Dept> moss(int page, int size, String deptName) {
+        Page<Dept> page1=new Page<>(page,size);
+        QueryWrapper<Dept> wrapper=new QueryWrapper<>();
+        wrapper.like("DEPT_NAME",deptName);
+        IPage<Dept> n=deptMapper.selectPage(page1,wrapper);
+        return n;
+    }
+
+    //查询员工
+    @Override
+    public IPage<DeptStaffVo> yg(int page, int pagesize,String staffName) {
+        Page<DeptStaffVo> page1 = new Page<>(page,pagesize);
+        QueryWrapper<DeptStaffVo> wrapper = new QueryWrapper<>();
+        //员工姓名
+        if (staffName!="" && staffName!=null){
+            wrapper.like("a.STAFF_NAME",staffName);
+        }
+        return staff_deptMapper.yg(page1,wrapper);
+    }
+
 
 
     /**
@@ -109,4 +143,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         }
         return childList;
     }
+
+
+
+
+
 }
