@@ -1,9 +1,11 @@
 package com.trkj.balance.modules.employee_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.employee_management.entity.Glory;
 import com.trkj.balance.modules.employee_management.entity.Punish;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PunishService extends IService<Punish> {
@@ -19,5 +21,8 @@ public interface PunishService extends IService<Punish> {
 
     //删除惩罚表信息
     int deletePunishId(Long id);
+
+    //分页查询惩罚表数据
+    IPage<Punish> selectPunishPage(IPage<Punish> page, String staffName, ArrayList deptIds);
 
 }

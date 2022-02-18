@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Slf4j
@@ -24,22 +25,15 @@ public class EntryhirdeVoController {
     @GetMapping("/selectEntryhirdeVo")
     public AjaxResponse selectEntryhirdeVo(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                            @RequestParam("staffNameSearch") String staffNameSearch,
-                                           @RequestParam("deptSearch") String deptSearch,
+                                           @RequestParam("deptIds") ArrayList deptIds,
                                            @RequestParam("postSearch") String postSearch,
                                            @RequestParam("clockTimeStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeStart,
                                            @RequestParam("clockTimeEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeEnd){
 
-        log.debug("1111111111111111111");
-
-        log.debug(staffNameSearch);
-        log.debug(deptSearch);
-        log.debug(postSearch);
-        log.debug(clockTimeStart+"");
-        log.debug(clockTimeEnd+"");
 
 
         Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
-        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirde1(page,staffNameSearch,deptSearch,postSearch,clockTimeStart,clockTimeEnd);
+        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirde1(page,staffNameSearch,deptIds,postSearch,clockTimeStart,clockTimeEnd);
         return AjaxResponse.success(list);
 
     }
@@ -49,18 +43,20 @@ public class EntryhirdeVoController {
     @GetMapping("/selectEntryhirdeVoFQ")
     public AjaxResponse selectEntryhirdeVoFQ(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                              @RequestParam("staffNameSearch") String staffNameSearch,
-                                             @RequestParam("deptSearch") String deptSearch,
+                                             @RequestParam("deptIds") ArrayList deptIds,
                                              @RequestParam("postSearch") String postSearch){
 
-        log.debug("222222222222222222");
-
-        log.debug(staffNameSearch);
-        log.debug(deptSearch);
-        log.debug(postSearch);
 
         Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
-        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirdeFQ(page,staffNameSearch,deptSearch,postSearch);
+        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirdeFQ(page,staffNameSearch,deptIds,postSearch);
         return AjaxResponse.success(list);
 
     }
+
+    //查询本月放弃入职员工
+    @GetMapping("/selectFqDate/{date}")
+    public AjaxResponse selectFqDate(@PathVariable("date") String date){
+        return AjaxResponse.success(entryhirdeVoService.selectFqhirdate(date));
+    }
+
 }

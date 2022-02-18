@@ -64,7 +64,7 @@ public class WorkschemeController {
         Workscheme workscheme=workschemeService.selectWorkschemeId(id);
         return AjaxResponse.success(workscheme);
     }
-    //修改员工
+    //修改加班信息
     @PutMapping("/updateWorkscheme")
     public AjaxResponse updateWorkscheme(@RequestBody Workscheme workscheme){
         log.debug("123456789098765rfvbhy654edcvgtredc");

@@ -1,12 +1,17 @@
 package com.trkj.balance.modules.employee_management.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.employee_management.entity.Glory;
 import com.trkj.balance.modules.employee_management.entity.WorkExperience;
 import com.trkj.balance.modules.employee_management.service.GloryService;
+import com.trkj.balance.modules.employee_management.vo.GloryPunishVo;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Slf4j
 @RestController
@@ -39,4 +44,16 @@ public class GloryController {
     public AjaxResponse insertWorkExperience(@RequestBody Glory glory){
         return AjaxResponse.success(gloryService.insertGlory(glory));
     }
+
+    //分页查询奖励表
+    @GetMapping("/selectGloryPage")
+    public AjaxResponse selectGloryPage(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                        @RequestParam("staffNameSearch") String staffNameSearch,@RequestParam("deptIds") ArrayList deptIds ){
+
+        Page<Glory> page = new Page<>(currenPage,pagesize);
+        IPage<Glory> list=gloryService.selectGloryPage(page,staffNameSearch,deptIds);
+        return AjaxResponse.success(list);
+
+    }
+
 }

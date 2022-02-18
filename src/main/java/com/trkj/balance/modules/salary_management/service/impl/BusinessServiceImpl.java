@@ -47,14 +47,15 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         return businessMapper.deleteById(id);
     }
 
-
+    //根据id查询出差信息
     @Override
     public Business selectBusinessId(Long id) {
-        return null;
+        return businessMapper.selectById(id);
     }
 
+    //修改出差信息
     @Override
     public int updateBusiness(Business business) {
-        return 0;
+        return businessMapper.updateById(business);
     }
 }

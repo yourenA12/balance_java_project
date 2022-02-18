@@ -232,10 +232,12 @@ public class StaffVo implements Serializable {
     @TableField("EDUCATION_FULL_TIME")
     private Long educationFullTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "离职原因")
     @TableField("QUIT_EXPLAIN")
     private String quitExplain;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "正式离职日期")
     @TableField("FORMAL_QUIT_DATE")
     private Date formalQuitDate;

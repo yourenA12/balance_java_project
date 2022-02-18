@@ -1,11 +1,13 @@
 package com.trkj.balance.modules.employee_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import com.trkj.balance.modules.employee_management.entity.Glory;
 import com.trkj.balance.modules.employee_management.vo.GloryPunishVo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,4 +23,8 @@ public interface GloryService extends IService<Glory> {
 
     //添加荣誉/奖励信息
     int insertGlory(Glory glory);
+
+    //分页查询奖励表
+    IPage<Glory> selectGloryPage(IPage<Glory> page, String staffName, ArrayList deptIds);
+
 }

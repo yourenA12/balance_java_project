@@ -11,6 +11,7 @@ import com.trkj.balance.modules.employee_management.vo.StaffVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
@@ -20,7 +21,7 @@ public class EntryhirdeVoServicelmpl extends ServiceImpl<EntryhirdeVoMapper, Ent
     private EntryhirdeVoMapper entryhirdeMapper;
 
     @Override
-    public IPage<EntryhirdeVo> selectEntryhirde1(Page<EntryhirdeVo> page, String staffNameSearch, String deptSearch, String postSearch, Date clockTimeStart, Date clockTimeEnd) {
+    public IPage<EntryhirdeVo> selectEntryhirde1(Page<EntryhirdeVo> page, String staffNameSearch, ArrayList deptIds, String postSearch, Date clockTimeStart, Date clockTimeEnd) {
         //声明一个条件构造器
         QueryWrapper<EntryhirdeVo> wrapper=new QueryWrapper<>();
         if(staffNameSearch!="" && staffNameSearch!=null ){
@@ -28,9 +29,9 @@ public class EntryhirdeVoServicelmpl extends ServiceImpl<EntryhirdeVoMapper, Ent
             wrapper.like("r.RESUME_NAME",staffNameSearch);
         }
 
-        if(deptSearch!="" && deptSearch!=null){
-            // 按部门id查询
-            wrapper.eq("d.DEPT_ID",deptSearch);
+        if(deptIds.size()!=0 && deptIds!=null){
+            // 按照部门id查询
+            wrapper.in("d.DEPT_ID",deptIds);
         }
 
         if(postSearch!="" && postSearch!=null){
@@ -53,8 +54,9 @@ public class EntryhirdeVoServicelmpl extends ServiceImpl<EntryhirdeVoMapper, Ent
         return list;
     }
 
+    //放弃入职 查询放弃入职员工
     @Override
-    public IPage<EntryhirdeVo> selectEntryhirdeFQ(Page<EntryhirdeVo> page,String staffNameSearch, String deptSearch,String postSearch) {
+    public IPage<EntryhirdeVo> selectEntryhirdeFQ(Page<EntryhirdeVo> page,String staffNameSearch, ArrayList deptIds,String postSearch) {
         //声明一个条件构造器
         QueryWrapper<EntryhirdeVo> wrapper=new QueryWrapper<>();
         if(staffNameSearch!="" && staffNameSearch!=null ){
@@ -62,9 +64,9 @@ public class EntryhirdeVoServicelmpl extends ServiceImpl<EntryhirdeVoMapper, Ent
             wrapper.like("r.RESUME_NAME",staffNameSearch);
         }
 
-        if(deptSearch!="" && deptSearch!=null){
-            // 按部门id查询
-            wrapper.eq("d.DEPT_ID",deptSearch);
+        if(deptIds.size()!=0 && deptIds!=null){
+            // 按照部门id查询
+            wrapper.in("d.DEPT_ID",deptIds);
         }
 
         if(postSearch!="" && postSearch!=null){
@@ -76,5 +78,10 @@ public class EntryhirdeVoServicelmpl extends ServiceImpl<EntryhirdeVoMapper, Ent
         wrapper.eq("r.RESUME_ZT",11);
 
         return entryhirdeMapper.selectEntryhirdeFQ(page,wrapper);
+    }
+
+    @Override
+    public int selectFqhirdate(String date) {
+        return entryhirdeMapper.selectFqhirdate(date);
     }
 }

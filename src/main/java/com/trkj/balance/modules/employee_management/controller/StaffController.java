@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class StaffController {
         Education education = JSON.parseObject(JSON.toJSONString(map.get("Education")), Education.class);
         Resume resume = JSON.parseObject(JSON.toJSONString(map.get("Resume")), Resume.class);
         Fixedwage fixedwage = JSON.parseObject(JSON.toJSONString(map.get("Fixedwage")), Fixedwage.class);
+
         //调用入职方法，
         return AjaxResponse.success(staffService.insertStaff(staff,workExperience,education,resume,fixedwage));
     }
@@ -71,31 +73,26 @@ public class StaffController {
     @GetMapping("/selectStaffVo")
     public AjaxResponse selectStaffVo(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                       @RequestParam("staffNameSearch") String staffNameSearch,
-                                      @RequestParam("deptSearch") String deptSearch,
+                                      @RequestParam("deptIds") ArrayList deptIds,
                                       @RequestParam("stateSearch") String stateSearch,
                                       @RequestParam("clockTimeStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeStart,
                                       @RequestParam("clockTimeEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeEnd){
 
-        log.debug( "哈哈哈哈" );
-        log.debug( currenPage +"");
-        log.debug( pagesize + "" );
-        log.debug( staffNameSearch );
-        log.debug( deptSearch );
-        log.debug( stateSearch );
-        log.debug( clockTimeStart + "");
-        log.debug( clockTimeEnd + "");
 
 
         Page<StaffVo> page = new Page<>(currenPage,pagesize);
-        IPage<StaffVo> list=staffVoService.selectStaffVo(page,staffNameSearch,deptSearch,stateSearch,clockTimeStart,clockTimeEnd);
+        IPage<StaffVo> list=staffVoService.selectStaffVo(page,staffNameSearch,deptIds,stateSearch,clockTimeStart,clockTimeEnd);
         return AjaxResponse.success(list);
     }
 
     //查询员工的名称、部门、职位
     @GetMapping("/selectStaffXX")
-    public AjaxResponse selectStaffXX(){
+    public AjaxResponse selectStaffXX(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                      @RequestParam("deptIds") ArrayList deptIds  ){
 
-        return AjaxResponse.success(staffVoService.selectStaffXX());
+        Page<StaffVo> page = new Page<>(currenPage,pagesize);
+        IPage<StaffVo> list=staffVoService.selectStaffXX(page,deptIds);
+        return AjaxResponse.success(list);
     }
 
     //根据id查询
@@ -105,17 +102,18 @@ public class StaffController {
         return AjaxResponse.success(staff);
     }
 
-    //查询试用期信息
+    //转正管理 查询试用期信息
     @GetMapping("/selectProbation")
     public AjaxResponse selectProbation(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                         @RequestParam("staffNameSearch") String staffNameSearch,
-                                        @RequestParam("deptSearch") String deptSearch,
+                                        @RequestParam("deptIds") ArrayList deptIds,
                                         @RequestParam("postSearch") String postSearch,
+                                        @RequestParam("stateSearch") Object day,
                                         @RequestParam("clockTimeStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeStart,
                                         @RequestParam("clockTimeEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeEnd){
 
         Page<StaffVo> page = new Page<>(currenPage,pagesize);
-        IPage<StaffVo> list=staffVoService.selectProbation(page,staffNameSearch,deptSearch,postSearch,clockTimeStart,clockTimeEnd);
+        IPage<StaffVo> list=staffVoService.selectProbation(page,staffNameSearch,deptIds,postSearch,day,clockTimeStart,clockTimeEnd);
         return AjaxResponse.success(list);
     }
 
@@ -123,11 +121,11 @@ public class StaffController {
     @GetMapping("/selectHistorical")
     public AjaxResponse selectHistorical(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                          @RequestParam("staffNameSearch") String staffNameSearch,
-                                         @RequestParam("deptSearch") String deptSearch,
+                                         @RequestParam("deptIds") ArrayList deptIds,
                                          @RequestParam("postSearch") String postSearch){
 
         Page<StaffVo> page = new Page<>(currenPage,pagesize);
-        IPage<StaffVo> list=staffVoService.selectStaffHistorical(page,staffNameSearch,deptSearch,postSearch);
+        IPage<StaffVo> list=staffVoService.selectStaffHistorical(page,staffNameSearch,deptIds,postSearch);
         return AjaxResponse.success(list);
     }
 

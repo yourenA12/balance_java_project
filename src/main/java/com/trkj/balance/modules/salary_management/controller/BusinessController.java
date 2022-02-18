@@ -58,6 +58,21 @@ public class BusinessController {
         return AjaxResponse.success( businessService.deleteBusiness(id) );
     }
 
+    //根据id查询出差方案信息
+    @GetMapping("/selectBusinessId/{id}")
+    public AjaxResponse selectBusinessId(@PathVariable("id") Long id){
+        Business business=businessService.selectBusinessId(id);
+        return AjaxResponse.success(business);
+    }
+
+    //修改出差信息
+    @PutMapping("/updateBusiness")
+    public AjaxResponse updateBusiness(@RequestBody Business business){
+        log.debug("123456789098765rfvbhy654edcvgtredc");
+        log.debug(business.toString());
+        return AjaxResponse.success(businessService.updateBusiness(business));
+    }
+
 
 }
 
