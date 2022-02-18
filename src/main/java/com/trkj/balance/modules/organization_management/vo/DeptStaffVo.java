@@ -33,9 +33,25 @@ public class DeptStaffVo implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "部门职位编号外键")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "手机号码")
+    @TableField("STAFF_PHONE")
+    private Long staffPhone;
+
+    @ApiModelProperty(value = "部门编号")
+    @TableId("DEPT_ID")
+    private Long deptId;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POSITION_NAME")
+    private String positionName;
 
 
 }

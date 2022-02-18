@@ -1,8 +1,12 @@
 package com.trkj.balance.modules.organization_management.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.organization_management.entity.Dept;
+import com.trkj.balance.modules.organization_management.entity.Staff;
 import com.trkj.balance.modules.organization_management.service.DeptService;
+import com.trkj.balance.modules.organization_management.vo.DeptStaffVo;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,12 +54,28 @@ public class DeptController {
             return AjaxResponse.success("失败");
      }
 
-     //
+     //查询
      @GetMapping("/yyds")
      public AjaxResponse queryList(){
         List<Dept> list = deptService.queryList();
         return AjaxResponse.success(list);
      }
+
+     //模糊搜索
+     @GetMapping("/deptmo/{currenPage}/{pagesize}/{input}")
+    public AjaxResponse mos(@PathVariable("currenPage") int page, @PathVariable("pagesize") int size,@PathVariable("input") String classesName){
+        IPage<Dept> s = deptService.moss(page, size, classesName);
+        return AjaxResponse.success(s);
+    }
+
+    //查询员工
+    @GetMapping("/yg")
+    public AjaxResponse yg(@RequestParam("currenPage") int page, @RequestParam("pagesize") int pagesize,
+                           @RequestParam("staffName") String staffName){
+       IPage<DeptStaffVo> ss = deptService.yg(page, pagesize,staffName);
+        return AjaxResponse.success(ss);
+    }
+
 
 
 }

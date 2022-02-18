@@ -32,7 +32,7 @@ public class Position implements Serializable {
     @TableId("POSITION_ID")
     private Long positionId;
 
-    @ApiModelProperty(value = "部门名称")
+    @ApiModelProperty(value = "职位名称")
     @TableField("POSITION_NAME")
     private String positionName;
 

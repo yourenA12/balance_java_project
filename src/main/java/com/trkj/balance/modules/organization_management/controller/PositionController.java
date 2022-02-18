@@ -32,7 +32,7 @@ public class PositionController {
     public AjaxResponse posi(@PathVariable("currenPage") int page, @PathVariable("pagesize") int pagesize){
         Page<Position> page1 = new Page<>(page,pagesize);
         IPage<Position> page2 = positionService.selectPo(page1);
-        return AjaxResponse.success(page1);
+        return AjaxResponse.success(page2);
     }
 }
 
