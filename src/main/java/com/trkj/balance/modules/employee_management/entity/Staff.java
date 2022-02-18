@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,8 +17,8 @@ import lombok.experimental.Accessors;
  * 员工表
  * </p>
  *
- * @author 友人A
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -52,6 +54,7 @@ public class Staff implements Serializable {
     @TableField("STAFF_PICTURE")
     private String staffPicture;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "出生日期")
     @TableField("STAFF_BIRTHDAY")
     private Date staffBirthday;
@@ -64,17 +67,23 @@ public class Staff implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "部门职位编号外键")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "转正日期")
+    @TableField("WORKER_DATE")
+    private Date workerDate;
 
     @ApiModelProperty(value = "转正编号")
     @TableField("WORKER_ID")
@@ -115,6 +124,10 @@ public class Staff implements Serializable {
     @TableField("STAFF_SIGN")
     private String staffSign;
 
+    @ApiModelProperty(value = "年龄")
+    @TableField("STAFF_AGE")
+    private String staffAge;
+
     @ApiModelProperty(value = "婚姻状态")
     @TableField("STAFF_MARITAL")
     private String staffMarital;
@@ -131,10 +144,13 @@ public class Staff implements Serializable {
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
 
-    @ApiModelProperty(value = "员工状态")
+    @ApiModelProperty(value = "员工状态;0：在职，1：离职，2：实习，3：正式")
     @TableField("STAFF_STATE")
     private Long staffState;
 
+    @ApiModelProperty(value = "工龄 显示：xx年xx月xx日")
+    @TableField("STAFF_WORKING_YEARS")
+    private String staffWorkingYears;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)

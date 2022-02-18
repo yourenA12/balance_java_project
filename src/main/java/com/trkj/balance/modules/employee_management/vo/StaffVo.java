@@ -67,9 +67,9 @@ public class StaffVo implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "部门职位编号外键")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
@@ -79,6 +79,16 @@ public class StaffVo implements Serializable {
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
+
+    @ApiModelProperty(value = "工龄 显示：xx年xx月xx日")
+    @TableField("STAFF_WORKING_YEARS")
+    private String staffWorkingYears;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "转正日期")
+    @TableField("WORKER_DATE")
+    private Date workerDate;
+
 
     @ApiModelProperty(value = "转正编号")
     @TableField("WORKER_ID")
@@ -114,6 +124,10 @@ public class StaffVo implements Serializable {
     @ApiModelProperty(value = "血型")
     @TableField("STAFF_BLOOD")
     private String staffBlood;
+
+    @ApiModelProperty(value = "年龄")
+    @TableField("STAFF_AGE")
+    private String staffAge;
 
     @ApiModelProperty(value = "星座")
     @TableField("STAFF_SIGN")
@@ -163,8 +177,8 @@ public class StaffVo implements Serializable {
     private String deptName;
 
     @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+    @TableField("POSITION_NAME")
+    private String positionName;
 
     @ApiModelProperty(value = "编号")
     @TableId("WORK_EXPERIENCE_ID")
@@ -217,5 +231,15 @@ public class StaffVo implements Serializable {
     @ApiModelProperty(value = "是否全日制")
     @TableField("EDUCATION_FULL_TIME")
     private Long educationFullTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "离职原因")
+    @TableField("QUIT_EXPLAIN")
+    private String quitExplain;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "正式离职日期")
+    @TableField("FORMAL_QUIT_DATE")
+    private Date formalQuitDate;
 
 }

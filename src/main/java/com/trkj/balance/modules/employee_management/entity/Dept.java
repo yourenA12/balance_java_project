@@ -1,23 +1,26 @@
 package com.trkj.balance.modules.employee_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * <p>
  * 部门表
  * </p>
  *
- * @author 林落
- * @since 2021-12-29
+ * @author 林落。
+ * @since 2022-02-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,6 +34,10 @@ public class Dept implements Serializable {
     @ApiModelProperty(value = "部门编号")
     @TableId("DEPT_ID")
     private Long deptId;
+
+    @ApiModelProperty(value = "上级部门编号")
+    @TableField("SUPERIOR_DEPT_ID")
+    private Long deptPid;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")
     @TableField("DEPT_STATE")
@@ -59,6 +66,10 @@ public class Dept implements Serializable {
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
+
+    @TableField(exist = false)
+    private List<Dept> children =new ArrayList<>();
+
 
 
 }

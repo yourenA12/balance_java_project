@@ -7,10 +7,11 @@ import com.trkj.balance.modules.employee_management.vo.EntryhirdeVo;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 @Slf4j
 @RestController
@@ -21,23 +22,41 @@ public class EntryhirdeVoController {
     private EntryhirdeVoService entryhirdeVoService;
 
     //查询待入职员工
-    @GetMapping("/selectEntryhirdeVo/{currenPage}/{pagesize}")
-    public AjaxResponse selectEntryhirdeVo(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    @GetMapping("/selectEntryhirdeVo")
+    public AjaxResponse selectEntryhirdeVo(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                           @RequestParam("staffNameSearch") String staffNameSearch,
+                                           @RequestParam("deptIds") ArrayList deptIds,
+                                           @RequestParam("postSearch") String postSearch,
+                                           @RequestParam("clockTimeStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeStart,
+                                           @RequestParam("clockTimeEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date clockTimeEnd){
+
+
 
         Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
-        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirde1(page);
+        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirde1(page,staffNameSearch,deptIds,postSearch,clockTimeStart,clockTimeEnd);
         return AjaxResponse.success(list);
 
     }
 
 
     //查询放弃入职员工
-    @GetMapping("/selectEntryhirdeVoFQ/{currenPage}/{pagesize}")
-    public AjaxResponse selectEntryhirdeVoFQ(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    @GetMapping("/selectEntryhirdeVoFQ")
+    public AjaxResponse selectEntryhirdeVoFQ(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                             @RequestParam("staffNameSearch") String staffNameSearch,
+                                             @RequestParam("deptIds") ArrayList deptIds,
+                                             @RequestParam("postSearch") String postSearch){
+
 
         Page<EntryhirdeVo> page = new Page<>(currenPage,pagesize);
-        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirdeFQ(page);
+        IPage<EntryhirdeVo> list=entryhirdeVoService.selectEntryhirdeFQ(page,staffNameSearch,deptIds,postSearch);
         return AjaxResponse.success(list);
 
     }
+
+    //查询本月放弃入职员工
+    @GetMapping("/selectFqDate/{date}")
+    public AjaxResponse selectFqDate(@PathVariable("date") String date){
+        return AjaxResponse.success(entryhirdeVoService.selectFqhirdate(date));
+    }
+
 }

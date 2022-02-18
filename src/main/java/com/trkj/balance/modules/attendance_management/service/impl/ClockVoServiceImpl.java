@@ -32,9 +32,11 @@ public class ClockVoServiceImpl extends ServiceImpl<ClockVoMapper, ClockVo> impl
         Page<ClockVo> pagss=new Page<>(page,size);
         QueryWrapper<ClockVo> wrapper = new QueryWrapper<>();
         // 员工姓名
-        wrapper.like("b.STAFF_NAME",staffName);
+        if( staffName!="" && staffName!=null) {
+            wrapper.like("a.STAFF_NAME", staffName);
+        }
         // 部门id
-        if( optionsDeptId!="" ){
+        if( optionsDeptId!="" && optionsDeptId!=null ){
             wrapper.eq("c.DEPT_ID",optionsDeptId);
         }
         if( clockTimeStart != null ){

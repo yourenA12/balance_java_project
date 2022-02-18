@@ -1,16 +1,22 @@
 package com.trkj.balance.modules.examine_management.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.employee_management.entity.Education;
+import com.trkj.balance.modules.employee_management.entity.Resume;
+import com.trkj.balance.modules.employee_management.entity.Staff;
+import com.trkj.balance.modules.employee_management.entity.WorkExperience;
 import com.trkj.balance.modules.examine_management.entity.Auditflow;
+import com.trkj.balance.modules.examine_management.entity.Auditflowdetail;
+import com.trkj.balance.modules.examine_management.entity.Worker;
 import com.trkj.balance.modules.examine_management.service.AuditflowService;
+import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,14 +29,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class AuditflowController {
+    //添加方法
     @Autowired
     private AuditflowService auditflowService;
+    @PostMapping("/insertStaff")
+    private AjaxResponse insertStaff(@RequestBody Map<Object, Object> map) {
 
-    @GetMapping("/findSelect")
-    public Page<Auditflow> findSelect(@RequestParam("currentPage") int currentPage, @RequestParam("pagesize") int pagesize){
-        Page<Auditflow> page= new Page<>(currentPage-1,pagesize);
-        Page<Auditflow> page1 = (Page<Auditflow>) auditflowService.findSelect(page);
-        return page1;
+        Auditflow auditflow = JSON.parseObject(JSON.toJSONString(map.get("Auditflow")), Auditflow.class); // 取map中的 员工表数据 转换为实体类
+        Auditflowdetail auditflowdetail = JSON.parseObject(JSON.toJSONString(map.get("Auditflowdetail")), Auditflowdetail.class);
+        Worker worker = JSON.parseObject(JSON.toJSONString(map.get("Worker")), Worker.class);
+        //调用入职方法，
+        return AjaxResponse.success(auditflowService.insertStaff(auditflow,auditflowdetail,worker));
     }
 }
 

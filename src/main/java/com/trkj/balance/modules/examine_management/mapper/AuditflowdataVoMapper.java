@@ -13,7 +13,5 @@ import org.apache.ibatis.annotations.Select;
 * */
 @Mapper
 public interface AuditflowdataVoMapper extends BaseMapper<AuditflowdataVo> {
-    //分页查询sql
-   @Select("select a.CREATED_TIME,a.AUDITFLOW_ID,b.AUDITFLOWDETAIL_ID,a.AUDITFLOW_TYPE,a.STAFF_NAME as STAFF_NAME1,b.AUDITFLOWDETAI_STATE,b.STAFF_NAME as STAFF_NAME2,b.UPDATED_TIME,a.AUDITFLOW_TITLE from AUDITFLOW a LEFT OUTER join AUDITFLOWDETAIL b on a.AUDITFLOW_ID=b.AUDITFLOW_ID")
-    IPage<AuditflowdataVo> findSelectPage(Page<AuditflowdataVo> page);
+
 }

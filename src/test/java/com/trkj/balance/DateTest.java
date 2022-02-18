@@ -39,6 +39,10 @@ public class DateTest {
 
         Period period = Period.between(LocalDate.parse(fromDate), LocalDate.parse(toDate));
 
+        System.out.println(period.getYears()+"年"+period.getMonths()+"月"+period.getDays()+"日");
+
+
+
         StringBuffer sb = new StringBuffer();
         sb.append(period.getYears()).append(",")
                 .append(period.getMonths()).append(",")
@@ -49,7 +53,7 @@ public class DateTest {
     @Test
     public void b() throws ParseException {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-        System.out.println(dayComparePrecise("2021-12-12","2022-09-12"));
+        System.out.println(dayComparePrecise("2021-12-12","2023-09-18"));
     }
 
 }

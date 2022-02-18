@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.attendance_management.mapper.CardMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.attendance_management.entity.Card">
+        <id column="CARD_ID" property="cardId" />
+        <result column="AUDITFLOW_ID" property="auditflowId" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="STAFF_NAME" property="staffName" />
+        <result column="CARD_TYPE" property="cardType" />
+        <result column="CARD_DATE" property="cardDate" />
+        <result column="CARD_REMARKS" property="cardRemarks" />
+        <result column="CARD_STATE" property="cardState" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        CARD_ID, AUDITFLOW_ID, STAFF_ID, STAFF_NAME, CARD_TYPE, CARD_DATE, CARD_REMARKS, CARD_STATE, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>
