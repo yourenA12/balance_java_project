@@ -1,13 +1,18 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.salary_management.entity.Business;
+import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.mapper.BusinessMapper;
 import com.trkj.balance.modules.salary_management.service.BusinessService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -58,4 +63,17 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     public int updateBusiness(Business business) {
         return businessMapper.updateById(business);
     }
+
+    //查询出差方案名称
+    @Override
+    public List<Map<String, Object>> selectBusinessName() {
+        QueryWrapper<Business> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.select("BUSINESS_ID","BUSINESS_NAME");
+        queryWrapper.eq("IS_DELETED",0);
+        return businessMapper.selectMaps(queryWrapper);
+    }
+
+
+
 }

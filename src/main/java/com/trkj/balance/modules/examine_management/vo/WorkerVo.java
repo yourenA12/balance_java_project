@@ -26,10 +26,13 @@ public class WorkerVo  implements Serializable {
     @TableField("AUDITFLOW_ID")
     private Long auditflowId;
 
-
     @ApiModelProperty(value = "员工名称")
     @TableField("STAFF_NAME")
     private String staffName1;
+
+    @ApiModelProperty(value = "审批明细表编号")
+    @TableField("AUDITFLOWDETAIL_ID")
+    private Long auditflowdetailId;
 
     @ApiModelProperty(value = "部门编号")
     @TableField("DEPT_ID")

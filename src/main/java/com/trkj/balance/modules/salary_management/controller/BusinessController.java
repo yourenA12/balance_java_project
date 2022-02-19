@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -71,6 +73,13 @@ public class BusinessController {
         log.debug("123456789098765rfvbhy654edcvgtredc");
         log.debug(business.toString());
         return AjaxResponse.success(businessService.updateBusiness(business));
+    }
+
+    //查询出差方案名称
+    @GetMapping("/selectBusinessName")
+    public AjaxResponse selectBusinessName(){
+        List<Map<String, Object>> list=businessService.selectBusinessName();
+        return AjaxResponse.success(list);
     }
 
 
