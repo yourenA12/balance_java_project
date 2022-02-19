@@ -1,7 +1,9 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.salary_management.entity.Business;
 import com.trkj.balance.modules.salary_management.entity.Workscheme;
 import com.trkj.balance.modules.salary_management.mapper.WorkschemeMapper;
 import com.trkj.balance.modules.salary_management.service.WorkschemeService;
@@ -9,6 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -58,5 +63,14 @@ public class WorkschemeServiceImpl extends ServiceImpl<WorkschemeMapper, Worksch
     @Override
     public int updateWorkscheme(Workscheme workscheme) {
         return workschemeMapper.updateById(workscheme);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectWorkschemeName() {
+        QueryWrapper<Workscheme> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.select("WORKSCHEME_ID","WORKSCHEME_NAME");
+        queryWrapper.eq("IS_DELETED",0);
+        return workschemeMapper.selectMaps(queryWrapper);
     }
 }

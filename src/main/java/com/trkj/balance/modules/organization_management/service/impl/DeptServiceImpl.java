@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -55,10 +56,18 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
 
     //模糊搜索
     @Override
-    public IPage<Dept> moss(int page, int size, String deptName) {
+    public IPage<Dept> moss(int page, int size, String deptName,String deptState) {
         Page<Dept> page1=new Page<>(page,size);
         QueryWrapper<Dept> wrapper=new QueryWrapper<>();
-        wrapper.like("DEPT_NAME",deptName);
+
+        if (deptName!="" && deptName!=null){
+            wrapper.like("DEPT_NAME",deptName);
+        }
+
+        if (deptState!="" && deptState!=null){
+            wrapper.eq("DEPT_STATE",deptState);
+        }
+
         IPage<Dept> n=deptMapper.selectPage(page1,wrapper);
         return n;
     }
@@ -75,6 +84,12 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         return staff_deptMapper.yg(page1,wrapper);
     }
 
+    @Override
+    public List<Map<Object, Object>> state() {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.select("DEPT_ID","DEPT_STATE");
+        return deptMapper.selectMaps(wrapper);
+    }
 
 
     /**

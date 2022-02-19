@@ -6,6 +6,9 @@ import com.trkj.balance.modules.salary_management.entity.Business;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.salary_management.entity.Workscheme;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 出差方案表 服务类
@@ -33,6 +36,9 @@ public interface BusinessService extends IService<Business> {
 
     //修改出差方案
     int updateBusiness(Business business);
+
+    //查询出差方案名称
+    List<Map<String, Object>> selectBusinessName();
 
 
 

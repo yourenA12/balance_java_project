@@ -3,6 +3,7 @@ package com.trkj.balance.modules.salary_management.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.trkj.balance.modules.employee_management.entity.*;
+import com.trkj.balance.modules.salary_management.entity.Business;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
 import com.trkj.balance.modules.salary_management.service.CompensationDeptPostService;
@@ -61,6 +62,12 @@ public class CompensationController {
     public AjaxResponse selectCompensationName(){
         List<Map<String, Object>> list=compensationService.selectCompensationName();
         return AjaxResponse.success(list);
+    }
+    //根据id查询薪酬组数据
+    @GetMapping("/selectCompensationId/{id}")
+    public AjaxResponse selectCompensationId(@PathVariable("id") Long id){
+        Compensation compensation=compensationService.selectCompensationById(id);
+        return AjaxResponse.success(compensation);
     }
 
 }

@@ -32,10 +32,13 @@ public interface DeptService extends IService<Dept> {
     List<Dept> queryList();
 
     //模糊搜索
-    IPage<Dept> moss(int page, int size, String deptName);
+    IPage<Dept> moss(int page, int size, String deptName,String deptState);
 
     //查询员工
     IPage<DeptStaffVo> yg(int page, int pagesize ,String staffName);
+
+    //部门状态
+    List<Map<Object,Object>> state();
 
 
 

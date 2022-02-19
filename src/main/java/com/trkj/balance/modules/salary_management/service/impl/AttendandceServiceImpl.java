@@ -1,14 +1,19 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.salary_management.entity.Attendandce;
+import com.trkj.balance.modules.salary_management.entity.Business;
 import com.trkj.balance.modules.salary_management.entity.Workscheme;
 import com.trkj.balance.modules.salary_management.mapper.AttendandceMapper;
 import com.trkj.balance.modules.salary_management.service.AttendandceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -56,5 +61,15 @@ public class AttendandceServiceImpl extends ServiceImpl<AttendandceMapper, Atten
     @Override
     public int updateAttendandce(Attendandce attendandce) {
         return attendandceMapper.updateById(attendandce);
+    }
+
+    //查询考勤扣款方案
+    @Override
+    public List<Map<String, Object>> selectAttendandce() {
+        QueryWrapper<Attendandce> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.select("ATTENDANDCE_ID","ATTENDANDCE_NAME");
+        queryWrapper.eq("IS_DELETED",0);
+        return attendandceMapper.selectMaps(queryWrapper);
     }
 }

@@ -6,6 +6,9 @@ import com.trkj.balance.modules.employee_management.entity.WorkExperience;
 import com.trkj.balance.modules.salary_management.entity.Workscheme;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 加班方案表 服务类
@@ -33,4 +36,8 @@ public interface WorkschemeService extends IService<Workscheme> {
 
     //修改加班方案
     int updateWorkscheme(Workscheme workscheme);
+
+    //查询加班方案名称
+    List<Map<String, Object>> selectWorkschemeName();
+
 }

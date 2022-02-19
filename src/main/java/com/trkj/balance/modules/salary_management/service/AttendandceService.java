@@ -6,6 +6,9 @@ import com.trkj.balance.modules.salary_management.entity.Attendandce;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.salary_management.entity.Workscheme;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 考勤扣款方案表 服务类
@@ -33,5 +36,9 @@ public interface AttendandceService extends IService<Attendandce> {
 
     //修改考勤扣款方案
     int updateAttendandce(Attendandce attendandce);
+
+    //查询考勤扣款方案
+    List<Map<String, Object>> selectAttendandce();
+
 
 }
