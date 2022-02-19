@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-12-29
  */
 public interface AuditflowdetailService extends IService<Auditflowdetail> {
-
+    //修改明细表状态
+    int updateAuditflowdetail(Auditflowdetail auditflowdetail);
 }

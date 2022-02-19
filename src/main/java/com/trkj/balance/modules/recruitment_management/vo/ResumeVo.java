@@ -97,14 +97,17 @@ public class ResumeVo implements Serializable {
     @TableField("RESUME_ZT")
     private String resumeZt;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "投简时间")
     @TableField("TOUJ_TIME")
     private Date toujTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "修改时间")
     @TableField("UPDATED_TIME")
     private Date updatedTime;
@@ -120,6 +123,52 @@ public class ResumeVo implements Serializable {
     @ApiModelProperty(value = "职位名称")
     @TableField("POST_NAME")
     private String postName;
+
+    @ApiModelProperty(value = "所属专业")
+    @TableField("EDUCATION_MAJOR")
+    private String educationMajor;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POSITION_NAME")
+    private String positionName;
+
+    @ApiModelProperty(value = "所属行业")
+    @TableField("POSITION_INDUSTRY")
+    private String positionIndustry;
+
+    @ApiModelProperty(value = "公司名称")
+    @TableField("COMPANY_NAME")
+    private String companyName;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "开始时间")
+    @TableField("WORK_STARE_TIME")
+    private Date workStareTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "结束时间")
+    @TableField("WORK_END_TIME")
+    private Date workEndTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "开始时间")
+    @TableField("EDUCATION_START_TIME")
+    private Date educationStartTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "结束时间")
+    @TableField("EDUCATION_END_TIME")
+    private Date educationEndTime;
+
+
+
+;
+
+
+
+    @ApiModelProperty(value = "是否全日制")
+    @TableField("EDUCATION_FULL_TIME")
+    private Long educationFullTime;
 
 
 }

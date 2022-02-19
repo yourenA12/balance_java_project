@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.examine_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.examine_management.entity.Auditflow;
@@ -10,8 +11,12 @@ import com.trkj.balance.modules.examine_management.mapper.AuditflowdetailMapper;
 import com.trkj.balance.modules.examine_management.mapper.WorkerMapper;
 import com.trkj.balance.modules.examine_management.service.AuditflowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.balance.modules.examine_management.vo.WorkerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -34,21 +39,56 @@ public class AuditflowServiceImpl extends ServiceImpl<AuditflowMapper, Auditflow
     private AuditflowdetailMapper auditflowdetailMapper;
 
     @Override
-    public int insertStaff(Auditflow auditflow, Auditflowdetail auditflowdetail, Worker worker) {
+    @Transactional
+    public int insertStaff(Auditflow auditflow, List<Auditflowdetail> auditflowdetails, Worker worker) {
+
         //添加审批主表
        if(auditflowMapper.insert(auditflow)>0){
-           //审批明细表插入主表id
-           auditflowdetail.setAuditflowId(auditflow.getAuditflowId());
-           //明细表插入成功
-           if(auditflowdetailMapper.insert(auditflowdetail)>0){
-              //就插入主表数据
-               worker.setAuditflowId(auditflow.getAuditflowId());
+           //插入主表数据
+           worker.setAuditflowId(auditflow.getAuditflowId());
+           if(workerMapper.insert(worker) > 0){
 
-                   return workerMapper.insert(worker);
+               // 声明一个审批明细表实体类
+               Auditflowdetail auditflowdetail = new Auditflowdetail();
 
-           }
+               //审批明细表插入主表id
+               auditflowdetail.setAuditflowId(auditflow.getAuditflowId());
+
+               for (int i =0;i< auditflowdetails.size();i++){
+
+                   auditflowdetail.setStaffId(auditflowdetails.get(i).getStaffId());
+
+                   auditflowdetail.setStaffName(auditflowdetails.get(i).getStaffName());
+                    if(i==0){
+                        auditflowdetail.setAuditflowdetaiState(1L);
+                        auditflowdetail.setAuditflowdetaiRemarks("待我审批");
+                    }else{
+                        auditflowdetail.setAuditflowdetaiState(0L);
+                        auditflowdetail.setAuditflowdetaiRemarks("待审批");
+                    }
+                    //明细表插入成功
+                   auditflowdetailMapper.insert(auditflowdetail);
+
+               }
+               return 1;
+           };
        }
-
         return 0;
     }
+    //修改主表状态
+    @Override
+    @Transactional
+    public int updateAuditflow(Auditflow auditflow) {
+        return auditflowMapper.updateById(auditflow);
+    }
+
+    @Override
+    public IPage<Auditflow> findSelectId(Page<Auditflow> page,int id) {
+        // 声明一个条件构造器
+        QueryWrapper<Auditflow> wrapper = new QueryWrapper<>();
+        wrapper.eq("STAFF_ID",id);
+        return auditflowMapper.selectPage(page,wrapper);
+    }
+
+
 }
