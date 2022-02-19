@@ -100,14 +100,17 @@ public class RecruitmentPlanVo implements Serializable {
     @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
     @TableField("STAFF_ID")
     private Long staffId;
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+    @TableField("POSITION_NAME")
+    private String positionName;
 
-    @ApiModelProperty(value = "编号")
-    @TableId("MONTHLY_SALARY_ID")
-    private Long monthlySalaryId;
+    @ApiModelProperty(value = "职位说明")
+    @TableField("POSITION_DESCRIPTION")
+    private String positionDescription;
 
     @ApiModelProperty(value = "月薪起始金额")
     @TableField("MONTHLY_SALARY_STAR")
