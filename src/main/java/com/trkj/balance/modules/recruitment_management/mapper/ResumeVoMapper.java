@@ -1,8 +1,11 @@
 package com.trkj.balance.modules.recruitment_management.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.attendance_management.vo.TravelVo;
 import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,8 +21,9 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN\n" +
             "POSITION P\n" +
-            "ON Z.POSITION_ID = P.POSITION_ID")
-   IPage<ResumeVo> ResumePage(Page<ResumeVo> page);
+            "ON Z.POSITION_ID = P.POSITION_ID " +
+            "${ew.customSqlSegment}")
+   IPage<ResumeVo> ResumePage(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper<ResumeVo> queryWrapper);
 
     //新简历
     @Select("select  R.*,P.POSITION_NAME\n" +
@@ -27,7 +31,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=0")
     IPage<ResumeVo> ResumePage_a(Page<ResumeVo> page);
 
@@ -37,7 +41,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=1")
     IPage<ResumeVo> ResumePage_H(Page<ResumeVo> page);
 
@@ -47,7 +51,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=3")
     IPage<ResumeVo> ResumePage_D(Page<ResumeVo> page);
 
@@ -57,7 +61,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=2")
     IPage<ResumeVo> ResumePage_Y(Page<ResumeVo> page);
 
@@ -67,7 +71,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=4")
     IPage<ResumeVo> ResumePage_Z(Page<ResumeVo> page);
 
@@ -77,7 +81,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=6")
     IPage<ResumeVo> ResumePage_F(Page<ResumeVo> page);
 
@@ -87,7 +91,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=5")
     IPage<ResumeVo> ResumePage_T(Page<ResumeVo> page);
 

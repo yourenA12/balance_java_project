@@ -17,10 +17,11 @@ public class ResumeVoController {
     @Autowired
     private ResumeVoService resumeVoService;
     //全部简历
-    @GetMapping("/ResumePage/{currenPage}/{pagesize}")
-    public AjaxResponse queryPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize) {
-        Page<ResumeVo> page = new Page<>(currenPage, pagesize);
-        return AjaxResponse.success(resumeVoService.ResumePage(page));
+    @GetMapping("/ResumePage")
+    public AjaxResponse queryPage(@RequestParam("currenPage") int page, @RequestParam("pagesize") int size
+            ,@RequestParam("resumeName") String resumeName) {
+        IPage<ResumeVo> s = resumeVoService.ResumePage(page, size, resumeName);
+        return AjaxResponse.success(s);
     }
     //新简历
     @GetMapping("/ResumePage_a/{currenPage}/{pagesize}")
@@ -78,10 +79,10 @@ public class ResumeVoController {
         return AjaxResponse.success(resume);
     }
     //全部简历模糊
-    @GetMapping("/ResumePage_K")
-    public IPage<ResumeVo> ResumePage_K(@RequestParam("currentPage") int page,@RequestParam("size") int size,@RequestParam("jianli") String resumeName){
+    @GetMapping("/ResumePage_K/{currentPage}/{pagesize}/{input}")
+    public AjaxResponse ResumePage_K(@PathVariable("currentPage") int page,@PathVariable("pagesize") int size,@PathVariable("input") String resumeName){
         IPage<ResumeVo> page1=resumeVoService.ResumePage_K(page,size,resumeName);
-        return page1;
+        return AjaxResponse.success(page1);
     }
 
 }
