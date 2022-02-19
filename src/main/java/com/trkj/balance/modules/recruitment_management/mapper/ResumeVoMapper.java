@@ -27,7 +27,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=0")
     IPage<ResumeVo> ResumePage_a(Page<ResumeVo> page);
 
@@ -37,7 +37,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=1")
     IPage<ResumeVo> ResumePage_H(Page<ResumeVo> page);
 
@@ -47,7 +47,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=3")
     IPage<ResumeVo> ResumePage_D(Page<ResumeVo> page);
 
@@ -57,7 +57,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=2")
     IPage<ResumeVo> ResumePage_Y(Page<ResumeVo> page);
 
@@ -67,7 +67,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=4")
     IPage<ResumeVo> ResumePage_Z(Page<ResumeVo> page);
 
@@ -77,7 +77,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=6")
     IPage<ResumeVo> ResumePage_F(Page<ResumeVo> page);
 
@@ -87,7 +87,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN RECRUITMENT_PLAN Z \n" +
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
-            "ON Z.POSITION_ID = P.POSITION_ID\n" +
+            "ON Z.POSITION_ID = P.POSITION_ID\n " +
             "where R.RESUME_ZT=5")
     IPage<ResumeVo> ResumePage_T(Page<ResumeVo> page);
 

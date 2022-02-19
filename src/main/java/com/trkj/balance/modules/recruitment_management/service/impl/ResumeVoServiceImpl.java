@@ -64,7 +64,7 @@ public class ResumeVoServiceImpl extends ServiceImpl<ResumeVoMapper, ResumeVo> i
     public IPage<ResumeVo> ResumePage_K(int page, int size, String resumeName) {
         Page<ResumeVo> page1=new Page<>(page,size);
         QueryWrapper<ResumeVo> wrapper=new QueryWrapper<>();
-        wrapper.like("RESUME_NAME",resumeName).orderByDesc("RESUME_ID");
+        wrapper.like("RESUME_NAME",resumeName);
         IPage<ResumeVo> page2=resumeVoMapper.selectPage(page1,wrapper);
         return page2;
     }
