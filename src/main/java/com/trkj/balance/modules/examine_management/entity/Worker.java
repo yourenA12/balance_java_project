@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("WORKER")
-@KeySequence(value = "workerId",clazz = Long.class)
+@KeySequence(value = "WORKER_ID",clazz = Long.class)
 @ApiModel(value="Worker对象", description="转正")
 public class Worker implements Serializable {
 

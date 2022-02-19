@@ -8,33 +8,29 @@ import com.trkj.balance.modules.examine_management.vo.WorkerVo;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
 public class WorkerVoController {
     @Autowired
-    private WorkerVoService workerVoService;
-
-
+    private WorkerVoService workervoService;
     //待办申请分页查询方法 返回ajaxlist
     @GetMapping("/findSelectPageWorker")
     public AjaxResponse findSelectPageWorker(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
         @RequestParam("auditflowTitle") String auditflowTitle,@RequestParam("auditflowdetaiState") String auditflowdetaiState,@RequestParam("staffName") String staffName){
         Page<WorkerVo> page = new Page<>(currenPage,pagesize);
-        IPage<WorkerVo> list=workerVoService.findSelectPageWorker(page,auditflowTitle,auditflowdetaiState,staffName);
+        IPage<WorkerVo> list=workervoService.findSelectPageWorker(page,auditflowTitle,auditflowdetaiState,staffName);
         return AjaxResponse.success(list);
     }
-
-
     //通过id 查询 审批数据的详情信息
     @GetMapping("/findSelectPageById/{id}")
     public AjaxResponse findSelectPageById(@PathVariable("id") Long id){
-        return AjaxResponse.success(workerVoService.findSelectById(id));
+        return AjaxResponse.success(workervoService.findSelectById(id));
     }
-
-
+//    //修改审批主表的状态
+//    @PutMapping("/updateWorkerVo")
+//    public AjaxResponse updateWorkerVo(@RequestBody WorkerVo workerVo){
+//        return AjaxResponse.success(workerVoService.updateWorkerVo(workerVo));
+//    }
 }
