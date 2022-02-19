@@ -2,6 +2,7 @@ package com.trkj.balance.modules.employee_management.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -64,6 +65,7 @@ public class Dept implements Serializable {
     private Long revision;
 
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
+    @TableLogic
     @TableField("IS_DELETED")
     private Long isDeleted;
 
