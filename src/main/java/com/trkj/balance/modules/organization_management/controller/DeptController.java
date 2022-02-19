@@ -8,6 +8,7 @@ import com.trkj.balance.modules.organization_management.entity.Staff;
 import com.trkj.balance.modules.organization_management.service.DeptService;
 import com.trkj.balance.modules.organization_management.vo.DeptStaffVo;
 import com.trkj.balance.vo.AjaxResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/dept")
+@Slf4j
 public class DeptController {
     @Autowired
     public DeptService deptService;
@@ -62,9 +64,11 @@ public class DeptController {
      }
 
      //模糊搜索
-     @GetMapping("/deptmo/{currenPage}/{pagesize}/{input}")
-    public AjaxResponse mos(@PathVariable("currenPage") int page, @PathVariable("pagesize") int size,@PathVariable("input") String classesName){
-        IPage<Dept> s = deptService.moss(page, size, classesName);
+     @GetMapping("/deptmo")
+    public AjaxResponse mos(@RequestParam("currenPage") int page, @RequestParam("pagesize") int size,
+                            @RequestParam("input") String classesName,@RequestParam("inputs") String deptState){
+        IPage<Dept> s = deptService.moss(page, size, classesName,deptState);
+
         return AjaxResponse.success(s);
     }
 
@@ -74,6 +78,12 @@ public class DeptController {
                            @RequestParam("staffName") String staffName){
        IPage<DeptStaffVo> ss = deptService.yg(page, pagesize,staffName);
         return AjaxResponse.success(ss);
+    }
+
+    //部门状态
+    @GetMapping("/state")
+    public AjaxResponse state(){
+        return AjaxResponse.success(deptService.state());
     }
 
 
