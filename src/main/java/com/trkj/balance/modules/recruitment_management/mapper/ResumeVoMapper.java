@@ -1,8 +1,11 @@
 package com.trkj.balance.modules.recruitment_management.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.attendance_management.vo.TravelVo;
 import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,8 +21,9 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN\n" +
             "POSITION P\n" +
-            "ON Z.POSITION_ID = P.POSITION_ID")
-   IPage<ResumeVo> ResumePage(Page<ResumeVo> page);
+            "ON Z.POSITION_ID = P.POSITION_ID " +
+            "${ew.customSqlSegment}")
+   IPage<ResumeVo> ResumePage(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper<ResumeVo> queryWrapper);
 
     //新简历
     @Select("select  R.*,P.POSITION_NAME\n" +

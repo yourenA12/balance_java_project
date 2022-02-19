@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.balance.modules.attendance_management.vo.TravelVo;
 import com.trkj.balance.modules.recruitment_management.mapper.ResumeVoMapper;
 import com.trkj.balance.modules.recruitment_management.service.ResumeVoService;
 import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
@@ -18,8 +19,13 @@ public class ResumeVoServiceImpl extends ServiceImpl<ResumeVoMapper, ResumeVo> i
     private  ResumeVoMapper  resumeVoMapper;
 
     @Override
-    public IPage<ResumeVo> ResumePage(Page<ResumeVo> page) {
-        return resumeVoMapper.ResumePage(page);
+    public IPage<ResumeVo> ResumePage(int page,int size,String resumeName) {
+        Page<ResumeVo> page1 = new Page<>(page,size);
+        QueryWrapper<ResumeVo> wrapper = new QueryWrapper<>();
+        if( resumeName!="" && resumeName!=null) {
+            wrapper.like("R.RESUME_NAME", resumeName);
+        }
+        return resumeVoMapper.ResumePage(page1,wrapper);
     }
 
     @Override

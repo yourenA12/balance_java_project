@@ -17,10 +17,11 @@ public class ResumeVoController {
     @Autowired
     private ResumeVoService resumeVoService;
     //全部简历
-    @GetMapping("/ResumePage/{currenPage}/{pagesize}")
-    public AjaxResponse queryPage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize) {
-        Page<ResumeVo> page = new Page<>(currenPage, pagesize);
-        return AjaxResponse.success(resumeVoService.ResumePage(page));
+    @GetMapping("/ResumePage")
+    public AjaxResponse queryPage(@RequestParam("currenPage") int page, @RequestParam("pagesize") int size
+            ,@RequestParam("resumeName") String resumeName) {
+        IPage<ResumeVo> s = resumeVoService.ResumePage(page, size, resumeName);
+        return AjaxResponse.success(s);
     }
     //新简历
     @GetMapping("/ResumePage_a/{currenPage}/{pagesize}")
