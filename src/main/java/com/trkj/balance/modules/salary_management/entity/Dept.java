@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.salary_management.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class Dept implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
