@@ -39,7 +39,7 @@ public class LeaveControllerN {
     public AjaxResponse insertStaff(@RequestBody Map<Object, Object> map) {
         Auditflow auditflow = JSON.parseObject(JSON.toJSONString(map.get("Auditflow")), Auditflow.class); // 取map中的 员工表数据 转换为实体类
         List<Auditflowdetail> auditflowdetails = JSON.parseArray(JSON.toJSONString(map.get("AuditflowDetail")), Auditflowdetail.class);
-        Leave leave = JSON.parseObject(JSON.toJSONString(map.get("Leave")), Leave.class);
+        Leave leave = JSON.parseObject(JSON.toJSONString(map.get("LEAVE")), Leave.class);
 
         return AjaxResponse.success(leavenService.insertStaff(auditflow,auditflowdetails,leave));
     }
