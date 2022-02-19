@@ -1,0 +1,29 @@
+package com.trkj.balance.modules.examine_management.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.balance.modules.examine_management.controller.NoticeVoController;
+import com.trkj.balance.modules.examine_management.mapper.NoticeVoMapper;
+import com.trkj.balance.modules.examine_management.mapper.TransferVoMapper;
+import com.trkj.balance.modules.examine_management.service.NoticeVoService;
+import com.trkj.balance.modules.examine_management.service.TranseferVoService;
+import com.trkj.balance.modules.examine_management.vo.TransferVo;
+import com.trkj.balance.modules.system_management.entity.NoticeVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class NoticeVoServicelmpl extends ServiceImpl<NoticeVoMapper, NoticeVo> implements NoticeVoService {
+    @Autowired
+    private NoticeVoMapper noticeVoMapper;
+
+    @Override
+    public IPage<NoticeVo> findSelectNoticeVo(Page<NoticeVo> page,int staffId) {
+        QueryWrapper<NoticeVo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("S.STAFF_ID",staffId);
+        queryWrapper.eq("N.IS_DELETED",0).orderByDesc("N.UPDATED_TIME");
+        return noticeVoMapper.findNoticeVo(page,queryWrapper);
+    }
+}

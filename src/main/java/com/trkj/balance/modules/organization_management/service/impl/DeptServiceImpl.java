@@ -102,7 +102,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         //先找到所有的一级分类
         for(Dept dept : data){
             // 一级菜单的parentId是0
-            if(dept.getDeptPid()+""!="" && dept.getDeptPid()!=null && dept.getDeptPid() == 1){
+            if(dept.getDeptPid()+""!="" && dept.getDeptPid()!=null && dept.getDeptPid() == 0){
                 deptpList.add(dept);
             }
         }
