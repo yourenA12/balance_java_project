@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> implements WorkerVoService {
+public  class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> implements WorkerVoService {
     @Autowired
     private WorkerVoMapper workerVoMapper;
 
@@ -35,13 +35,14 @@ public class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> im
             // 审批状态为 ‘已办’ ，就是已办申请
             wrapper.gt("b.AUDITFLOWDETAI_STATE",1);
         }
-
+        wrapper.eq("a.IS_DELETED",0);
         // 模糊查询申请人名称
         wrapper.like("a.staff_name",staffName);
 
         /*
         // 当前登录人 id ？？
         */
+       /* wrapper.eq("a.staff");*/
         return workerVoMapper.findSelectPageWorker(page,wrapper);
     }
 
@@ -49,7 +50,6 @@ public class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> im
     public List<WorkerVo> findSelectById(Long id) {
         return workerVoMapper.findSelectById(id);
     }
-
 
 
 }

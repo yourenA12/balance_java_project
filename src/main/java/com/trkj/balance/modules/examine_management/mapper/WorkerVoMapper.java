@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.examine_management.vo.WorkerVo;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -14,7 +15,6 @@ import java.util.*;
 
 @Mapper
 public interface WorkerVoMapper extends BaseMapper<WorkerVo> {
-
     /*通过id 查询 详情信息*/
     @Select("select  a.AUDITFLOW_ID,a.staff_name as staff_name1,b.staff_name as staff_name2,c.worker_date,a.auditflow_state,dept_name,c.WORKER_TYPE,c.WORKER_REMARKS,b.AUDITFLOWDETAI_STATE\n" +
             "from AUDITFLOW a\n" +
@@ -29,9 +29,8 @@ public interface WorkerVoMapper extends BaseMapper<WorkerVo> {
             "on c.dept_id = d.dept_id\n" +
             "where a.AUDITFLOW_ID=#{id} " +
             "ORDER BY d.CREATED_TIME")
+
     List<WorkerVo> findSelectById(@Param("id") Long id);
-
-
     //按名称搜索
     @Select("select  a.staff_name as staff_name1,a.auditflow_Title,b.AUDITFLOWDETAIL_id,a.AUDITFLOW_ID,b.staff_name as staff_name2,a.AUDITFLOW_STATE,b.AUDITFLOWDETAI_STATE,b.created_time,b.UPDATED_TIME  \n" +
             "from AUDITFLOW a\n" +
