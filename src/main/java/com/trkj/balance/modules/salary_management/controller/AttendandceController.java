@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 考勤扣款方案表 前端控制器
@@ -68,6 +71,13 @@ public class AttendandceController {
         log.debug("123456789098765rfvbhy654edcvgtredc");
         log.debug(attendandce.toString());
         return AjaxResponse.success(attendandceService.updateAttendandce(attendandce));
+    }
+
+    //查询考勤扣款名称
+    @GetMapping("/selectAttendandceName")
+    public AjaxResponse selectAttendandceName(){
+        List<Map<String, Object>> list=attendandceService.selectAttendandce();
+        return AjaxResponse.success(list);
     }
 
 }

@@ -86,4 +86,10 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
         queryWrapper.eq("IS_DELETED",0);
         return compensationMapper.selectMaps(queryWrapper);
     }
+
+    //根据id查询薪酬组数据
+    @Override
+    public Compensation selectCompensationById(Long id) {
+        return compensationMapper.selectById(id);
+    }
 }

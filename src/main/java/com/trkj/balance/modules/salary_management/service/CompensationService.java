@@ -23,4 +23,8 @@ public interface CompensationService extends IService<Compensation> {
 
     //查询薪酬组名称
     List<Map<String, Object>> selectCompensationName();
+
+    //根据id查询薪酬组数据
+    Compensation selectCompensationById(Long id);
+
 }

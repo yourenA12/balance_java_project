@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 加班方案表 前端控制器
@@ -70,6 +73,13 @@ public class WorkschemeController {
         log.debug("123456789098765rfvbhy654edcvgtredc");
         log.debug(workscheme.toString());
         return AjaxResponse.success(workschemeService.updateWorkscheme(workscheme));
+    }
+
+    //查询加班方案名称
+    @GetMapping("/selectWorkschemeName")
+    public AjaxResponse selectBusinessName(){
+        List<Map<String, Object>> list=workschemeService.selectWorkschemeName();
+        return AjaxResponse.success(list);
     }
 }
 
