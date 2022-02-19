@@ -1,16 +1,14 @@
 package com.trkj.balance.modules.recruitment_management.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.employee_management.vo.StaffVo;
 import com.trkj.balance.modules.recruitment_management.service.ResumeVoService;
 import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ResumeVo")
@@ -78,6 +76,12 @@ public class ResumeVoController {
     public AjaxResponse SelectRexumeId(@PathVariable("id") Long id){
         ResumeVo resume= resumeVoService.SelectRexumeId(id);
         return AjaxResponse.success(resume);
+    }
+    //全部简历模糊
+    @GetMapping("/ResumePage_K")
+    public IPage<ResumeVo> ResumePage_K(@RequestParam("currentPage") int page,@RequestParam("size") int size,@RequestParam("jianli") String resumeName){
+        IPage<ResumeVo> page1=resumeVoService.ResumePage_K(page,size,resumeName);
+        return page1;
     }
 
 }

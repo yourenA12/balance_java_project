@@ -1,6 +1,7 @@
 package com.trkj.balance.modules.recruitment_management.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -57,6 +58,15 @@ public class ResumeVoServiceImpl extends ServiceImpl<ResumeVoMapper, ResumeVo> i
     @Override
     public ResumeVo SelectRexumeId(Long id) {
         return resumeVoMapper.SelectRexumeId(id);
+    }
+
+    @Override
+    public IPage<ResumeVo> ResumePage_K(int page, int size, String resumeName) {
+        Page<ResumeVo> page1=new Page<>(page,size);
+        QueryWrapper<ResumeVo> wrapper=new QueryWrapper<>();
+        wrapper.like("RESUME_NAME",resumeName).orderByDesc("RESUME_ID");
+        IPage<ResumeVo> page2=resumeVoMapper.selectPage(page1,wrapper);
+        return page2;
     }
 
 

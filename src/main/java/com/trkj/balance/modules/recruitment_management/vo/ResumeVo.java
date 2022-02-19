@@ -120,9 +120,7 @@ public class ResumeVo implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
-    @ApiModelProperty(value = "职位名称")
-    @TableField("POST_NAME")
-    private String postName;
+
 
     @ApiModelProperty(value = "所属专业")
     @TableField("EDUCATION_MAJOR")
