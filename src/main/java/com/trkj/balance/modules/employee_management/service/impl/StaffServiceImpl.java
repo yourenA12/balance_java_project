@@ -1,9 +1,11 @@
 package com.trkj.balance.modules.employee_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.balance.modules.employee_management.entity.*;
 import com.trkj.balance.modules.employee_management.mapper.*;
 import com.trkj.balance.modules.employee_management.service.StaffService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.balance.modules.employee_management.vo.StaffVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -115,6 +117,23 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
     @Override
     public int updateStaff(Staff staff) {
         return staffMapper.updateById(staff);
+    }
+
+    //查询员工的状态，统计人数
+    @Override
+    public int selectStaffStateCount(int state) {
+        // 声明一个条件构造器
+        QueryWrapper<Staff> wrapper = new QueryWrapper<>();
+
+
+
+        return 0;
+    }
+
+    //查询本月离职和本月新入职员工
+    @Override
+    public int selectStaffDate(String date) {
+        return 0;
     }
 
 

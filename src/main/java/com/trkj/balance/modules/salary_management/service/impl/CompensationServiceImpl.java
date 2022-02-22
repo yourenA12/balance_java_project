@@ -92,4 +92,10 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
     public Compensation selectCompensationById(Long id) {
         return compensationMapper.selectById(id);
     }
+
+    //修改薪酬组数据
+    @Override
+    public int updateCompensation(Compensation compensation) {
+        return compensationMapper.updateById(compensation);
+    }
 }
