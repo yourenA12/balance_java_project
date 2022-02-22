@@ -7,7 +7,7 @@ import com.trkj.balance.modules.recruitment_management.vo.ResumeVo;
 
 public interface ResumeVoService extends IService<ResumeVo> {
     //全部简历
-    IPage<ResumeVo> ResumePage(Page<ResumeVo> page);
+    IPage<ResumeVo> ResumePage(int page,int size,String resumeName);
     //新简历
     IPage<ResumeVo> ResumePage_a(Page<ResumeVo> page);
     //候选人
