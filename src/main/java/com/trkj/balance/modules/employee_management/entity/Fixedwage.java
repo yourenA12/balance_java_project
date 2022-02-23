@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -65,6 +67,36 @@ public class Fixedwage implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
+
+
+    @ApiModelProperty(value = "员工姓名")
+    @TableField("STAFF_NAME")
+    private String staffName;
+
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
+    private Long positionId;
+
+    @ApiModelProperty(value = "部门编号")
+    @TableField("DEPT_ID")
+    private Long deptId;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POSITION_NAME")
+    private String positionName;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "入职日期")
+    @TableField("STAFF_HIREDATE")
+    private Date staffHiredate;
+
+    @ApiModelProperty(value = "员工状态;0：在职，1：离职，2：实习，3：正式")
+    @TableField("STAFF_STATE")
+    private Long staffState;
 
 
 }

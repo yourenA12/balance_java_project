@@ -6,6 +6,7 @@ import com.trkj.balance.modules.employee_management.entity.*;
 import com.trkj.balance.modules.salary_management.entity.Business;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
+import com.trkj.balance.modules.salary_management.entity.Workscheme;
 import com.trkj.balance.modules.salary_management.service.CompensationDeptPostService;
 import com.trkj.balance.modules.salary_management.service.CompensationService;
 import com.trkj.balance.vo.AjaxResponse;
@@ -68,6 +69,14 @@ public class CompensationController {
     public AjaxResponse selectCompensationId(@PathVariable("id") Long id){
         Compensation compensation=compensationService.selectCompensationById(id);
         return AjaxResponse.success(compensation);
+    }
+
+    //修改薪酬组数据
+    @PutMapping("/updateCompensation")
+    public AjaxResponse updateCompensation(@RequestBody Compensation compensation){
+        log.debug("123456789098765rfvbhy654edcvgtredc");
+        log.debug(compensation.toString());
+        return AjaxResponse.success(compensationService.updateCompensation(compensation));
     }
 
 }

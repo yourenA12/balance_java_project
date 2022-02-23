@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.salary_management.mapper.SalaryFixedMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.salary_management.entity.Salary">
+        <id column="SALARY_ID" property="salaryId" />
+        <result column="AUDITFLOW_ID" property="auditflowId" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="SALARY_CAUSE" property="salaryCause" />
+        <result column="FRONT_SALARY" property="frontSalary" />
+        <result column="AFTER_SALARY" property="afterSalary" />
+        <result column="OPERATOR" property="operator" />
+        <result column="SALARY_REMARKS" property="salaryRemarks" />
+        <result column="SALARY_STATE" property="salaryState" />
+        <result column="TAKE_EFFECT_DATE" property="takeEffectDate" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SALARY_ID, AUDITFLOW_ID, STAFF_ID, SALARY_CAUSE, FRONT_SALARY, AFTER_SALARY, OPERATOR, SALARY_REMARKS, SALARY_STATE, TAKE_EFFECT_DATE, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

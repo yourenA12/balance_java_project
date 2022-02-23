@@ -27,4 +27,7 @@ public interface CompensationService extends IService<Compensation> {
     //根据id查询薪酬组数据
     Compensation selectCompensationById(Long id);
 
+    //修改薪酬组数据
+    int updateCompensation(Compensation compensation);
+
 }
