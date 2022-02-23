@@ -1,9 +1,8 @@
 package com.trkj.balance.modules.social_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,6 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("DEF_SCHEME")
 @ApiModel(value="DefScheme对象", description="默认方案表")
+@KeySequence(value = "DEF_SCHEME_ID",clazz = Long.class)
 public class DefScheme implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,17 +73,19 @@ public class DefScheme implements Serializable {
     private String defSchemeType;
 
     @ApiModelProperty(value = "创建时间 精确到秒")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间 精确到秒")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删")
     @TableField("IS_DELETED")
     private Long isDeleted;
