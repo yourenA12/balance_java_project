@@ -2,10 +2,14 @@ package com.trkj.balance.modules.salary_management.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.balance.modules.employee_management.entity.Dept;
+import com.trkj.balance.modules.employee_management.entity.Staff;
+import com.trkj.balance.modules.employee_management.vo.StaffVo;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
+import com.trkj.balance.modules.salary_management.entity.CompensationStaff;
 import com.trkj.balance.modules.salary_management.mapper.CompensationDeptPostMapper;
 import com.trkj.balance.modules.salary_management.mapper.CompensationMapper;
+import com.trkj.balance.modules.salary_management.mapper.CompensationStaffMapper;
 import com.trkj.balance.modules.salary_management.mapper.DeptPostMapper;
 import com.trkj.balance.modules.salary_management.service.CompensationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -37,13 +41,17 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
     @Autowired
     private CompensationDeptPostMapper compensationDeptPostMapper;
 
+    // 薪酬组员工表
+    @Autowired
+    private CompensationStaffMapper compensationStaffMapper;
+
     //部门职位表
     @Autowired
     private DeptPostMapper deptPostMapper;
 
     @Override
     @Transactional
-    public int insertCompensation(Compensation compensation, ArrayList<Integer> deptIds, ArrayList<Integer> postIds) {
+    public int insertCompensation(Compensation compensation, ArrayList<Integer> deptIds, ArrayList<Integer> postIds,ArrayList<Integer> staffIds) {
        //添加薪酬组
         if(compensationMapper.insert(compensation)>0 ){
             // 声明一个实体类
@@ -72,6 +80,27 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
                 }
             }
 
+            // 声明一个实体类
+            CompensationStaff compensationStaff=new CompensationStaff();
+            //将新加的薪酬组id 作为薪酬组员工表的外键
+            compensationStaff.setCompensationId(compensation.getCompensationId());
+
+            // 拿到员工id 查询 薪酬组员工中间表有无数据
+            for (Integer staffId : staffIds) {
+
+                compensationStaff.setStaffId(Long.valueOf(staffId));
+
+                // 如果查询到了
+                if(compensationStaffMapper.insert(compensationStaff)<1){
+                    // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
+                    // 手动回滚
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                    return 0;
+                }
+
+            }
+
+
         }
         // 执行完成，添加成功
         return 1;
@@ -97,5 +126,20 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
     @Override
     public int updateCompensation(Compensation compensation) {
         return compensationMapper.updateById(compensation);
+    }
+
+    //根据薪酬组名称查询
+    @Override
+    public String selectCompensationNames(String name) {
+        // 声明一个条件构造器
+        QueryWrapper<Compensation> wrapper = new QueryWrapper<>();
+        wrapper.eq("COMPENSATION_NAME",name);
+        List<Compensation> compensations = compensationMapper.selectList(wrapper);
+        // 有数据 返回薪酬组名称
+        if (compensations.size()>0){
+            return name;
+        }
+
+        return null;
     }
 }

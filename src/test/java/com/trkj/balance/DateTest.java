@@ -1,6 +1,7 @@
 package com.trkj.balance;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

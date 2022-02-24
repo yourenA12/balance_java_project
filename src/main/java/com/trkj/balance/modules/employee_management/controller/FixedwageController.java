@@ -11,6 +11,8 @@ import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 /**
  * <p>
  * 固定工资表 前端控制器
@@ -26,12 +28,15 @@ public class FixedwageController {
     @Autowired
     private FixedwageService fixedwageService;
 
-    //查询考勤扣款方案
-    @GetMapping("/selectFixedwage/{currenPage}/{pagesize}")
-    public AjaxResponse selectFixedwage(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    //查询固定工资
+    @GetMapping("/selectFixedwage")
+    public AjaxResponse selectFixedwage(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                        @RequestParam("staffNameSearch") String staffNameSearch,
+                                        @RequestParam("deptIds") ArrayList deptIds,
+                                        @RequestParam("postSearch") String postSearch){
 
         Page<Fixedwage> page = new Page<>(currenPage,pagesize);
-        IPage<Fixedwage> list=fixedwageService.selectFixedwagePage(page);
+        IPage<Fixedwage> list=fixedwageService.selectFixedwagePage(page,staffNameSearch,deptIds,postSearch);
         return AjaxResponse.success(list);
 
     }
