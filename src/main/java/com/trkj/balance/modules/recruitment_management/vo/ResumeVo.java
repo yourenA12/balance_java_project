@@ -160,7 +160,14 @@ public class ResumeVo implements Serializable {
 
 
 
-;
+    @ApiModelProperty(value = "部门编号")
+    @TableId("DEPT_ID")
+    private Long deptId;
+
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
 
 
