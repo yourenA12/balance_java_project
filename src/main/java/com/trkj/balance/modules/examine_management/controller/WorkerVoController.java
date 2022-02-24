@@ -28,6 +28,12 @@ public class WorkerVoController {
     public AjaxResponse findSelectPageById(@PathVariable("id") Long id){
         return AjaxResponse.success(workervoService.findSelectById(id));
     }
+    //通过id 查询 查看步骤条的名称
+    @GetMapping("/findSelectPageByIdName/{id}")
+    public AjaxResponse findSelectPageByIdName(@PathVariable("id") Long id){
+        return AjaxResponse.success(workervoService.findSelectById(id));
+    }
+
 //    //修改审批主表的状态
 //    @PutMapping("/updateWorkerVo")
 //    public AjaxResponse updateWorkerVo(@RequestBody WorkerVo workerVo){

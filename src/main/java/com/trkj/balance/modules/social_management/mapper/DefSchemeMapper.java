@@ -3,6 +3,9 @@ package com.trkj.balance.modules.social_management.mapper;
 import com.trkj.balance.modules.social_management.entity.DefScheme;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DefSchemeMapper extends BaseMapper<DefScheme> {
+
+    @Select("select * from DEF_SCHEME where DEF_INSURED_ID=#{id}")
+    List<DefScheme> selectdefSchemeBydefInsuredId(Long id);
 
 }

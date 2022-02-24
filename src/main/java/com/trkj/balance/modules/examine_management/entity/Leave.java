@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.examine_management.entity;
 
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,6 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("LEAVE")
+@KeySequence(value = "LEAVE_ID",clazz = Long.class)
 @ApiModel(value="Leave对象", description="请假表")
 public class Leave implements Serializable {
 
