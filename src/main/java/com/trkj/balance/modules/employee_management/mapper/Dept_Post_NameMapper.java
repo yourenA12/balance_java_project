@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface Dept_Post_NameMapper extends BaseMapper<DeptPost> {
 
+
+
 }
