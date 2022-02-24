@@ -39,7 +39,7 @@ public class Dept implements Serializable {
     private Long deptId;
 
     @ApiModelProperty(value = "上级部门编号")
-    @TableField("DEPT_PID")
+    @TableField("SUPERIOR_DEPT_ID")
     private Long deptPid;
 
     @ApiModelProperty(value = "状态;0：启用  1：禁用")

@@ -3,6 +3,7 @@ package com.trkj.balance.modules.social_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.mapper.DeptPostMapper;
 import com.trkj.balance.modules.social_management.entity.DefInsured;
 import com.trkj.balance.modules.social_management.entity.DefScheme;
@@ -151,7 +152,6 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
                 }
             }
 
-            int i =9/0;
             return 1;
 
         }
@@ -217,6 +217,22 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         insuredStaffMapper.delete(wrapper);
 
         return 1;
+    }
+
+
+    //根据参保方案名称查询
+    @Override
+    public String selectDefInsuredNames(String name) {
+        // 声明一个条件构造器
+        QueryWrapper<DefInsured> wrapper = new QueryWrapper<>();
+        wrapper.eq("DEF_INSURED_NAME",name);
+        List<DefInsured> defInsureds = defInsuredMapper.selectList(wrapper);
+        // 有数据 返回薪酬组名称
+        if (defInsureds.size()>0){
+            return name;
+        }
+
+        return null;
     }
 
 

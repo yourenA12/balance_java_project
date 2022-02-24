@@ -55,5 +55,9 @@ public interface DefInsuredService extends IService<DefInsured> {
     int deleteById(Long id);
 
 
+    //根据参保方案名称查询
+    String selectDefInsuredNames(String name);
+
+
 
 }
