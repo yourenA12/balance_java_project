@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface TransferVoMapper extends BaseMapper<TransferVo> {
     //更具id 查询人事异动详情信息
-    @Select("SELECT A.AUDITFLOW_ID,A.STAFF_NAME AS STAFF_NAME1,B.STAFF_NAME AS STAFF_NAME2,C.TRANSFER_TYPE,C.CREATED_DEPT_ID,C.UPDATED_DEPT_ID,C.TRANSFER_STATE,C.TRANSFER_RAWPOST_ID,C.TRANSFER_AFTERPOST_ID,E.POSITION_ID,f.POSITION_NAME,d.dept_name,d1.dept_name as dept_name1\n" +
+    @Select("SELECT A.AUDITFLOW_ID,E.STAFF_NAME AS STAFF_NAME1,EE.STAFF_NAME AS STAFF_NAME2,C.TRANSFER_TYPE,C.CREATED_DEPT_ID,C.UPDATED_DEPT_ID,C.TRANSFER_STATE,C.TRANSFER_RAWPOST_ID,C.TRANSFER_AFTERPOST_ID,E.POSITION_ID,f.POSITION_NAME,d.dept_name,d1.dept_name as dept_name1\n" +
             "FROM AUDITFLOW A\n" +
             "LEFT JOIN \n" +
             "AUDITFLOWDETAIL B\n" +
@@ -28,7 +28,10 @@ public interface TransferVoMapper extends BaseMapper<TransferVo> {
             "ON C.UPDATED_DEPT_ID = d1.DEPT_ID\n" +
             "LEFT JOIN\n" +
             "STAFF E\n" +
-            "ON E.STAFF_ID = C.STAFF_ID\n" +
+            "ON E.STAFF_ID = A.STAFF_ID\n" +
+            "LEFT JOIN\n" +
+            "STAFF EE\n" +
+            "ON EE.STAFF_ID = B.STAFF_ID\n" +
             "left join\n" +
             "POSITION F\n" +
             "on f.POSITION_ID = e.POSITION_ID\n" +

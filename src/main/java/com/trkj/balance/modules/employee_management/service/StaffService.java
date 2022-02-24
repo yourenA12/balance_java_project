@@ -30,5 +30,10 @@ public interface StaffService extends IService<Staff> {
     //修改员工
     int updateStaff(Staff staff);
 
+    //查询员工的状态，统计人数
+    int selectStaffStateCount(int state);
+
+    //查询本月离职和本月新入职员工
+    int selectStaffDate(String date);
 
 }
