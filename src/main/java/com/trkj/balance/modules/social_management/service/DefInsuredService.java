@@ -49,7 +49,10 @@ public interface DefInsuredService extends IService<DefInsured> {
     List<Integer> selectPostId(Long id);
 
     // 按参保方案id查询员工
-//    List<StaffVo> selectStaff(Long id);
+    List<Integer> selectStaffId(Long id);
+
+    // 按id删除参保方案
+    int deleteById(Long id);
 
 
 
