@@ -72,7 +72,7 @@ public class InsuredDeptPostServiceImpl extends ServiceImpl<InsuredDeptPostMappe
                     while (true){
                         // 按照部门id 查询部门名称 及 上级部门id
                         QueryWrapper wrapper2 = new QueryWrapper();
-                        wrapper2.select("DEPT_NAME","DEPT_PID").eq("DEPT_ID",x);
+                        wrapper2.eq("DEPT_ID",x);
                         Dept dept = deptMapper.selectOne(wrapper2);
                         // 部门名称 拼接上 数组
                         a=dept.getDeptName()+"-"+a;
