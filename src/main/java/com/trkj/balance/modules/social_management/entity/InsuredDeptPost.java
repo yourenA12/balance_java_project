@@ -53,7 +53,7 @@ public class InsuredDeptPost implements Serializable {
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
-    @TableLogic
+//    @TableLogic
     @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
     @TableField("IS_DELETED")
     private Long isDeleted;

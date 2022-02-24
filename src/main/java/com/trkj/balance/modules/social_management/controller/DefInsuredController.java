@@ -102,10 +102,40 @@ public class DefInsuredController {
 
 
     // 按参保方案id查询参保方案
+    @GetMapping("/selectDefInsuredById/{id}")
+    public AjaxResponse selectDefInsuredById(Long id){
+        return AjaxResponse.success(defInsuredService.selectDefInsuredById(id));
+    }
 
+    // 按参保方案id查询方案
+    @GetMapping("/selectDefSchemeById/{id}")
+    public AjaxResponse selectDefSchemeById(Long id){
+        return AjaxResponse.success(defInsuredService.selectDefSchemeById(id));
+    }
 
-    // 编辑参保方案
+    // 按参保方案id查询部门id
+    @GetMapping("/selectDeptId/{id}")
+    public AjaxResponse selectDeptId(Long id){
+        return AjaxResponse.success(defInsuredService.selectDeptId(id));
+    }
 
+    // 按参保方案id查询职位id
+    @GetMapping("/selectPostId/{id}")
+    public AjaxResponse selectPostId(Long id){
+        return AjaxResponse.success(defInsuredService.selectPostId(id));
+    }
+
+    // 按参保方案id查询员工
+    @GetMapping("/selectStaffId/{id}")
+    public AjaxResponse selectStaffId(Long id){
+        return AjaxResponse.success(defInsuredService.selectStaffId(id));
+    }
+
+    // 按参保方案id删除
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResponse deleteById(Long id){
+        return AjaxResponse.success(defInsuredService.deleteById(id));
+    }
 
 
 }

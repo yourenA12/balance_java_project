@@ -170,7 +170,9 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
     // 按参保方案id查询方案
     @Override
     public List<DefScheme> selectDefSchemeById(Long id) {
-        return defSchemeMapper.selectdefSchemeBydefInsuredId(id);
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.eq("DEF_INSURED_ID",id);
+        return defSchemeMapper.selectList(wrapper);
     }
 
     // 按参保方案id查询部门id
@@ -193,7 +195,29 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         return deptPostMapper.selectPostId(wrapper);
     }
 
+    // 按参保方案id查询员工
+    @Override
+    public List<Integer> selectStaffId(Long id) {
 
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.select("STAFF_ID").eq("DEF_INSURED_ID",id);
+        return insuredStaffMapper.selectList(wrapper);
+    }
+
+    // 按参保方案id删除
+    @Override
+    public int deleteById(Long id) {
+
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.eq("DEF_INSURED_ID",id);
+
+        defInsuredMapper.delete(wrapper);
+        defSchemeMapper.delete(wrapper);
+        insuredDeptPostMapper.delete(wrapper);
+        insuredStaffMapper.delete(wrapper);
+
+        return 1;
+    }
 
 
 }
