@@ -39,12 +39,12 @@ public class ClockVo {
     private String staffName;
 
     //打卡
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "早上打卡时间")
     @TableField("MORN_CLOCK")
     private Date mornClock;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "下午打卡时间")
     @TableField("AFTERNOON_CLOCK")
     private Date afternoonClock;
