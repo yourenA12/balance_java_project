@@ -20,4 +20,13 @@ import java.util.List;
 @Mapper
 public interface StaffMapper extends BaseMapper<Staff> {
 
+
+    // 查询本月离职
+    @Select("select COUNT(*) from staff where staff_state=1 and IS_DELETED=0 and TO_CHAR(UPDATED_TIME,'yyyy-MM')=TO_CHAR(sysdate,'yyyy-MM')\n")
+    int selectMonthQuit();
+
+    // 查询本月新入职
+    @Select("select COUNT(*) from staff where staff_state<>1 and IS_DELETED=0 and TO_CHAR(UPDATED_TIME,'yyyy-MM')=TO_CHAR(sysdate,'yyyy-MM')\n")
+    int selectMonthEntry();
+
 }
