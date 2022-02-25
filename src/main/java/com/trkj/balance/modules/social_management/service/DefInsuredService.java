@@ -32,27 +32,27 @@ public interface DefInsuredService extends IService<DefInsured> {
 
     // 新增参保方案
     int insertDefInsured(DefInsured defInsured, List<DefScheme> defScheme,
-                         int upper, int lower, ArrayList<Integer> deptIds,
-                         ArrayList<Integer> postIds,ArrayList<Integer> staffIds);
+                         int upper, int lower, List<Integer> deptIds,
+                         List<Integer> postIds,List<Integer> staffIds);
 
 
     // 按参保方案id查询参保方案
-    DefInsured selectDefInsuredById(Long id);
+    DefInsured selectDefInsuredById(int id);
 
     // 按参保方案id查询方案
-    List<DefScheme> selectDefSchemeById(Long id);
+    List<DefScheme> selectDefSchemeById(int id);
 
     // 按参保方案id查询部门id
-    List<Integer> selectDeptId(Long id);
+    List<Integer> selectDeptId(int id);
 
     // 按参保方案id查询部门id
-    List<Integer> selectPostId(Long id);
+    List<Integer> selectPostId(int id);
 
     // 按参保方案id查询员工
-    List<Integer> selectStaffId(Long id);
+    List<Integer> selectStaffId(int id);
 
     // 按id删除参保方案
-    int deleteById(Long id);
+    int deleteById(int id);
 
 
     //根据参保方案名称查询

@@ -4,6 +4,7 @@ import com.trkj.balance.modules.social_management.entity.InsuredDeptPost;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +17,6 @@ import java.util.ArrayList;
 public interface InsuredDeptPostService extends IService<InsuredDeptPost> {
 
     // 根据部门id和职位id，查询参保方案部门职位中间表有无数据，
-    String selectInsuredDeptPost(ArrayList<Integer> deptIds, ArrayList<Integer> postIds);
+    String selectInsuredDeptPost(List<Integer> deptIds, List<Integer> postIds);
 
 }

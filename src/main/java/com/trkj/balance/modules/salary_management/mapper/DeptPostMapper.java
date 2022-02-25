@@ -29,7 +29,7 @@ public interface DeptPostMapper extends BaseMapper<DeptPost> {
     @Select("SELECT DISTINCT DEPT_ID FROM DEPT_POST ${ew.customSqlSegment}")
     List<Integer> selectDeptId(@Param(Constants.WRAPPER) QueryWrapper<DeptPost> wrapper);
 
-    @Select("SELECT DISTINCT POST_ID FROM DEPT_POST ${ew.customSqlSegment}")
+    @Select("SELECT DISTINCT POSITION_ID FROM DEPT_POST ${ew.customSqlSegment}")
     List<Integer> selectPostId(@Param(Constants.WRAPPER) QueryWrapper<DeptPost> wrapper);
 
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -40,7 +41,7 @@ public class InsuredDeptPostServiceImpl extends ServiceImpl<InsuredDeptPostMappe
     private PositionMapper postMapper;
 
     @Override
-    public String selectInsuredDeptPost(ArrayList<Integer> deptIds, ArrayList<Integer> postIds) {
+    public String selectInsuredDeptPost(List<Integer> deptIds, List<Integer> postIds) {
 
         String a = "";
 

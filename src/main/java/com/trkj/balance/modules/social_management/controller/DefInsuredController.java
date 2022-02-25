@@ -78,9 +78,9 @@ public class DefInsuredController {
         // 基数下限
         int lower = JSON.parseObject(JSON.toJSONString(map.get("lower")), Integer.class);
 
-        ArrayList<Integer> deptIds = JSON.parseObject(JSON.toJSONString(map.get("deptIds")), ArrayList.class);
-        ArrayList<Integer> postIds = JSON.parseObject(JSON.toJSONString(map.get("postIds")), ArrayList.class);
-        ArrayList<Integer> staffIds = JSON.parseObject(JSON.toJSONString(map.get("staffIds")), ArrayList.class);
+        List<Integer> deptIds = JSON.parseArray(JSON.toJSONString(map.get("deptIds")), Integer.class);
+        List<Integer> postIds = JSON.parseArray(JSON.toJSONString(map.get("postIds")), Integer.class);
+        List<Integer> staffIds = JSON.parseArray(JSON.toJSONString(map.get("staffIds")), Integer.class);
 
         for (DefScheme defScheme : defScheme2) {
             defScheme1.add(defScheme);
@@ -104,6 +104,12 @@ public class DefInsuredController {
 
         log.debug(staffIds.toString());
 
+        // 判断删除
+        if(defInsured.getDefInsuredId()+""!="" && defInsured.getDefInsuredId()!=null){
+            if( defInsuredService.deleteById(Math.toIntExact(defInsured.getDefInsuredId()))<1){
+                return AjaxResponse.success("出错了，请稍后再试");
+            }
+        }
 
         String a=defInsuredService.selectDefInsuredNames(defInsured.getDefInsuredName());
         if(a!=null) return AjaxResponse.success(a+",重复");
@@ -120,37 +126,38 @@ public class DefInsuredController {
 
     // 按参保方案id查询参保方案
     @GetMapping("/selectDefInsuredById/{id}")
-    public AjaxResponse selectDefInsuredById(Long id){
+    public AjaxResponse selectDefInsuredById(@PathVariable("id") int id){
+
         return AjaxResponse.success(defInsuredService.selectDefInsuredById(id));
     }
 
     // 按参保方案id查询方案
     @GetMapping("/selectDefSchemeById/{id}")
-    public AjaxResponse selectDefSchemeById(Long id){
+    public AjaxResponse selectDefSchemeById(@PathVariable("id") int id){
         return AjaxResponse.success(defInsuredService.selectDefSchemeById(id));
     }
 
     // 按参保方案id查询部门id
     @GetMapping("/selectDeptId/{id}")
-    public AjaxResponse selectDeptId(Long id){
+    public AjaxResponse selectDeptId(@PathVariable("id") int id){
         return AjaxResponse.success(defInsuredService.selectDeptId(id));
     }
 
     // 按参保方案id查询职位id
     @GetMapping("/selectPostId/{id}")
-    public AjaxResponse selectPostId(Long id){
+    public AjaxResponse selectPostId(@PathVariable("id") int id){
         return AjaxResponse.success(defInsuredService.selectPostId(id));
     }
 
     // 按参保方案id查询员工
     @GetMapping("/selectStaffId/{id}")
-    public AjaxResponse selectStaffId(Long id){
+    public AjaxResponse selectStaffId(@PathVariable("id") int id){
         return AjaxResponse.success(defInsuredService.selectStaffId(id));
     }
 
     // 按参保方案id删除
     @DeleteMapping("/deleteById/{id}")
-    public AjaxResponse deleteById(Long id){
+    public AjaxResponse deleteById(@PathVariable("id") int id){
         return AjaxResponse.success(defInsuredService.deleteById(id));
     }
 
