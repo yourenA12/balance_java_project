@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -31,7 +32,7 @@ public class InsuredStaffServiceImpl extends ServiceImpl<InsuredStaffMapper, Ins
 
     //根据薪酬组员工中间表查询数据
     @Override
-    public String selectInsuredStaffName(ArrayList<Integer> staffIds) {
+    public String selectInsuredStaffName(List<Integer> staffIds) {
 
         // 拿到员工id 查询 薪酬组员工中间表有无数据
         for (Integer staffId : staffIds) {

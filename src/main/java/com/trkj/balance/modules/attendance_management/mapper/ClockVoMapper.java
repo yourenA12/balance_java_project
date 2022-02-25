@@ -17,7 +17,7 @@ public interface ClockVoMapper extends BaseMapper<ClockVo> {
             "LEFT JOIN staff b on a.STAFF_ID = b.STAFF_ID\n" +
             "LEFT JOIN dept c on a.DEPT_ID = c.DEPT_ID " +
             "${ew.customSqlSegment}")
-    IPage<ClockVo> selectClok1 (IPage<ClockVo> page,@Param(Constants.WRAPPER) QueryWrapper<ClockVo> queryWrapper);
+    IPage<ClockVo> dimsearch (IPage<ClockVo> page,@Param(Constants.WRAPPER) QueryWrapper<ClockVo> queryWrapper);
 
 
 

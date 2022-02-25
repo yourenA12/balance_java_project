@@ -14,6 +14,8 @@ public interface WorkerVoService extends IService<WorkerVo> {
     //根据id查询
     List<WorkerVo> findSelectById(Long id);
 
-    //根据id查询 步骤条的名称
+    //根据id查询 废弃sql 步骤条的名称
     List<WorkerVo> findSelectByIdName(Long id);
+    //根据id查询申请人的审批
+    IPage<WorkerVo> findByIdUser(Page<WorkerVo> page,Long id);
 }

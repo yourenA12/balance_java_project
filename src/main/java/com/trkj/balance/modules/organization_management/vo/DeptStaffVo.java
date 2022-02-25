@@ -3,13 +3,16 @@ package com.trkj.balance.modules.organization_management.vo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.trkj.balance.modules.organization_management.entity.Dept;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -52,6 +55,9 @@ public class DeptStaffVo implements Serializable {
     @ApiModelProperty(value = "职位名称")
     @TableField("POSITION_NAME")
     private String positionName;
+
+    @TableField(exist = false)
+    private List<Dept> children =new ArrayList<>();
 
 
 }

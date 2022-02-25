@@ -31,7 +31,7 @@ public class CardVo {
     @TableField("CARD_TYPE")
     private String cardType;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "补打卡时间")
     @TableField("CARD_DATE")
     private Date cardDate;
