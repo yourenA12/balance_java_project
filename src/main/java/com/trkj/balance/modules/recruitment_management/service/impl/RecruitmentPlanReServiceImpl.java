@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.recruitment_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.balance.modules.recruitment_management.entity.RecruitmentPlan;
 import com.trkj.balance.modules.recruitment_management.mapper.RecruitmentPlanReMapper;
 import com.trkj.balance.modules.recruitment_management.service.RecruitmentPlanReService;
@@ -7,6 +8,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,6 +41,15 @@ public class RecruitmentPlanReServiceImpl extends ServiceImpl<RecruitmentPlanReM
     @Override
     public int updateRecruitmentPlan(RecruitmentPlan recruitmentPlan) {
         return recruitmentPlanMapper.updateById(recruitmentPlan);
+    }
+    //招聘计划名称
+    @Override
+    public List<Map<String, Object>> selectzpjh() {
+        QueryWrapper<RecruitmentPlan> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.select("RECRUITMENT_PLAN_ID","RECRUITMENT_PLAN_NAME");
+        queryWrapper.eq("IS_DELETED",0);
+        return recruitmentPlanMapper.selectMaps(queryWrapper);
     }
 
     //根据id查询招聘计划信息

@@ -40,9 +40,9 @@ public class RecruitmentPlan implements Serializable {
     @TableField("DEPT_ID")
     private Long deptId;
 
-    @ApiModelProperty(value = "部门职位编号")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号")
+    @TableField("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "最低学历")
     @TableField("EDUCATION_NAME")
