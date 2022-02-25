@@ -46,7 +46,7 @@ public interface WorkerVoMapper extends BaseMapper<WorkerVo> {
             "    where\n" +
             "        a.AUDITFLOW_ID=#{id} \n" +
             "    ORDER BY\n" +
-            "        d.CREATED_TIME")
+            "        b.CREATED_TIME")
 
     List<WorkerVo> findSelectById(@Param("id") Long id);
     //查询那个 步骤条的名称   废弃！！！！
@@ -103,5 +103,28 @@ public interface WorkerVoMapper extends BaseMapper<WorkerVo> {
             "\t\t\t\t\t\tleft join staff bc on b.STAFF_ID=bc.STAFF_ID " +
             "${ew.customSqlSegment}")
     IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page, @Param(Constants.WRAPPER) QueryWrapper<WorkerVo> wrapper);
+
+    //根据id查询 我的申请
+    @Select("SELECT  a.AUDITFLOW_ID,\n" +
+            "\t\t\t\tA.AUDITFLOW_TITLE,\n" +
+            "        AA.staff_name as staff_name1,\n" +
+            "        BB.staff_name as staff_name2,\n" +
+            "        a.auditflow_state, \t\t\n" +
+            "        b.AUDITFLOWDETAI_STATE,\n" +
+            "\t\t\t\ta.CREATED_TIME,\n" +
+            "\t\t\t\ta.UPDATED_TIME\n" +
+            "FROM\n" +
+            "AUDITFLOW A\n" +
+            "LEFT JOIN\n" +
+            "AUDITFLOWDETAIL B\n" +
+            "ON A.AUDITFLOW_ID = B.AUDITFLOW_ID\n" +
+            "LEFT JOIN\n" +
+            "STAFF AA\n" +
+            "ON AA.STAFF_ID = A.STAFF_ID\n" +
+            "LEFT JOIN\n" +
+            "STAFF BB\n" +
+            "ON BB.STAFF_ID = B.STAFF_ID\n" +
+            "WHERE AA.STAFF_ID = #{id}\n")
+    IPage<WorkerVo> findeByIdUser1(Page<WorkerVo> page,@Param("id") Long id);
 
 }

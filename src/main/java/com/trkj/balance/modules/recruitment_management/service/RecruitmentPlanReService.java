@@ -4,6 +4,9 @@ import com.trkj.balance.modules.recruitment_management.entity.RecruitmentPlan;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.recruitment_management.vo.RecruitmentPlanVo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 招聘计划表 服务类
@@ -23,6 +26,10 @@ public interface RecruitmentPlanReService extends IService<RecruitmentPlan> {
 
     //修改招聘计划
     int updateRecruitmentPlan(RecruitmentPlan recruitmentPlan);
+
+    //查询招聘计划名称
+    List<Map<String,Object>> selectzpjh();
+
 
     //根据id查询招聘计划信息
     RecruitmentPlan selectRecruitmentPlanId(Long id);

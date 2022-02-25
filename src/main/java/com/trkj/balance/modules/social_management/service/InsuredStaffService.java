@@ -4,6 +4,7 @@ import com.trkj.balance.modules.social_management.entity.InsuredStaff;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +17,6 @@ import java.util.ArrayList;
 public interface InsuredStaffService extends IService<InsuredStaff> {
 
     //根据员工id查询，参保方案员工中间表有无数据
-    String selectInsuredStaffName(ArrayList<Integer> staffIds);
+    String selectInsuredStaffName(List<Integer> staffIds);
 
 }

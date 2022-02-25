@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface QuitVoMapper extends BaseMapper<QuitnVo> {
+    //更具id 查询离职详情
     @Select("SELECT A.AUDITFLOW_ID,A.STAFF_NAME AS STAFF_NAME1,b.STAFF_NAME AS STAFF_NAME2,C.QUIT_EXPLAIN,C.APPLY_QUIT_DATE,D.DEPT_NAME,C.APPLY_QUIT_DATE\n" +
             "FROM\n" +
             "AUDITFLOW A\n" +

@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 招聘计划表 前端控制器
@@ -53,6 +56,14 @@ public class RecruitmentPlanController {
         RecruitmentPlan rectruitmentPlan=recruitmentPlanService.selectRecruitmentPlanId(id);
         return AjaxResponse.success(rectruitmentPlan);
     }
+    //查询招聘计划名称
+    @GetMapping("/selectzpjh")
+    public AjaxResponse selectzpjh(){
+        List<Map<String,Object>> list= recruitmentPlanService.selectzpjh();
+        return AjaxResponse.success(list);
+    }
+
+
     }
 
 

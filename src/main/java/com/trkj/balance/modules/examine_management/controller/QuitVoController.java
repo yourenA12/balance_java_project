@@ -14,6 +14,7 @@ public class QuitVoController {
     @Autowired
     private QuitVoService quitVoService;
 
+    //根据id查询离职表详情
     @GetMapping("/findSelectByid/{id}")
     public AjaxResponse finSelectByid(@PathVariable("id")Long id){
 

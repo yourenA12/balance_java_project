@@ -57,15 +57,15 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
     // 查询所有参保方案
     @Override
     public IPage<DefInsured> selectAllPage(Page page, String name, Object state) {
-        QueryWrapper queryWrapper= new QueryWrapper<>();
-        if(name!=null && name!=""){
-            queryWrapper.like("DEF_INSURED_NAME",name);
+        QueryWrapper queryWrapper = new QueryWrapper<>();
+        if (name != null && name != "") {
+            queryWrapper.like("DEF_INSURED_NAME", name);
         }
-        if( state!=null && state!=""){
-            queryWrapper.eq("DEF_INSURED_STATE",state);
+        if (state != null && state != "") {
+            queryWrapper.eq("DEF_INSURED_STATE", state);
         }
 
-        return defInsuredMapper.selectPage(page,queryWrapper);
+        return defInsuredMapper.selectPage(page, queryWrapper);
     }
 
     // 删除参保方案
@@ -86,11 +86,11 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
     @Override
     @Transactional
     public int insertDefInsured(DefInsured defInsured, List<DefScheme> defScheme,
-                                int upper, int lower, ArrayList<Integer> deptIds,
-                                ArrayList<Integer> postIds,ArrayList<Integer> staffIds) {
+                                int upper, int lower, List<Integer> deptIds,
+                                List<Integer> postIds, List<Integer> staffIds) {
 
         // 新增参保方案
-        if (defInsuredMapper.insert(defInsured)>0){
+        if (defInsuredMapper.insert(defInsured) > 0) {
 
             // 循环添加方案表
             for (DefScheme defScheme1 : defScheme) {
@@ -101,13 +101,13 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
                 defScheme1.setDefSchemeMax((long) upper);// 上限
 
                 // 添加方案表
-                if(defSchemeMapper.insert(defScheme1)<1){
+                if (defSchemeMapper.insert(defScheme1) < 1) {
                     // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
                     // 手动回滚
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     return 0;
                 }
-                
+
             }
 
             // 声明一个 方案 实体类
@@ -116,18 +116,18 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
             insuredDeptPost.setDefInsuredId(defInsured.getDefInsuredId());
 
             // 使用双层for循环 按部门id和职位偶读查询部门职位中间表的id
-            for (int i=0;i<deptIds.size();i++){ // 循环部门id
-                for (int j=0;j<postIds.size();j++){ // 循环职位id
+            for (int i = 0; i < deptIds.size(); i++) { // 循环部门id
+                for (int j = 0; j < postIds.size(); j++) { // 循环职位id
                     // 拿到部门id和职位id 去查询部门职位中间表的id
-                    Long deptPostId=deptPostMapper.selectDeptPost(deptIds.get(i),postIds.get(j));
+                    Long deptPostId = deptPostMapper.selectDeptPost(deptIds.get(i), postIds.get(j));
                     // 如果id为空 则 换下一个id继续查询
-                    if(deptPostId==null){
+                    if (deptPostId == null) {
                         continue; // 结束此次循环，j++ 再次循环
                     }
                     // 将查询出来的部门职位中间表id，加入参保方案部门职位中间表中
                     insuredDeptPost.setDeptPostId(deptPostId);
                     //添加参保方案部门职位中间表
-                    if(insuredDeptPostMapper.insert(insuredDeptPost)<1){
+                    if (insuredDeptPostMapper.insert(insuredDeptPost) < 1) {
                         // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
                         // 手动回滚
                         TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -144,7 +144,7 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
             for (Integer staffId : staffIds) {
                 insuredStaff.setStaffId(Long.valueOf(staffId));//将id放入
                 // 添加参保方案员工中间表
-                if(insuredStaffMapper.insert(insuredStaff)<1){
+                if (insuredStaffMapper.insert(insuredStaff) < 1) {
                     // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
                     // 手动回滚
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -163,58 +163,69 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
 
     // 按参保方案id查询参保方案
     @Override
-    public DefInsured selectDefInsuredById(Long id) {
+    public DefInsured selectDefInsuredById(int id) {
         return defInsuredMapper.selectById(id);
     }
 
     // 按参保方案id查询方案
     @Override
-    public List<DefScheme> selectDefSchemeById(Long id) {
+    public List<DefScheme> selectDefSchemeById(int id) {
         QueryWrapper wrapper = new QueryWrapper<>();
-        wrapper.eq("DEF_INSURED_ID",id);
+        wrapper.eq("DEF_INSURED_ID", id);
         return defSchemeMapper.selectList(wrapper);
     }
 
     // 按参保方案id查询部门id
     @Override
-    public List<Integer> selectDeptId(Long id) {
+    public List<Integer> selectDeptId(int id) {
         List<Integer> insuredDeptPosts = insuredDeptPostMapper.selectinsuredDeptPostBydefInsuredId(id);
 
+        if (insuredDeptPosts.size() == 0) {
+            return null;
+        }
+
         QueryWrapper wrapper = new QueryWrapper<>();
-        wrapper.in("DEPT_POST_ID",insuredDeptPosts);
+        wrapper.in("DEPT_POST_ID", insuredDeptPosts);
+
         return deptPostMapper.selectDeptId(wrapper);
     }
 
     // 按参保方案id查询职位id
     @Override
-    public List<Integer> selectPostId(Long id) {
+    public List<Integer> selectPostId(int id) {
         List<Integer> insuredDeptPosts = insuredDeptPostMapper.selectinsuredDeptPostBydefInsuredId(id);
 
+        if (insuredDeptPosts.size() == 0) {
+            return null;
+        }
+
         QueryWrapper wrapper = new QueryWrapper<>();
-        wrapper.in("DEPT_POST_ID",insuredDeptPosts);
+        wrapper.in("DEPT_POST_ID", insuredDeptPosts);
+
         return deptPostMapper.selectPostId(wrapper);
     }
 
     // 按参保方案id查询员工
     @Override
-    public List<Integer> selectStaffId(Long id) {
+    public List<Integer> selectStaffId(int id) {
 
         QueryWrapper wrapper = new QueryWrapper<>();
-        wrapper.select("STAFF_ID").eq("DEF_INSURED_ID",id);
+        wrapper.select("STAFF_ID").eq("DEF_INSURED_ID", id);
         return insuredStaffMapper.selectList(wrapper);
     }
 
     // 按参保方案id删除
     @Override
-    public int deleteById(Long id) {
+    @Transactional
+    public int deleteById(int id) {
 
         QueryWrapper wrapper = new QueryWrapper<>();
-        wrapper.eq("DEF_INSURED_ID",id);
+        wrapper.eq("DEF_INSURED_ID", id);
 
-        defInsuredMapper.delete(wrapper);
-        defSchemeMapper.delete(wrapper);
         insuredDeptPostMapper.delete(wrapper);
         insuredStaffMapper.delete(wrapper);
+        defSchemeMapper.delete(wrapper);
+        defInsuredMapper.delete(wrapper);
 
         return 1;
     }
@@ -225,10 +236,10 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
     public String selectDefInsuredNames(String name) {
         // 声明一个条件构造器
         QueryWrapper<DefInsured> wrapper = new QueryWrapper<>();
-        wrapper.eq("DEF_INSURED_NAME",name);
+        wrapper.eq("DEF_INSURED_NAME", name);
         List<DefInsured> defInsureds = defInsuredMapper.selectList(wrapper);
         // 有数据 返回薪酬组名称
-        if (defInsureds.size()>0){
+        if (defInsureds.size() > 0) {
             return name;
         }
 
