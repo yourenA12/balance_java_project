@@ -8,6 +8,8 @@ import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.social_management.entity.DefInsured;
 import com.trkj.balance.modules.social_management.entity.DefScheme;
 import com.trkj.balance.modules.social_management.service.DefInsuredService;
+import com.trkj.balance.modules.social_management.service.InsuredDeptPostService;
+import com.trkj.balance.modules.social_management.service.InsuredStaffService;
 import com.trkj.balance.modules.system_management.entity.Notice;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,12 @@ public class DefInsuredController {
 
     @Autowired
     private DefInsuredService defInsuredService;
+
+    @Autowired
+    private InsuredStaffService insuredStaffService;
+
+    @Autowired
+    private InsuredDeptPostService insuredDeptPostService;
 
     // 查询所有参保方案
     @GetMapping("/selectAllPage")
@@ -97,15 +105,54 @@ public class DefInsuredController {
         log.debug(staffIds.toString());
 
 
-        return AjaxResponse.success(defInsuredService.insertDefInsured(defInsured,defScheme1,upper,lower,deptIds,postIds,staffIds));
+        String a=defInsuredService.selectDefInsuredNames(defInsured.getDefInsuredName());
+        if(a!=null) return AjaxResponse.success(a+",重复");
+
+        String b=insuredStaffService.selectInsuredStaffName(staffIds);
+        if(b!=null) return AjaxResponse.success(b+",已设置参保方案");
+
+        String c=insuredDeptPostService.selectInsuredDeptPost(deptIds,postIds);
+        if(c!=null) return AjaxResponse.success(c+",已设置参保方案");
+
+        return AjaxResponse.success(defInsuredService.insertDefInsured(defInsured,defScheme1,upper,lower,deptIds,postIds,staffIds) >0?"添加成功":"添加失败");
     }
 
 
     // 按参保方案id查询参保方案
+    @GetMapping("/selectDefInsuredById/{id}")
+    public AjaxResponse selectDefInsuredById(Long id){
+        return AjaxResponse.success(defInsuredService.selectDefInsuredById(id));
+    }
 
+    // 按参保方案id查询方案
+    @GetMapping("/selectDefSchemeById/{id}")
+    public AjaxResponse selectDefSchemeById(Long id){
+        return AjaxResponse.success(defInsuredService.selectDefSchemeById(id));
+    }
 
-    // 编辑参保方案
+    // 按参保方案id查询部门id
+    @GetMapping("/selectDeptId/{id}")
+    public AjaxResponse selectDeptId(Long id){
+        return AjaxResponse.success(defInsuredService.selectDeptId(id));
+    }
 
+    // 按参保方案id查询职位id
+    @GetMapping("/selectPostId/{id}")
+    public AjaxResponse selectPostId(Long id){
+        return AjaxResponse.success(defInsuredService.selectPostId(id));
+    }
+
+    // 按参保方案id查询员工
+    @GetMapping("/selectStaffId/{id}")
+    public AjaxResponse selectStaffId(Long id){
+        return AjaxResponse.success(defInsuredService.selectStaffId(id));
+    }
+
+    // 按参保方案id删除
+    @DeleteMapping("/deleteById/{id}")
+    public AjaxResponse deleteById(Long id){
+        return AjaxResponse.success(defInsuredService.deleteById(id));
+    }
 
 
 }

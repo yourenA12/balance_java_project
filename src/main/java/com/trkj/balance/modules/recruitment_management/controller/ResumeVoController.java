@@ -78,11 +78,6 @@ public class ResumeVoController {
         ResumeVo resume= resumeVoService.SelectRexumeId(id);
         return AjaxResponse.success(resume);
     }
-    //全部简历模糊
-    @GetMapping("/ResumePage_K/{currentPage}/{pagesize}/{input}")
-    public AjaxResponse ResumePage_K(@PathVariable("currentPage") int page,@PathVariable("pagesize") int size,@PathVariable("input") String resumeName){
-        IPage<ResumeVo> page1=resumeVoService.ResumePage_K(page,size,resumeName);
-        return AjaxResponse.success(page1);
-    }
+
 
 }

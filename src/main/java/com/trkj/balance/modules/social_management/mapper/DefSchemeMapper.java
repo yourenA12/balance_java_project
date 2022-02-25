@@ -18,7 +18,4 @@ import java.util.List;
 @Mapper
 public interface DefSchemeMapper extends BaseMapper<DefScheme> {
 
-    @Select("select * from DEF_SCHEME where DEF_INSURED_ID=#{id}")
-    List<DefScheme> selectdefSchemeBydefInsuredId(Long id);
-
 }
