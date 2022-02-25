@@ -19,12 +19,20 @@ import java.util.Map;
 public interface CompensationService extends IService<Compensation> {
 
     //添加薪酬组
-    int insertCompensation(Compensation compensation, ArrayList<Integer> deptIds, ArrayList<Integer> postIds );
+    int insertCompensation(Compensation compensation, ArrayList<Integer> deptIds, ArrayList<Integer> postIds,ArrayList<Integer> staffIds );
 
     //查询薪酬组名称
     List<Map<String, Object>> selectCompensationName();
 
     //根据id查询薪酬组数据
     Compensation selectCompensationById(Long id);
+
+    //修改薪酬组数据
+    int updateCompensation(Compensation compensation);
+
+    //根据薪酬组名称查询
+    String selectCompensationNames(String name);
+
+
 
 }

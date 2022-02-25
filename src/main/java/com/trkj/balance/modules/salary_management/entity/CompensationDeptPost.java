@@ -52,7 +52,7 @@ public class CompensationDeptPost implements Serializable {
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
-    @Version // 乐观锁注解
+//    @Version // 乐观锁注解
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;

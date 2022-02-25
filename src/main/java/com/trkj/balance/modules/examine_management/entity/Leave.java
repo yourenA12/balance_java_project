@@ -1,9 +1,8 @@
 package com.trkj.balance.modules.examine_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,6 +22,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("LEAVE")
+@KeySequence(value = "LEAVE_ID",clazz = Long.class)
 @ApiModel(value="Leave对象", description="请假表")
 public class Leave implements Serializable {
 
@@ -76,12 +76,12 @@ public class Leave implements Serializable {
     @TableField("LEAVE_STATE")
     private Long leaveState;
 
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
     private Date createdTime;
 
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
     private Date updatedTime;
 
     @ApiModelProperty(value = "乐观锁")

@@ -13,4 +13,9 @@ public interface WorkerVoService extends IService<WorkerVo> {
     IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page, String auditflowTitle,String auditflowdetaiState, String staffName);
     //根据id查询
     List<WorkerVo> findSelectById(Long id);
+
+    //根据id查询 废弃sql 步骤条的名称
+    List<WorkerVo> findSelectByIdName(Long id);
+    //根据id查询申请人的审批
+    IPage<WorkerVo> findByIdUser(Page<WorkerVo> page,Long id);
 }

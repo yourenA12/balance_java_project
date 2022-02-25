@@ -109,10 +109,8 @@ public class StaffVoServicelmpl extends ServiceImpl<StaffVoMapper, StaffVo> impl
             wrapper.in("d.DEPT_ID",deptIds);
         }
 
-
         // 员工当前状态为试用期
-        wrapper.eq("s.STAFF_STATE", 2).or().eq("s.STAFF_STATE", 3);
-
+        wrapper.ne("s.STAFF_STATE", 1);
 
         return staffVoMapper.selectStaffXX(page,wrapper);
     }

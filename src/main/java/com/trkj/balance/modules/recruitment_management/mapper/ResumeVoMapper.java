@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
     //全部简历
-    @Select("select  R.*,P.POSITION_NAME  from\n" +
+    @Select("select  R.*,P.POSITION_NAME,D.DEPT_ID,D.DEPT_NAME  from\n" +
             "RESUME R \n" +
             "LEFT JOIN\n" +
             "RECRUITMENT_PLAN Z\n" +
@@ -22,6 +22,8 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "LEFT JOIN\n" +
             "POSITION P\n" +
             "ON Z.POSITION_ID = P.POSITION_ID " +
+            "LEFT JOIN DEPT D " +
+            "ON Z.DEPT_ID = D.DEPT_ID " +
             "${ew.customSqlSegment}")
    IPage<ResumeVo> ResumePage(Page<ResumeVo> page,@Param(Constants.WRAPPER) QueryWrapper<ResumeVo> queryWrapper);
 

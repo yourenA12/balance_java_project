@@ -37,12 +37,10 @@ public  class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> i
         }
         wrapper.eq("a.IS_DELETED",0);
         // 模糊查询申请人名称
-        wrapper.like("a.staff_name",staffName);
+        wrapper.like("ac.staff_name",staffName);
+        //查询 审核人 员工id 为2 的审核人的审批数据// 当前登录人 id
+        wrapper.eq("bc.staff_id",2);
 
-        /*
-        // 当前登录人 id ？？
-        */
-       /* wrapper.eq("a.staff");*/
         return workerVoMapper.findSelectPageWorker(page,wrapper);
     }
 
@@ -51,5 +49,14 @@ public  class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> i
         return workerVoMapper.findSelectById(id);
     }
 
+    @Override
+    public List<WorkerVo> findSelectByIdName(Long id) {
+        return workerVoMapper.findSelectByIdName(id);
+    }
+    //根据id查询申请人的审批
+    @Override
+    public IPage<WorkerVo> findByIdUser( Page<WorkerVo> page,Long id) {
+        return workerVoMapper.findeByIdUser1(page,id);
+    }
 
 }

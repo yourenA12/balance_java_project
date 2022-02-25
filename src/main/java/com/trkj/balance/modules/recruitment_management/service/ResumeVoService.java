@@ -24,6 +24,4 @@ public interface ResumeVoService extends IService<ResumeVo> {
     IPage<ResumeVo> ResumePage_T(Page<ResumeVo> page);
     //根据id简历详情
     ResumeVo SelectRexumeId(Long id);
-    //简历模糊查询
-    IPage<ResumeVo> ResumePage_K(int page,int size,String resumeName);
 }
