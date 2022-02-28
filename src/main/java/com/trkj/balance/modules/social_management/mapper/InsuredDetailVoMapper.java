@@ -16,7 +16,7 @@ public interface InsuredDetailVoMapper extends BaseMapper<InsuredDetailVo> {
 
     // 查询社保缴费明细
     @Select("select * from INSURED_DETAIL a \n" +
-            "LEFT JOIN STAFF b on a.STAFF_ID=b.STAFF_ID LEFT JOIN dept d on s.DEPT_ID=d.DEPT_ID left JOIN  POSITION p  on s.POSITION_ID=p.POSITION_ID\n" +
+            "LEFT JOIN STAFF b on a.STAFF_ID=b.STAFF_ID LEFT JOIN dept de on b.DEPT_ID=de.DEPT_ID left JOIN  POSITION p  on b.POSITION_ID=p.POSITION_ID\n" +
             "RIGHT JOIN INSURED_STAFF c on c.STAFF_ID=b.STAFF_ID\n" +
             "LEFT JOIN DEF_INSURED d on c.DEF_INSURED_ID=d.DEF_INSURED_ID ${ew.customSqlSegment} and TO_CHAR(a.CREATED_TIME,'yyyy-MM')=TO_CHAR(sysdate,'yyyy-MM')")
     IPage<InsuredDetailVo> selectInsuredDetail(IPage<InsuredDetailVo> page,@Param(Constants.WRAPPER) QueryWrapper<InsuredDetailVo> wrapper);
