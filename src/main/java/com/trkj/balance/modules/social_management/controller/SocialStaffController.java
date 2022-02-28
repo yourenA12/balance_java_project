@@ -2,9 +2,8 @@ package com.trkj.balance.modules.social_management.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.employee_management.entity.WorkExperience;
-import com.trkj.balance.modules.social_management.service.socialStaffService;
-import com.trkj.balance.modules.social_management.vo.socialStaffVo;
+import com.trkj.balance.modules.social_management.service.SocialStaffService;
+import com.trkj.balance.modules.social_management.vo.SocialStaffVo;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,10 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/socialStaffVo")
-public class socialStaffController {
+public class SocialStaffController {
 
     @Autowired
-    private socialStaffService socialStaffService;
+    private SocialStaffService socialStaffService;
 
     @GetMapping("/selectsocialPage")
     public AjaxResponse selectsocialPage(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
@@ -24,8 +23,8 @@ public class socialStaffController {
                                          @RequestParam("deptIds") ArrayList deptIds,
                                          @RequestParam("stateSearch") String stateSearch){
 
-        Page<socialStaffVo> page = new Page<>(currenPage,pagesize);
-        IPage<socialStaffVo> list=socialStaffService.selectSocialPage(page,staffNameSearch,deptIds,stateSearch);
+        Page<SocialStaffVo> page = new Page<>(currenPage,pagesize);
+        IPage<SocialStaffVo> list=socialStaffService.selectSocialPage(page,staffNameSearch,deptIds,stateSearch);
         return AjaxResponse.success(list);
 
     }

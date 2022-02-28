@@ -16,7 +16,7 @@ import java.util.Date;
 @TableName("STAFF")
 @KeySequence(value = "STAFF_ID",clazz = Long.class)
 @ApiModel(value="Staff对象", description="员工表")
-public class socialStaffVo {
+public class SocialStaffVo {
 
     @ApiModelProperty(value = "获奖人编号")
     @TableId("STAFF_ID")
