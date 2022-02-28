@@ -1,7 +1,13 @@
 package com.trkj.balance.modules.recruitment_management.service;
 
+import com.trkj.balance.modules.employee_management.entity.Education;
+import com.trkj.balance.modules.employee_management.entity.Fixedwage;
+import com.trkj.balance.modules.employee_management.entity.Staff;
+import com.trkj.balance.modules.employee_management.entity.WorkExperience;
+import com.trkj.balance.modules.recruitment_management.entity.Educationss;
 import com.trkj.balance.modules.recruitment_management.entity.Resume;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.trkj.balance.modules.recruitment_management.entity.WorkExperiencess;
 
 /**
  * <p>
@@ -16,5 +22,8 @@ public interface ResumesService extends IService<Resume> {
     int updateeliminate(Resume resume);
     //新简历转入淘汰库
     int updatexinjl(Resume resume);
+
+    //添加简历
+    int insertResume(Resume resume, Educationss educationss, WorkExperiencess workExperiencess);
 
 }
