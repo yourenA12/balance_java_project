@@ -18,4 +18,7 @@ public interface InsuredDetailService extends IService<InsuredDetail> {
     // 按id删除参保明细
     int deleteInsuredDetail(List<Integer> ids);
 
+    // 查询当月所有参保明细
+//    List<InsuredDetail>
+
 }
