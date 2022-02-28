@@ -46,22 +46,5 @@ public class GloryServicelmpl extends ServiceImpl<GloryMapper, Glory> implements
         return gloryMapper.insert(glory);
     }
 
-    //分页查询奖励表
-    @Override
-    public IPage<Glory> selectGloryPage(IPage<Glory> page, String staffName, ArrayList deptIds) {
 
-        // 声明一个条件构造器
-        QueryWrapper wrapper = new QueryWrapper<>();
-        if(staffName!=null && staffName!="" ){
-            // 按照员工id查询工作经历
-            wrapper.like("s.STAFF_NAME",staffName);
-        }
-        if(deptIds.size()!=0 && deptIds!=null){
-            // 按照部门id查询
-            wrapper.in("d.DEPT_ID",deptIds);
-        }
-
-
-        return gloryMapper.selectGloryPage(page,wrapper);
-    }
 }

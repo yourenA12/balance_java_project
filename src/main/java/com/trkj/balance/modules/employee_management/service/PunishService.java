@@ -22,7 +22,6 @@ public interface PunishService extends IService<Punish> {
     //删除惩罚表信息
     int deletePunishId(Long id);
 
-    //分页查询惩罚表数据
-    IPage<Punish> selectPunishPage(IPage<Punish> page, String staffName, ArrayList deptIds);
+
 
 }

@@ -153,4 +153,17 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
 
     }
 
+    //查询员工的密码
+    @Override
+    public Staff selectStaffAccountPass(Long id,String pass) {
+
+        QueryWrapper queryWrapper=new QueryWrapper();
+
+        queryWrapper.eq("STAFF_ID",id);
+        queryWrapper.eq("STAFF_PASS",pass);
+        return staffMapper.selectOne(queryWrapper);
+    }
+
+
+
 }
