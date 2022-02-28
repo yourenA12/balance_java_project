@@ -44,12 +44,12 @@ public class TravelVo {
     @TableField("TRAVEL_MATTER")
     private String travelMatter;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "出差开始时间")
     @TableField("TRAVEL_S_DATE")
     private Date travelSDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "出差结束时间")
     @TableField("TRAVEL_E_DATE")
     private Date travelEDate;

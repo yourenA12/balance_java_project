@@ -44,6 +44,9 @@ public class InsuredStaff implements Serializable {
     @TableField("TRI_INSURED_ID")
     private Long triInsuredId;
 
+    @TableField("INSUREDIS_ONE")
+    private Long insuredisOne;
+
     @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
