@@ -1,9 +1,8 @@
 package com.trkj.balance.modules.recruitment_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,6 +22,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("EDUCATIONSS")
+@KeySequence(value = "EDUCATIONSS_ID",clazz = Long.class)
 @ApiModel(value="Educationss对象", description="受教育经历表")
 public class Educationss implements Serializable {
 
@@ -57,17 +57,19 @@ public class Educationss implements Serializable {
     private Long educationFullTime;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除;1表示删除，0 表示未删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
