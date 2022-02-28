@@ -1,6 +1,7 @@
 package com.trkj.balance.modules.recruitment_management.service.impl;
 
 import com.trkj.balance.modules.recruitment_management.entity.Educationss;
+import com.trkj.balance.modules.recruitment_management.entity.RecruitmentPlan;
 import com.trkj.balance.modules.recruitment_management.entity.Resume;
 import com.trkj.balance.modules.recruitment_management.entity.WorkExperiencess;
 import com.trkj.balance.modules.recruitment_management.mapper.EducationssMapper;
@@ -47,6 +48,17 @@ public class ResumesServiceImpl extends ServiceImpl<ResumesMapper, Resume> imple
         return resumeMapper.updateById(resume);
     }
 
+    //  修改简历
+    @Override
+    @Transactional
+    public int updateResume(Resume resume,Educationss educationss, WorkExperiencess workExperiencess) {
+
+        resumeMapper.updateById(resume);
+        educationssMapper.updateById(educationss);
+        workExperiencessMapper.updateById(workExperiencess);
+
+        return 1;
+    }
     //添加简历
     @Override
     @Transactional
@@ -66,5 +78,10 @@ public class ResumesServiceImpl extends ServiceImpl<ResumesMapper, Resume> imple
         // 手动回滚
         TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         return 0;
+    }
+    //根据id查简历
+    @Override
+    public Resume selectResumes(Long id) {
+        return resumeMapper.selectById(id);
     }
 }
