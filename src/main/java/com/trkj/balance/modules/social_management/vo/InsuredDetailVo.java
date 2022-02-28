@@ -13,8 +13,6 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("INSURED_DETAIL")
-@ApiModel(value="InsuredDetail对象", description="参保明细表")
 public class InsuredDetailVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,5 +59,17 @@ public class InsuredDetailVo implements Serializable {
     @ApiModelProperty(value = "默认参保方案名称")
     @TableField("DEF_INSURED_NAME")
     private String defInsuredName;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POSITION_NAME")
+    private String positionName;
+
+    @ApiModelProperty(value = "员工状态;0：在职，1：离职，2：实习，3：正式")
+    @TableField("STAFF_STATE")
+    private Long staffState;
 
 }

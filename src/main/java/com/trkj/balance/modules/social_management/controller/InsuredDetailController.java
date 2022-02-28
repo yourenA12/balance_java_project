@@ -1,13 +1,16 @@
 package com.trkj.balance.modules.social_management.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.social_management.service.InsuredDetailVoService;
+import com.trkj.balance.modules.social_management.vo.InsuredDetailVo;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -26,9 +29,22 @@ public class InsuredDetailController {
 
     // 查询社保缴费明细
     @GetMapping("/selectInsuredDetail")
-    public AjaxResponse selectInsuredDetail(){
-        return AjaxResponse.success(detailVoService.selectInsuredDetail());
+    public AjaxResponse selectInsuredDetail(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                            @RequestParam("staffNameSearch") String staffNameSearch,
+                                            @RequestParam("deptIds") ArrayList deptIds,
+                                            @RequestParam("stateSearch") String stateSearch){
+
+        Page<InsuredDetailVo> page = new Page<>(currenPage,pagesize);
+        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch);
+        return AjaxResponse.success(list);
+
     }
+//    // 删除参保方案
+//    @DeleteMapping("/deleteInsuredDetail/{ids}")
+//    public AjaxResponse deleteInsuredDetail(@PathVariable("ids") List<Integer> ids){
+//        return AjaxResponse.success(detailVoService.selectInsuredDetail());
+//    }
+
 
 }
 
