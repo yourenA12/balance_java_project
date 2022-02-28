@@ -1,33 +1,22 @@
-package com.trkj.balance.modules.employee_management.entity;
+package com.trkj.balance.modules.employee_management.vo;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.util.Date;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 荣誉/奖励表
- * </p>
- *
- * @author 林落。
- * @since 2022-01-04
- */
+import java.util.Date;
+
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("GLORY")
+@AllArgsConstructor
+@NoArgsConstructor
 @KeySequence(value = "GLORY_ID",clazz = Long.class)
 @ApiModel(value="Glory对象", description="荣誉/奖励表")
-public class Glory implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class GloryVo {
     @ApiModelProperty(value = "荣誉/奖励编号")
     @TableId("GLORY_ID")
     private Long gloryId;
@@ -65,8 +54,15 @@ public class Glory implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    @ApiModelProperty(value = "部门编号")
+    @TableId("DEPT_ID")
+    private Long deptId;
 
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
-
-
+    @ApiModelProperty(value = "员工姓名")
+    @TableField("STAFF_NAME")
+    private String staffName;
 }

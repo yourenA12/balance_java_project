@@ -46,20 +46,5 @@ public class PunishServicelmpl extends ServiceImpl<PunishMapper, Punish> impleme
         return punishMapper.deleteById(id);
     }
 
-    //分页查询惩罚表
-    @Override
-    public IPage<Punish> selectPunishPage(IPage<Punish> page, String staffName, ArrayList deptIds) {
 
-        // 声明一个条件构造器
-        QueryWrapper wrapper = new QueryWrapper<>();
-        if(staffName!=null && staffName!="" ){
-            // 按照员工id查询工作经历
-            wrapper.like("s.STAFF_NAME",staffName);
-        }
-        if(deptIds.size()!=0 && deptIds!=null){
-            // 按照部门id查询
-            wrapper.in("d.DEPT_ID",deptIds);
-        }
-        return punishMapper.selectPunishPage(page,wrapper);
-    }
 }

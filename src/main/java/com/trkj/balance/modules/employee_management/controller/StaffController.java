@@ -156,6 +156,13 @@ public class StaffController {
         return AjaxResponse.success(staffService.selectCountStaff(state));
     }
 
+    //查询员工密码
+    @PostMapping("/selectStaffId/{id}/{pass}")
+    public AjaxResponse selectStaffId(@PathVariable("id") Long id,@PathVariable("pass") String pass){
+        Staff staff=staffService.selectStaffAccountPass(id,pass);
+        return AjaxResponse.success(staff);
+    }
+
 }
 
 

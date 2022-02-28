@@ -1,32 +1,20 @@
-package com.trkj.balance.modules.employee_management.entity;
+package com.trkj.balance.modules.employee_management.vo;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.util.Date;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 惩罚表
- * </p>
- *
- * @author 林落。
- * @since 2022-01-04
- */
+import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("PUNISH")
 @KeySequence(value = "PUNISH_ID",clazz = Long.class)
 @ApiModel(value="Punish对象", description="惩罚表")
-public class Punish implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class PunishVo {
 
     @ApiModelProperty(value = "惩罚编号")
     @TableId("PUNISH_ID")
@@ -74,6 +62,15 @@ public class Punish implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    @ApiModelProperty(value = "部门编号")
+    @TableId("DEPT_ID")
+    private Long deptId;
 
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
 
+    @ApiModelProperty(value = "员工姓名")
+    @TableField("STAFF_NAME")
+    private String staffName;
 }

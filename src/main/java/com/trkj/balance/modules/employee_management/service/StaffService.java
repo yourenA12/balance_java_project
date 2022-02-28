@@ -39,4 +39,9 @@ public interface StaffService extends IService<Staff> {
     //统计离职、在职、试用的员工人数
     int selectCountStaff(String staffState);
 
+    //查询员工密码
+    Staff selectStaffAccountPass(Long id,String pass);
+
+
+
 }

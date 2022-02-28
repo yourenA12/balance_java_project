@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.employee_management.entity.Glory;
 import com.trkj.balance.modules.employee_management.entity.Punish;
 import com.trkj.balance.modules.employee_management.service.PunishService;
+import com.trkj.balance.modules.employee_management.service.PunishVoService;
+import com.trkj.balance.modules.employee_management.vo.PunishVo;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class PunishController {
 
     @Autowired
     private PunishService punishService;
+
+    @Autowired
+    private PunishVoService punishVoService;
 
     //花名册 编辑里根据id查询查询惩罚表
     @GetMapping("/selectPunishId/{id}")
@@ -49,8 +54,8 @@ public class PunishController {
     public AjaxResponse selectPunishPage(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                          @RequestParam("staffNameSearch") String staffNameSearch, @RequestParam("deptIds") ArrayList deptIds) {
 
-        Page<Punish> page = new Page<>(currenPage, pagesize);
-        IPage<Punish> list = punishService.selectPunishPage(page,staffNameSearch,deptIds);
+        Page<PunishVo> page = new Page<>(currenPage, pagesize);
+        IPage<PunishVo> list = punishVoService.selectPunishPage(page,staffNameSearch,deptIds);
         return AjaxResponse.success(list);
 
     }
