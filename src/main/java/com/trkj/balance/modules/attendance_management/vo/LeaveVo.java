@@ -40,12 +40,12 @@ public class LeaveVo {
     @TableField("LEAVE_MATTER")
     private String leaveMatter;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "请假开始时间")
     @TableField("LEAVE_S_DATE")
     private Date leaveSDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "请假结束时间")
     @TableField("LEAVE_E_DATE")
     private Date leaveEDate;

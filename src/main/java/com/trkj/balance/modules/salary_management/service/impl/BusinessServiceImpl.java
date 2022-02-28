@@ -71,6 +71,8 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
 
         queryWrapper.select("BUSINESS_ID","BUSINESS_NAME");
         queryWrapper.eq("IS_DELETED",0);
+        queryWrapper.eq("BUSINESS_STATE",0);
+
         return businessMapper.selectMaps(queryWrapper);
     }
 

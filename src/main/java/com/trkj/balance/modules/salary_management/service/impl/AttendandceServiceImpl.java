@@ -70,6 +70,7 @@ public class AttendandceServiceImpl extends ServiceImpl<AttendandceMapper, Atten
 
         queryWrapper.select("ATTENDANDCE_ID","ATTENDANDCE_NAME");
         queryWrapper.eq("IS_DELETED",0);
+        queryWrapper.eq("ATTENDANDCE_STATE",0);
         return attendandceMapper.selectMaps(queryWrapper);
     }
 }

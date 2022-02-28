@@ -149,6 +149,13 @@ public class StaffController {
         return AjaxResponse.success(staffService.updateStaff(staff));
     }
 
+    //统计离职、在职、试用的员工人数
+    @GetMapping("/selectCountStaff/{state}")
+    public AjaxResponse selectCountStaff(@PathVariable("state") String state){
+
+        return AjaxResponse.success(staffService.selectCountStaff(state));
+    }
+
 }
 
 

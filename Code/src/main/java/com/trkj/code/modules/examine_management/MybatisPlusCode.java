@@ -19,7 +19,7 @@ public class MybatisPlusCode {
         //代码输出目录
         globalConfig.setOutputDir(property + "/src/main/java/");
         /*生成作者的信息*/
-        globalConfig.setAuthor("jiejie");
+        globalConfig.setAuthor("晚风");
         //是否打开资源管理器
         globalConfig.setOpen(false);
         //是否覆盖原来生成的文件
@@ -86,7 +86,7 @@ public class MybatisPlusCode {
         //4、策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         //数据库表名 自己写自己模块的表名
-        strategyConfig.setInclude("WORKER");// 不写默认生成所有的表！！！
+        strategyConfig.setInclude("CLOCK_RECORD");// 不写默认生成所有的表！！！
         //包的命名规则
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         //列的名字

@@ -33,7 +33,7 @@ public class ClockVoServiceImpl extends ServiceImpl<ClockVoMapper, ClockVo> impl
         QueryWrapper<ClockVo> wrapper = new QueryWrapper<>();
         // 员工姓名
         if( staffName!="" && staffName!=null) {
-            wrapper.like("a.STAFF_NAME", staffName);
+            wrapper.like("b.STAFF_NAME", staffName);
         }
         // 部门id
         if( optionsDeptId!="" && optionsDeptId!=null ){
@@ -46,8 +46,7 @@ public class ClockVoServiceImpl extends ServiceImpl<ClockVoMapper, ClockVo> impl
 
         // 逻辑删除
         wrapper.eq("a.IS_DELETED",0);
-        IPage<ClockVo> namedk=clockVoMapper.selectClok1(pagss,wrapper);
-        return namedk;
+        return clockVoMapper.dimsearch(pagss,wrapper);
     }
 
     // 部门查询
