@@ -15,5 +15,7 @@ import java.util.List;
  */
 public interface InsuredDetailService extends IService<InsuredDetail> {
 
+    // 按id删除参保明细
+    int deleteInsuredDetail(List<Integer> ids);
 
 }

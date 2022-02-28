@@ -13,8 +13,6 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("INSURED_DETAIL")
-@ApiModel(value="InsuredDetail对象", description="参保明细表")
 public class InsuredDetailVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
