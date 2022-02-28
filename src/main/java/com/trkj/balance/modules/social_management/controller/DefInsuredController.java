@@ -2,21 +2,20 @@ package com.trkj.balance.modules.social_management.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.salary_management.entity.Compensation;
+import com.trkj.balance.modules.employee_management.mapper.StaffMapper;
 import com.trkj.balance.modules.social_management.entity.DefInsured;
 import com.trkj.balance.modules.social_management.entity.DefScheme;
 import com.trkj.balance.modules.social_management.service.DefInsuredService;
 import com.trkj.balance.modules.social_management.service.InsuredDeptPostService;
 import com.trkj.balance.modules.social_management.service.InsuredStaffService;
-import com.trkj.balance.modules.system_management.entity.Notice;
 import com.trkj.balance.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +41,37 @@ public class DefInsuredController {
     @Autowired
     private InsuredDeptPostService insuredDeptPostService;
 
+    // 员工表
+    @Autowired
+    private StaffMapper staffMapper;
+
+    @GetMapping("/aaa")
+    public AjaxResponse aaa(){
+
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.select("STAFF_ID").eq("DEPT_ID",0);
+        wrapper.eq("POSITION_ID",0);
+        List<Integer> aa = staffMapper.selectList(wrapper);
+        log.error(aa.toString());
+        log.debug("1111111111111");
+
+
+
+        List<Map> bb = staffMapper.selectMaps(wrapper);
+        log.error(bb.toString());
+        log.debug("22222222222222");
+
+        if(bb.size()>0){
+            log.debug("xxxxxxxxxxxxxxxxxxxx");
+        }
+
+        for (Map map : bb) {
+            log.debug( map.get("staffId") +"" );
+        }
+
+        return null;
+    }
+
     // 查询所有参保方案
     @GetMapping("/selectAllPage")
     public AjaxResponse selectAllPage(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
@@ -51,16 +81,16 @@ public class DefInsuredController {
         return AjaxResponse.success(list);
     }
 
-    // 按id删除某参保方案
-    @DeleteMapping("/deleteDefInsured/{id}")
-    public AjaxResponse deleteNotices(@PathVariable("id") Long id){
-        return AjaxResponse.success( defInsuredService.deleteDefInsured(id) );
-    }
-
     // 修改参保方案状态
     @PutMapping("/updateDefInsuredState")
     public AjaxResponse updateDefInsuredState(@RequestBody DefInsured defInsured){
         return AjaxResponse.success( defInsuredService.updateDefInsuredState(defInsured) );
+    }
+
+    // 删除参保方案
+    @DeleteMapping("/deleteDefInsured/{id}")
+    public AjaxResponse deleteDefInsured(@PathVariable("id") int id){
+        return AjaxResponse.success(defInsuredService.deleteDefInsured(id));
     }
 
     // 新增参保方案
@@ -106,7 +136,7 @@ public class DefInsuredController {
 
         // 判断删除
         if(defInsured.getDefInsuredId()+""!="" && defInsured.getDefInsuredId()!=null){
-            if( defInsuredService.deleteById(Math.toIntExact(defInsured.getDefInsuredId()))<1){
+            if( defInsuredService.deleteDefInsured(Math.toIntExact(defInsured.getDefInsuredId()))<1){
                 return AjaxResponse.success("出错了，请稍后再试");
             }
         }
@@ -153,12 +183,6 @@ public class DefInsuredController {
     @GetMapping("/selectStaffId/{id}")
     public AjaxResponse selectStaffId(@PathVariable("id") int id){
         return AjaxResponse.success(defInsuredService.selectStaffId(id));
-    }
-
-    // 按参保方案id删除
-    @DeleteMapping("/deleteById/{id}")
-    public AjaxResponse deleteById(@PathVariable("id") int id){
-        return AjaxResponse.success(defInsuredService.deleteById(id));
     }
 
 

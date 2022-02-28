@@ -24,9 +24,6 @@ public interface DefInsuredService extends IService<DefInsured> {
     // 查询所有参保方案
     IPage<DefInsured> selectAllPage(Page page,String name,Object state);
 
-    // 删除参保方案
-    int deleteDefInsured(Long id);
-
     // 修改参保方案状态
     int updateDefInsuredState(DefInsured defInsured);
 
@@ -52,7 +49,7 @@ public interface DefInsuredService extends IService<DefInsured> {
     List<Integer> selectStaffId(int id);
 
     // 按id删除参保方案
-    int deleteById(int id);
+    int deleteDefInsured(int id);
 
 
     //根据参保方案名称查询
