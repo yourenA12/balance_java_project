@@ -60,4 +60,16 @@ public class InsuredDetailVo implements Serializable {
     @TableField("DEF_INSURED_NAME")
     private String defInsuredName;
 
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+    @ApiModelProperty(value = "职位名称")
+    @TableField("POSITION_NAME")
+    private String positionName;
+
+    @ApiModelProperty(value = "员工状态;0：在职，1：离职，2：实习，3：正式")
+    @TableField("STAFF_STATE")
+    private Long staffState;
+
 }
