@@ -20,5 +20,12 @@ import java.util.List;
 @Service
 public class InsuredDetailServiceImpl extends ServiceImpl<InsuredDetailMapper, InsuredDetail> implements InsuredDetailService {
 
+    @Autowired
+    private InsuredDetailMapper detailMapper;
 
+    // 按id删除参保明细
+    @Override
+    public int deleteInsuredDetail(List<Integer> ids) {
+        return detailMapper.deleteBatchIds(ids);
+    }
 }

@@ -4,10 +4,10 @@ package com.trkj.balance.modules.social_management.controller;
 import com.trkj.balance.modules.social_management.service.InsuredDetailVoService;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -29,6 +29,13 @@ public class InsuredDetailController {
     public AjaxResponse selectInsuredDetail(){
         return AjaxResponse.success(detailVoService.selectInsuredDetail());
     }
+
+    // 删除参保方案
+    @DeleteMapping("/deleteInsuredDetail/{ids}")
+    public AjaxResponse deleteInsuredDetail(@PathVariable("ids") List<Integer> ids){
+        return AjaxResponse.success(detailVoService.selectInsuredDetail());
+    }
+
 
 }
 
