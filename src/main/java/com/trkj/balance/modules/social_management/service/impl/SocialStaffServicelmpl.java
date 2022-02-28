@@ -45,7 +45,7 @@ public class SocialStaffServicelmpl extends ServiceImpl<SocialStaffMapper, Socia
             wrapper.eq("s.STAFF_STATE",stateSearch);
         }
 
-        wrapper.ne("STAFF_STATE",1);
+        wrapper.ne("s.STAFF_STATE",1);
 
         // 员工ids
         List<Integer> staffIds = new ArrayList<>();
@@ -57,7 +57,7 @@ public class SocialStaffServicelmpl extends ServiceImpl<SocialStaffMapper, Socia
         }
         // 查询员工编号不在参保方案员工表中
         if(staffIds.size()!=0){
-            wrapper.notIn("STAFF_ID",staffIds);
+            wrapper.notIn("s.STAFF_ID",staffIds);
         }
 
         return socialStaffMapper.selectSocialPage(page,wrapper);
