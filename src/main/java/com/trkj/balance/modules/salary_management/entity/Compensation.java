@@ -71,4 +71,8 @@ public class Compensation implements Serializable {
     private Long isDeleted;
 
 
+    @ApiModelProperty(value = "薪酬组人数")
+    @TableField(exist = false)
+    private String compensationNumber;
+
 }

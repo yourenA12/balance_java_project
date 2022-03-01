@@ -1,6 +1,7 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.employee_management.entity.Dept;
 import com.trkj.balance.modules.employee_management.entity.Staff;
 import com.trkj.balance.modules.employee_management.vo.StaffVo;
@@ -141,5 +142,20 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
         }
 
         return null;
+    }
+
+    //查询薪酬组
+    @Override
+    public IPage<Compensation> selectCompensationPage(IPage<Compensation> page) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("IS_DELETED",0);
+
+        return compensationMapper.selectPage(page,wrapper);
+    }
+
+    //删除薪酬组
+    @Override
+    public int deleteCompensation(Long id) {
+        return compensationMapper.deleteById(id);
     }
 }

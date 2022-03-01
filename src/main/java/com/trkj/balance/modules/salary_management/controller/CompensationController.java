@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.employee_management.entity.*;
-import com.trkj.balance.modules.salary_management.entity.Business;
-import com.trkj.balance.modules.salary_management.entity.Compensation;
-import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
-import com.trkj.balance.modules.salary_management.entity.Workscheme;
+import com.trkj.balance.modules.salary_management.entity.*;
 import com.trkj.balance.modules.salary_management.service.CompensationDeptPostService;
 import com.trkj.balance.modules.salary_management.service.CompensationService;
 import com.trkj.balance.modules.salary_management.service.CompensationStaffService;
@@ -133,6 +130,22 @@ public class CompensationController {
 
         return AjaxResponse.success(null);
 
+    }
+
+    //查询薪酬组
+    @GetMapping("/selectCompensation/{currenPage}/{pagesize}")
+    public AjaxResponse selectCompensation(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+
+        Page<Compensation> page = new Page<>(currenPage,pagesize);
+        IPage<Compensation> list=compensationService.selectCompensationPage(page);
+        return AjaxResponse.success(list);
+
+    }
+
+    //删除薪酬组
+    @DeleteMapping("/deleteCompensationId/{id}")
+    public AjaxResponse deleteCompensationId(@PathVariable("id") Long id){
+        return AjaxResponse.success(compensationService.deleteCompensation(id));
     }
 
 }
