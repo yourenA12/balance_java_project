@@ -11,4 +11,5 @@ public interface InsuredDetailVoService extends IService<InsuredDetailVo> {
 
     // 查询社保缴费明细
     IPage<InsuredDetailVo> selectInsuredDetail(IPage<InsuredDetailVo> page, String staffNameSearch, ArrayList deptIds, String stateSearch);
+
 }

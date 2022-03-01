@@ -3,11 +3,9 @@ package com.trkj.balance.modules.social_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.employee_management.entity.Fixedwage;
+import com.trkj.balance.modules.social_management.entity.Fixedwage;
 import com.trkj.balance.modules.employee_management.entity.Staff;
-import com.trkj.balance.modules.employee_management.mapper.FixedwageMapper;
 import com.trkj.balance.modules.employee_management.mapper.StaffMapper;
-import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.mapper.DeptPostMapper;
 import com.trkj.balance.modules.social_management.entity.*;
 import com.trkj.balance.modules.social_management.mapper.*;
@@ -65,11 +63,15 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
 
     // 固定工资表
     @Autowired
-    private FixedwageMapper fixedwageMapper;
+    private FixedwageSoMapper fixedwageMapper;
 
     // 参保明细表
     @Autowired
     private InsuredDetailMapper detailMapper;
+
+    // 参保明细详情表
+    @Autowired
+    private InsuredDetailSonMapper detailSonMapper;
 
     // 查询所有参保方案
     @Override
@@ -234,7 +236,8 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         return 0;
     }
 
-    // 新增参保明细
+    // 新增参保明细 与参保明细详情
+    @Override
     @Transactional
     public int insertInsuredDetail(List<DefScheme> defScheme,int upper, int lower,int staffId) {
 
@@ -289,12 +292,27 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
             // 基数乘以公司缴纳百分比 加上 公司固定缴纳
             s_firm += money * (scheme.getDefSchemeFirmProp() / 100) + scheme.getDefSchemeFirmSum();
 
+            //声明一个参保明细详情表实体类
+            InsuredDetailSon detailSon = new InsuredDetailSon();
+            detailSon.setStaffId((long) staffId);//员工id
+            detailSon.setInsuredPaymentType(scheme.getDefSchemeType());//缴纳类型
+            detailSon.setInsuredPaymentNumber(money);// 缴纳基数
+            detailSon.setInsArchivePersonProp(scheme.getDefSchemePersonProp());// 个人缴纳比例
+            detailSon.setInsArchivePersonMoney(money * (scheme.getDefSchemePersonProp() / 100));// 个人缴纳金额
+            detailSon.setInsArchivePersonSum(scheme.getDefSchemePersonSum());// 个人固定缴纳金额
+            detailSon.setInsArchiveFirmProp(scheme.getDefSchemeFirmProp());// 公司缴纳比例
+            detailSon.setInsArchiveFirmMoney(money * (scheme.getDefSchemeFirmProp() / 100));// 公司缴纳金额
+            detailSon.setInsArchiveFirmSum(scheme.getDefSchemeFirmSum());// 公司固定缴纳金额
+
+            // 添加参保明细详情表
+            if(detailSonMapper.insert(detailSon)<1) return 0;
+
         }
 
         // 声明参保明细实体类
         InsuredDetail insuredDetail = new InsuredDetail();
 
-        insuredDetail.setStaffId(1l);// 员工id
+        insuredDetail.setStaffId((long) staffId);// 员工id
         insuredDetail.setInsDetailSocialPersonPay(s_person);// 社保个人缴费
         insuredDetail.setInsDetailSocialFirmPay(s_firm);// 社保公司缴费
         insuredDetail.setInsDetailFundPersonPay(f_person);// 积金个人缴费
@@ -367,8 +385,16 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         QueryWrapper wrapper = new QueryWrapper<>();
         wrapper.eq("DEF_INSURED_ID", id);
 
+        insuredDeptPostMapper.delete(wrapper); // 按参保方案id删除 部门职位
+        insuredStaffMapper.delete(wrapper); // 删除员工
+        defSchemeMapper.delete(wrapper); // 删除方案
+        defInsuredMapper.delete(wrapper); // 删除参保方案
+
         // 按参保方案id 查询参保方案员工中间表，返回员工ids
         List<InsuredStaff> insuredStaffs = insuredStaffMapper.selectList(wrapper);
+
+        if(insuredStaffs.size()==0) return 1;
+
         // 拿到ids 去参保明细表按员工id删除数据 使用in（ids）
         List<Integer> staffIds = new ArrayList<>();
         for (InsuredStaff insuredStaff : insuredStaffs) {
@@ -376,12 +402,9 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         }
         QueryWrapper wrapper1 = new QueryWrapper<>();
         wrapper1.in("STAFF_ID",staffIds);
-        detailMapper.delete(wrapper1);
+        detailMapper.delete(wrapper1);// 按员工id删除参保明细表
 
-        insuredDeptPostMapper.delete(wrapper); // 按参保方案id删除 部门职位
-        insuredStaffMapper.delete(wrapper); // 删除员工
-        defSchemeMapper.delete(wrapper); // 删除方案
-        defInsuredMapper.delete(wrapper); // 删除参保方案
+        detailSonMapper.delete(wrapper1);// 按员工id删除参保明细详情表
 
 
         return 1;

@@ -3,13 +3,18 @@ package com.trkj.balance.modules.social_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.balance.modules.social_management.entity.DefScheme;
 import com.trkj.balance.modules.social_management.entity.InsuredStaff;
+import com.trkj.balance.modules.social_management.mapper.DefSchemeMapper;
 import com.trkj.balance.modules.social_management.mapper.InsuredStaffMapper;
 import com.trkj.balance.modules.social_management.mapper.SocialStaffMapper;
+import com.trkj.balance.modules.social_management.service.DefInsuredService;
 import com.trkj.balance.modules.social_management.service.SocialStaffService;
 import com.trkj.balance.modules.social_management.vo.SocialStaffVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +30,15 @@ public class SocialStaffServicelmpl extends ServiceImpl<SocialStaffMapper, Socia
     @Autowired
     private InsuredStaffMapper insuredStaffMapper;
 
-    //查询全部员工
+    // 方案表
+    @Autowired
+    private DefSchemeMapper schemeMapper;
+
+    // 参保方案service
+    @Autowired
+    private DefInsuredService insuredService;
+
+    //查询未参保员工
     @Override
     public IPage<SocialStaffVo> selectSocialPage(IPage<SocialStaffVo> page, String staffNameSearch, ArrayList deptIds, String stateSearch) {
         QueryWrapper<SocialStaffVo> wrapper=new QueryWrapper();
@@ -61,6 +74,49 @@ public class SocialStaffServicelmpl extends ServiceImpl<SocialStaffMapper, Socia
         }
 
         return socialStaffMapper.selectSocialPage(page,wrapper);
+    }
+
+    // 添加参保方案员工表
+    @Override
+    @Transactional
+    public int insertInsuredStaff(int insuredId, ArrayList<Integer> staffIds) {
+
+        // 声明参保方案员工中间表
+        InsuredStaff insuredStaff = new InsuredStaff();
+        insuredStaff.setDefInsuredId((long) insuredId);// 参保方案id
+
+        // 按参保方案id 查询方案表
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.eq("DEF_INSURED_ID",insuredId);
+        List<DefScheme> defSchemes = schemeMapper.selectList(wrapper);
+
+        int upper=0;
+        int lower=0;
+
+        if(defSchemes.size()!=0){
+            upper = Math.toIntExact(defSchemes.get(0).getDefSchemeMax());// 上限
+            lower = Math.toIntExact(defSchemes.get(0).getDefSchemeMin());// 下限
+        }
+
+        for (Integer staffId : staffIds) {
+            insuredStaff.setStaffId(Long.valueOf(staffId));// 员工id
+
+            // 新增参保方案员工中间表
+            int a = insuredStaffMapper.insert(insuredStaff);
+
+            // 新增参保明细 与参保明细详情
+            int b = insuredService.insertInsuredDetail(defSchemes,upper,lower,staffId);
+
+            if(a<1 || b<1){
+                // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
+                // 手动回滚
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return 0;
+            }
+
+        }
+
+        return 1;
     }
 
 

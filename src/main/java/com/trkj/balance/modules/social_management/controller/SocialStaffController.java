@@ -22,30 +22,32 @@ public class SocialStaffController {
     @Autowired
     private SocialStaffService socialStaffService;
 
+    // 查询所有未参保员工
     @GetMapping("/selectsocialPage")
     public AjaxResponse selectsocialPage(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
-                                          @RequestParam("staffNameSearch") String staffNameSearch,
+                                         @RequestParam("staffNameSearch") String staffNameSearch,
                                          @RequestParam("deptIds") ArrayList deptIds,
-                                         @RequestParam("stateSearch") String stateSearch){
+                                         @RequestParam("stateSearch") String stateSearch) {
 
-        Page<SocialStaffVo> page = new Page<>(currenPage,pagesize);
-        IPage<SocialStaffVo> list=socialStaffService.selectSocialPage(page,staffNameSearch,deptIds,stateSearch);
+        Page<SocialStaffVo> page = new Page<>(currenPage, pagesize);
+        IPage<SocialStaffVo> list = socialStaffService.selectSocialPage(page, staffNameSearch, deptIds, stateSearch);
         return AjaxResponse.success(list);
 
     }
 
+    // 为未参保员工添加 参保
     @PostMapping("/insertsocial")
     private AjaxResponse insertsocial(@RequestBody Map<Object, Object> map) {
 
-        int id = JSON.parseObject(JSON.toJSONString(map.get("zbId")), Integer.class); // 取map中的 员工表数据 转换为实体类
+        int id = JSON.parseObject(JSON.toJSONString(map.get("insuredId")), Integer.class); // 取map中的 参保方案id
 
-        ArrayList<Integer> staffIds = JSON.parseObject(JSON.toJSONString(map.get("staffIds")), ArrayList.class);
+        ArrayList<Integer> staffIds = JSON.parseObject(JSON.toJSONString(map.get("staffIds")), ArrayList.class);// 参保员工
 
         log.debug("111111111111111111");
-        log.debug(id+"");
+        log.debug(id + "");
         log.debug(staffIds.toString());
-        return null;
+        return AjaxResponse.success( socialStaffService.insertInsuredStaff(id,staffIds) );
 
-            }
+    }
 
 }

@@ -46,6 +46,10 @@ public class InsuredDetailVo implements Serializable {
     private Date updatedTime;
 
 //
+    @ApiModelProperty(value = "员工编号")
+    @TableField("STAFF_ID")
+    private String staffId;
+
     @ApiModelProperty(value = "员工姓名")
     @TableField("STAFF_NAME")
     private String staffName;

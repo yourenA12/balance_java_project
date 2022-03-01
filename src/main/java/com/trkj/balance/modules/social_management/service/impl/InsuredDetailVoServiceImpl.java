@@ -3,6 +3,7 @@ package com.trkj.balance.modules.social_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.trkj.balance.modules.social_management.entity.InsuredStaff;
 import com.trkj.balance.modules.social_management.mapper.InsuredDetailVoMapper;
 import com.trkj.balance.modules.social_management.service.InsuredDetailVoService;
 import com.trkj.balance.modules.social_management.vo.InsuredDetailVo;
@@ -13,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class InsuredDetailVoServiceImpl  extends ServiceImpl<InsuredDetailVoMapper, InsuredDetailVo> implements InsuredDetailVoService {
+public class InsuredDetailVoServiceImpl extends ServiceImpl<InsuredDetailVoMapper, InsuredDetailVo> implements InsuredDetailVoService {
 
+    // 参保明细
     @Autowired
     private InsuredDetailVoMapper detailVoMapper;
 
@@ -45,4 +47,5 @@ public class InsuredDetailVoServiceImpl  extends ServiceImpl<InsuredDetailVoMapp
 
 
     }
+
 }

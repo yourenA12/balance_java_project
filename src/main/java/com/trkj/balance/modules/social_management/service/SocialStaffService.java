@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public interface SocialStaffService extends IService<SocialStaffVo> {
 
-    // 查询全部员工
+    // 查询未参保员工
     IPage<SocialStaffVo> selectSocialPage(IPage<SocialStaffVo> page, String staffNameSearch, ArrayList deptIds, String stateSearch);
 
     // 添加参保方案员工表
-//    int insertInsuredStaff(int insuredId,ArrayList staffIds);
+    int insertInsuredStaff(int insuredId,ArrayList<Integer> staffIds);
 
 }
