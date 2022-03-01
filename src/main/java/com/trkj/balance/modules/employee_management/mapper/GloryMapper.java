@@ -20,9 +20,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface GloryMapper extends BaseMapper<Glory> {
 
-    //分页查询奖励表
-    @Select("select * from GLORY g left JOIN staff s on g.STAFF_ID=s.STAFF_ID LEFT JOIN dept d on s.DEPT_ID=d.DEPT_ID  ${ew.customSqlSegment}")
-    IPage<Glory> selectGloryPage(IPage<Glory> page,@Param(Constants.WRAPPER) QueryWrapper wrapper);
 
 
 }

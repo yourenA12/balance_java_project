@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.salary_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
@@ -33,6 +34,21 @@ public interface CompensationService extends IService<Compensation> {
     //根据薪酬组名称查询
     String selectCompensationNames(String name);
 
+    //查询薪酬组
+    IPage<Compensation> selectCompensationPage(IPage<Compensation> page);
 
+
+    // 按薪酬组id查询部门id
+    List<Integer> selectDeptId(int id);
+
+    // 按薪酬组id查询部门id
+    List<Integer> selectPostId(int id);
+
+    // 按薪酬组id查询员工
+    List<Integer> selectStaffId(int id);
+
+
+    //删除薪酬组
+    int deleteCompensation(Long id);
 
 }

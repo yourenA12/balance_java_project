@@ -136,5 +136,34 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         return 0;
     }
 
+    //统计离职、在职、试用的员工人数
+    @Override
+    public int selectCountStaff(String staffState) {
+
+        if(staffState=="1"){ // 本月离职
+            return staffMapper.selectMonthQuit();
+        }else if(staffState=="x"){ // 本月新入职
+            return staffMapper.selectMonthEntry();
+        }else{ // 正式或试用
+            // 声明一个条件构造器
+            QueryWrapper<Staff> wrapper = new QueryWrapper<>();
+            wrapper.eq("STAFF_STATE",staffState);
+            return staffMapper.selectCount(wrapper);
+        }
+
+    }
+
+    //查询员工的密码
+    @Override
+    public Staff selectStaffAccountPass(Long id,String pass) {
+
+        QueryWrapper queryWrapper=new QueryWrapper();
+
+        queryWrapper.eq("STAFF_ID",id);
+        queryWrapper.eq("STAFF_PASS",pass);
+        return staffMapper.selectOne(queryWrapper);
+    }
+
+
 
 }

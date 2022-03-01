@@ -36,6 +36,10 @@ public class Compensation implements Serializable {
     @TableField("COMPENSATION_NAME")
     private String compensationName;
 
+    @ApiModelProperty(value = "薪酬组人数")
+    @TableField("COMPENSATION_NUMBER")
+    private Long compensationNumber;
+
     @ApiModelProperty(value = "加班工资方案id")
     @TableField("WORKSCHEME_ID")
     private Long workschemeId;
@@ -69,6 +73,5 @@ public class Compensation implements Serializable {
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
 
 }

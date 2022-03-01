@@ -71,6 +71,7 @@ public class WorkschemeServiceImpl extends ServiceImpl<WorkschemeMapper, Worksch
 
         queryWrapper.select("WORKSCHEME_ID","WORKSCHEME_NAME");
         queryWrapper.eq("IS_DELETED",0);
+        queryWrapper.eq("WORKSCHEME_STATE",0);
         return workschemeMapper.selectMaps(queryWrapper);
     }
 }

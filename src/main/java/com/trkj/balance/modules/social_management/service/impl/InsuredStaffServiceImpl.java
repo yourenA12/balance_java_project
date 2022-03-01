@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -31,7 +32,7 @@ public class InsuredStaffServiceImpl extends ServiceImpl<InsuredStaffMapper, Ins
 
     //根据薪酬组员工中间表查询数据
     @Override
-    public String selectInsuredStaffName(ArrayList<Integer> staffIds) {
+    public String selectInsuredStaffName(List<Integer> staffIds) {
 
         // 拿到员工id 查询 薪酬组员工中间表有无数据
         for (Integer staffId : staffIds) {
@@ -39,6 +40,7 @@ public class InsuredStaffServiceImpl extends ServiceImpl<InsuredStaffMapper, Ins
             //
             QueryWrapper wrapper = new QueryWrapper<>();
             wrapper.eq("STAFF_ID",staffId);
+            wrapper.eq("INSUREDIS_ONE",0);// 状态为员工不是部门职位
             // 如果查询到了
             if(insuredStaffMapper.selectCount(wrapper)>0){
                 // 再拿员工id 查询员工名称

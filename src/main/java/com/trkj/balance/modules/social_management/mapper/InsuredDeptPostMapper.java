@@ -19,7 +19,7 @@ import java.util.List;
 @Mapper
 public interface InsuredDeptPostMapper extends BaseMapper<InsuredDeptPost> {
 
-    @Select("select DEPT_POST_ID from INSURED_DEPT_POST from DEF_SCHEME where DEF_INSURED_ID=#{id}")
-    List<Integer> selectinsuredDeptPostBydefInsuredId(Long id);
+    @Select("select DEPT_POST_ID from INSURED_DEPT_POST where DEF_INSURED_ID=#{id}")
+    List<Integer> selectinsuredDeptPostBydefInsuredId(int id);
 
 }

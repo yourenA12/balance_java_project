@@ -28,11 +28,18 @@ public class PositionController {
     @Autowired
     public PositionService positionService;
 
+    //分页查询
     @GetMapping("/Po/{currenPage}/{pagesize}")
     public AjaxResponse posi(@PathVariable("currenPage") int page, @PathVariable("pagesize") int pagesize){
         Page<Position> page1 = new Page<>(page,pagesize);
         IPage<Position> page2 = positionService.selectPo(page1);
         return AjaxResponse.success(page2);
+    }
+
+    //部门查询
+    @GetMapping("/selectDept")
+    public AjaxResponse selectDept(){
+        return AjaxResponse.success(positionService.selectDept());
     }
 }
 

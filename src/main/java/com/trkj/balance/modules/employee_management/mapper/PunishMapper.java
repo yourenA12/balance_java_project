@@ -20,6 +20,5 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface PunishMapper extends BaseMapper<Punish> {
 
-    @Select("select * from Punish p left JOIN staff s on p.STAFF_ID=s.STAFF_ID LEFT JOIN dept d on s.DEPT_ID=d.DEPT_ID  ${ew.customSqlSegment}")
-    IPage<Punish> selectPunishPage(IPage<Punish> page,@Param(Constants.WRAPPER) QueryWrapper wrapper);
+
 }

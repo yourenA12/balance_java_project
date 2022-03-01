@@ -45,12 +45,12 @@ public class OvertVo {
     @TableField("OVERTIMEASK_REMARKS")
     private String overtimeaskRemarks;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "加班开始时间")
     @TableField("OVERTIMEASK_S_DATE")
     private Date overtimeaskSDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @ApiModelProperty(value = "加班结束时间")
     @TableField("OVERTIMEASK_E_DATE")
     private Date overtimeaskEDate;
