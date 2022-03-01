@@ -94,7 +94,7 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         return defInsuredMapper.updateById(defInsured);
     }
 
-    // 新增参保方案状态
+    // 新增参保方案
     @Override
     @Transactional
     public int insertDefInsured(DefInsured defInsured, List<DefScheme> defScheme,
@@ -201,9 +201,6 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     return 0;
                 }
-
-
-
             }
 
             // 声明一个id

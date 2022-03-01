@@ -40,6 +40,7 @@ public class CompensationStaffServiceImpl extends ServiceImpl<CompensationStaffM
             //
             QueryWrapper wrapper = new QueryWrapper<>();
             wrapper.eq("STAFF_ID",staffId);
+            wrapper.eq("COMPENSATIONIS_ONE",0);// 状态为员工不是部门职位
             // 如果查询到了
             if(compensationStaffMapper.selectCount(wrapper)>0){
                 // 再拿员工id 查询员工名称

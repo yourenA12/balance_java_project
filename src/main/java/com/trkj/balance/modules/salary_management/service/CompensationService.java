@@ -37,6 +37,17 @@ public interface CompensationService extends IService<Compensation> {
     //查询薪酬组
     IPage<Compensation> selectCompensationPage(IPage<Compensation> page);
 
+
+    // 按薪酬组id查询部门id
+    List<Integer> selectDeptId(int id);
+
+    // 按薪酬组id查询部门id
+    List<Integer> selectPostId(int id);
+
+    // 按薪酬组id查询员工
+    List<Integer> selectStaffId(int id);
+
+
     //删除薪酬组
     int deleteCompensation(Long id);
 

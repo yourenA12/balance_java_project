@@ -40,6 +40,9 @@ public class CompensationStaff implements Serializable {
     @TableField("STAFF_ID")
     private Long staffId;
 
+    @TableField("COMPENSATIONIS_ONE")
+    private Long compensationisOne;
+
     @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
