@@ -3,6 +3,7 @@ package com.trkj.balance.modules.social_management.service;
 import com.trkj.balance.modules.social_management.entity.InsuredDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,7 @@ import java.util.List;
  */
 public interface InsuredDetailService extends IService<InsuredDetail> {
 
-    // 按id删除参保明细
-    int deleteInsuredDetail(List<Integer> ids);
-
-    // 查询当月所有参保明细
-//    List<InsuredDetail>
+    // 按员工id删除参保
+    int deleteInsuredAll(ArrayList<Integer> staffIds);
 
 }

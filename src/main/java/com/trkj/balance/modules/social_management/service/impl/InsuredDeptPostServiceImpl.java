@@ -40,6 +40,7 @@ public class InsuredDeptPostServiceImpl extends ServiceImpl<InsuredDeptPostMappe
     @Autowired
     private PositionMapper postMapper;
 
+    // 按部门id和职位id查询 部门 、 职位ids
     @Override
     public String selectInsuredDeptPost(List<Integer> deptIds, List<Integer> postIds) {
 

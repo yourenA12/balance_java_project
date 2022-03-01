@@ -55,6 +55,7 @@ public interface DefInsuredService extends IService<DefInsured> {
     //根据参保方案名称查询
     String selectDefInsuredNames(String name);
 
-
+    // 新增参保明细 与参保明细详情
+    int insertInsuredDetail(List<DefScheme> defScheme,int upper, int lower,int staffId);
 
 }

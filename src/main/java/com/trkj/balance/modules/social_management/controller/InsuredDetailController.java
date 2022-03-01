@@ -3,6 +3,7 @@ package com.trkj.balance.modules.social_management.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.social_management.service.InsuredDetailService;
 import com.trkj.balance.modules.social_management.service.InsuredDetailVoService;
 import com.trkj.balance.modules.social_management.vo.InsuredDetailVo;
 import com.trkj.balance.vo.AjaxResponse;
@@ -24,8 +25,13 @@ import java.util.List;
 @RequestMapping("/insuredDetail")
 public class InsuredDetailController {
 
+    // 参保明细vo
     @Autowired
     private InsuredDetailVoService detailVoService;
+
+    // 参保明细
+    @Autowired
+    private InsuredDetailService detailService;
 
     // 查询社保缴费明细
     @GetMapping("/selectInsuredDetail")
@@ -39,11 +45,13 @@ public class InsuredDetailController {
         return AjaxResponse.success(list);
 
     }
-//    // 删除参保方案
-//    @DeleteMapping("/deleteInsuredDetail/{ids}")
-//    public AjaxResponse deleteInsuredDetail(@PathVariable("ids") List<Integer> ids){
-//        return AjaxResponse.success(detailVoService.selectInsuredDetail());
-//    }
+
+
+    // 删除参保方案
+    @DeleteMapping("/deleteInsuredAll/{ids}")
+    public AjaxResponse deleteInsuredAll(@PathVariable("ids") ArrayList<Integer> ids){
+        return AjaxResponse.success( detailService.deleteInsuredAll(ids) );
+    }
 
 
 }
