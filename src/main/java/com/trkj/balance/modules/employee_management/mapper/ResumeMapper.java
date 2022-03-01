@@ -1,6 +1,6 @@
 package com.trkj.balance.modules.employee_management.mapper;
 
-import com.trkj.balance.modules.employee_management.entity.Resume;
+import com.trkj.balance.modules.employee_management.entity.*;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

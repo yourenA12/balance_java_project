@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.social_management.mapper.InsuredDetailSonMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.social_management.entity.InsuredDetailSon">
+        <id column="INSURED_DETAIL_SON_ID" property="insuredDetailSonId" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="INSURED_PAYMENT_TYPE" property="insuredPaymentType" />
+        <result column="INSURED_PAYMENT_NUMBER" property="insuredPaymentNumber" />
+        <result column="INS_ARCHIVE_PERSON_PROP" property="insArchivePersonProp" />
+        <result column="INS_ARCHIVE_PERSON_MONEY" property="insArchivePersonMoney" />
+        <result column="INS_ARCHIVE_PERSON_SUM" property="insArchivePersonSum" />
+        <result column="INS_ARCHIVE_FIRM_PROP" property="insArchiveFirmProp" />
+        <result column="INS_ARCHIVE_FIRM_MONEY" property="insArchiveFirmMoney" />
+        <result column="INS_ARCHIVE_FIRM_SUM" property="insArchiveFirmSum" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        INSURED_DETAIL_SON_ID, STAFF_ID, INSURED_PAYMENT_TYPE, INSURED_PAYMENT_NUMBER, INS_ARCHIVE_PERSON_PROP, INS_ARCHIVE_PERSON_MONEY, INS_ARCHIVE_PERSON_SUM, INS_ARCHIVE_FIRM_PROP, INS_ARCHIVE_FIRM_MONEY, INS_ARCHIVE_FIRM_SUM, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

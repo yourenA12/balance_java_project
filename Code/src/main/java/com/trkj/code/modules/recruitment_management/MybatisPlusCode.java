@@ -59,7 +59,7 @@ public class MybatisPlusCode {
 //        templateConfig.setService(null);//不生成service
 //        templateConfig.setServiceImpl(null);//不生成serviceImpl
 //        templateConfig.setController(null);//不生成controller
-        autoGenerator.setTemplate(templateConfig);
+//        autoGenerator.setTemplate(templateConfig);
 
         //3.包的配置
         PackageConfig packageConfig = new PackageConfig();
@@ -86,7 +86,7 @@ public class MybatisPlusCode {
         //4、策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         //数据库表名 自己写自己模块的表名
-        strategyConfig.setInclude("RESUME");// 不写默认生成所有的表！！！
+        strategyConfig.setInclude("EMPLOYMENT_TABLE");// 不写默认生成所有的表！！！
         //包的命名规则
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         //列的名字

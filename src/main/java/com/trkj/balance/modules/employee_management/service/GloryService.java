@@ -24,7 +24,5 @@ public interface GloryService extends IService<Glory> {
     //添加荣誉/奖励信息
     int insertGlory(Glory glory);
 
-    //分页查询奖励表
-    IPage<Glory> selectGloryPage(IPage<Glory> page, String staffName, ArrayList deptIds);
 
 }

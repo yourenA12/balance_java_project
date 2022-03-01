@@ -74,17 +74,6 @@ public class Punish implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
-    @ApiModelProperty(value = "部门编号")
-    @TableId("DEPT_ID")
-    private Long deptId;
-
-    @ApiModelProperty(value = "部门名称")
-    @TableField("DEPT_NAME")
-    private String deptName;
-
-    @ApiModelProperty(value = "员工姓名")
-    @TableField("STAFF_NAME")
-    private String staffName;
 
 
 }

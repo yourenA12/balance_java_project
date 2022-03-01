@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trkj.balance.modules.employee_management.entity.*;
-import com.trkj.balance.modules.salary_management.entity.Business;
-import com.trkj.balance.modules.salary_management.entity.Compensation;
-import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
-import com.trkj.balance.modules.salary_management.entity.Workscheme;
+import com.trkj.balance.modules.salary_management.entity.*;
 import com.trkj.balance.modules.salary_management.service.CompensationDeptPostService;
 import com.trkj.balance.modules.salary_management.service.CompensationService;
 import com.trkj.balance.modules.salary_management.service.CompensationStaffService;
@@ -67,12 +64,22 @@ public class CompensationController {
 
         log.debug(staffIds.toString());
 
+//        // 判断删除
+//        if(compensation.getCompensationId()+""!="" && compensation.getCompensationId()!=null){
+//            if( defInsuredService.deleteDefInsured(Math.toIntExact(defInsured.getDefInsuredId()))<1){
+//                return AjaxResponse.success("出错了，请稍后再试");
+//            }
+//        }
+
+        // 查询薪酬组名称是否重复
         String a=compensationService.selectCompensationNames(compensation.getCompensationName());
         if(a!=null) return AjaxResponse.success(a+",重复");
 
+        // 查询薪酬组员工中间表是否有重复员工
         String b=compensationStaffService.selectCompensationStaffName(staffIds);
         if(b!=null) return AjaxResponse.success(b+",已设置薪酬组");
 
+        // 查询薪酬组部门职位中间表是否有重复部门职位
         String c=compensationDeptPostService.selectCompensationDeptPost(deptIds,postIds);
         if(c!=null) return AjaxResponse.success(c+",已设置薪酬组");
 
@@ -133,6 +140,43 @@ public class CompensationController {
 
         return AjaxResponse.success(null);
 
+    }
+
+    //查询薪酬组
+    @GetMapping("/selectCompensation/{currenPage}/{pagesize}")
+    public AjaxResponse selectCompensation(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+
+        Page<Compensation> page = new Page<>(currenPage,pagesize);
+        IPage<Compensation> list=compensationService.selectCompensationPage(page);
+        return AjaxResponse.success(list);
+
+    }
+
+
+
+    // 按薪酬组id查询部门id
+    @GetMapping("/selectDeptId/{id}")
+    public AjaxResponse selectDeptId(@PathVariable("id") int id){
+        return AjaxResponse.success(compensationService.selectDeptId(id));
+    }
+
+    // 按薪酬组id查询职位id
+    @GetMapping("/selectPostId/{id}")
+    public AjaxResponse selectPostId(@PathVariable("id") int id){
+        return AjaxResponse.success(compensationService.selectPostId(id));
+    }
+
+    // 按薪酬组id查询员工
+    @GetMapping("/selectStaffId/{id}")
+    public AjaxResponse selectStaffId(@PathVariable("id") int id){
+        return AjaxResponse.success(compensationService.selectStaffId(id));
+    }
+
+
+    //删除薪酬组
+    @DeleteMapping("/deleteCompensationId/{id}")
+    public AjaxResponse deleteCompensationId(@PathVariable("id") Long id){
+        return AjaxResponse.success(compensationService.deleteCompensation(id));
     }
 
 }
