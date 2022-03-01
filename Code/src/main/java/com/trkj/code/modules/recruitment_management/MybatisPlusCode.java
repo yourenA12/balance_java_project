@@ -54,7 +54,7 @@ public class MybatisPlusCode {
         // 配置模板 自定义模板
         TemplateConfig templateConfig = new TemplateConfig();
 //        templateConfig.setXml(null); // 不生成xml文件
-        templateConfig.setEntity(null); // 不生成实体类
+//        templateConfig.setEntity(null); // 不生成实体类
 //        templateConfig.setMapper(null);//不生成mapper
 //        templateConfig.setService(null);//不生成service
 //        templateConfig.setServiceImpl(null);//不生成serviceImpl
@@ -86,7 +86,7 @@ public class MybatisPlusCode {
         //4、策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         //数据库表名 自己写自己模块的表名
-        strategyConfig.setInclude("WORK_EXPERIENCESS");// 不写默认生成所有的表！！！
+        strategyConfig.setInclude("EMPLOYMENT_TABLE");// 不写默认生成所有的表！！！
         //包的命名规则
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         //列的名字
