@@ -14,4 +14,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface AuditflowdetailService extends IService<Auditflowdetail> {
     //修改明细表状态
     int updateAuditflowdetail(Auditflowdetail auditflowdetail);
+    //修改 异动 和部门状态
+    int updateTransfer(Auditflowdetail auditflowdetail);
+    //修改 调薪 工资 状态
+    int updateFixedwage(Auditflowdetail auditflowdetail);
+
+    //修改加班表状态
+    int updateOvertimeask(Auditflowdetail auditflowdetail);
+    //修改补打卡
+    int updateCard(Auditflowdetail auditflowdetail);
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.examine_management.mapper.FixedwageNMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.examine_management.entity.Fixedwage">
+        <id column="FIXEDWAGE_ID" property="fixedwageId" />
+        <result column="FIXEDWAGE_PERIODMONEY" property="fixedwagePeriodmoney" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="FIXEDWAGE_OFFICIALMONEY" property="fixedwageOfficialmoney" />
+        <result column="FIXEDWAGE_REMARK" property="fixedwageRemark" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        FIXEDWAGE_ID, FIXEDWAGE_PERIODMONEY, STAFF_ID, FIXEDWAGE_OFFICIALMONEY, FIXEDWAGE_REMARK, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>
