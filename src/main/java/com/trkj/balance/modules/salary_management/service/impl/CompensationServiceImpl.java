@@ -260,8 +260,8 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
     public List<Integer> selectStaffId(int id) {
 
         QueryWrapper wrapper = new QueryWrapper<>();
-        wrapper.select("STAFF_ID").eq("DEF_INSURED_ID", id);
-        wrapper.eq("INSUREDIS_ONE",0);// 状态为员工不是部门职位
+        wrapper.select("STAFF_ID").eq("COMPENSATION_ID", id);
+        wrapper.eq("COMPENSATIONIS_ONE",0);// 状态为员工不是部门职位
         return compensationStaffMapper.selectList(wrapper);
     }
 
