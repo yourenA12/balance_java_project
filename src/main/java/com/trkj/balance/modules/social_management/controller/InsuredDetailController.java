@@ -38,10 +38,11 @@ public class InsuredDetailController {
     public AjaxResponse selectInsuredDetail(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                             @RequestParam("staffNameSearch") String staffNameSearch,
                                             @RequestParam("deptIds") ArrayList deptIds,
-                                            @RequestParam("stateSearch") String stateSearch){
+                                            @RequestParam("stateSearch") String stateSearch,
+                                            @RequestParam("scheme_name") String scheme_name){
 
         Page<InsuredDetailVo> page = new Page<>(currenPage,pagesize);
-        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch);
+        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch,scheme_name);
         return AjaxResponse.success(list);
 
     }
