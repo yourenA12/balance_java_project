@@ -1,19 +1,30 @@
-package com.trkj.balance.modules.examine_management.vo;
+package com.trkj.balance.modules.examine_management.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.baomidou.mybatisplus.annotation.*;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
+/**
+ * <p>
+ * 离职表
+ * </p>
+ *
+ * @author jiejie
+ * @since 2022-02-21
+ */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class QuitnVo implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("QUIT")
+@ApiModel(value="Quit对象", description="离职表")
+@KeySequence(value = "QUIT_ID",clazz = Long.class)
+public class Quit implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,7 +42,7 @@ public class QuitnVo implements Serializable {
 
     @ApiModelProperty(value = "员工名称")
     @TableField("STAFF_NAME")
-    private String staffName1;
+    private String staffName;
 
     @ApiModelProperty(value = "部门编号")
     @TableField("DEPT_ID")
@@ -44,11 +55,6 @@ public class QuitnVo implements Serializable {
     @ApiModelProperty(value = "离职说明")
     @TableField("QUIT_EXPLAIN")
     private String quitExplain;
-
-    @ApiModelProperty(value = "员工名称")
-    @TableField("STAFF_NAME")
-    private String staffName2;
-
 
     @ApiModelProperty(value = "状态 0:不同意 1:同意")
     @TableField("QUIT_STATE")
@@ -63,11 +69,11 @@ public class QuitnVo implements Serializable {
     private Date formalQuitDate;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("CREATED_TIME")
+    @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
-    @TableField("UPDATED_TIME")
+    @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
     @ApiModelProperty(value = "乐观锁")
@@ -78,12 +84,5 @@ public class QuitnVo implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
-    @ApiModelProperty(value = "部门名称")
-    @TableField("dept_name")
-    private String deptName;
-
-    @ApiModelProperty(value = "审核状态")
-    @TableField("AUDITFLOWDETAI_STATE")
-    private Long auditflowdetaiState;
 
 }

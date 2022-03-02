@@ -12,49 +12,53 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 审批流明细表
+ * 补打卡表
  * </p>
  *
  * @author jiejie
- * @since 2021-12-29
+ * @since 2022-02-28
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("AUDITFLOWDETAIL")
-@KeySequence(value = "AUDITFLOWDETAIL_ID",clazz = Long.class)
-@ApiModel(value="Auditflowdetail对象", description="审批流明细表")
-public class Auditflowdetail implements Serializable {
+@TableName("CARD")
+@ApiModel(value="Card对象", description="补打卡表")
+@KeySequence(value = "CARD_ID",clazz = Long.class)
+public class Card implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "审批流明细编号")
-    @TableId("AUDITFLOWDETAIL_ID")
-    private Long auditflowdetailId;
+    @ApiModelProperty(value = "补打卡编号")
+    @TableId("CARD_ID")
+    private Long cardId;
 
     @ApiModelProperty(value = "审批编号")
     @TableField("AUDITFLOW_ID")
     private Long auditflowId;
 
-    @ApiModelProperty(value = "审核人编号")
+    @ApiModelProperty(value = "员工编号")
     @TableField("STAFF_ID")
     private Long staffId;
 
-    @ApiModelProperty(value = "审核人")
+    @ApiModelProperty(value = "员工名称")
     @TableField("STAFF_NAME")
     private String staffName;
 
-    @ApiModelProperty(value = "审核备注")
-    @TableField("AUDITFLOWDETAI_REMARKS")
-    private String auditflowdetaiRemarks;
+    @ApiModelProperty(value = "补打卡类型")
+    @TableField("CARD_TYPE")
+    private String cardType;
 
-    @ApiModelProperty(value = "审核时间")
-    @TableField("AUDITFLOWDETAI_DATE")
-    private Date auditflowdetaiDate;
+    @ApiModelProperty(value = "补打卡时间")
+    @TableField("CARD_DATE")
+    private Date cardDate;
 
-    @ApiModelProperty(value = "审核状态")
-    @TableField("AUDITFLOWDETAI_STATE")
-    private Long auditflowdetaiState;
+    @ApiModelProperty(value = "备注")
+    @TableField("CARD_REMARKS")
+    private String cardRemarks;
+
+    @ApiModelProperty(value = "状态 0:不同意 1:同意")
+    @TableField("CARD_STATE")
+    private Long cardState;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
@@ -64,19 +68,13 @@ public class Auditflowdetail implements Serializable {
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
-    @Version // 乐观锁注解
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
-    @TableLogic // 逻辑删除注解
     @ApiModelProperty(value = "逻辑删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
-    @TableField(exist = false)
-    private Long isStaffState;
-
 
 
 }

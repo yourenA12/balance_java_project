@@ -12,49 +12,65 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 审批流明细表
+ * 出差表
  * </p>
  *
  * @author jiejie
- * @since 2021-12-29
+ * @since 2022-02-24
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("AUDITFLOWDETAIL")
-@KeySequence(value = "AUDITFLOWDETAIL_ID",clazz = Long.class)
-@ApiModel(value="Auditflowdetail对象", description="审批流明细表")
-public class Auditflowdetail implements Serializable {
+@TableName("TRAVEL")
+@KeySequence(value = "TRAVEL_ID",clazz = Long.class)
+@ApiModel(value="Travel对象", description="出差表")
+public class Travel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "审批流明细编号")
-    @TableId("AUDITFLOWDETAIL_ID")
-    private Long auditflowdetailId;
+    @ApiModelProperty(value = "出差编号")
+    @TableId("TRAVEL_ID")
+    private Long travelId;
 
     @ApiModelProperty(value = "审批编号")
     @TableField("AUDITFLOW_ID")
     private Long auditflowId;
 
-    @ApiModelProperty(value = "审核人编号")
+    @ApiModelProperty(value = "员工编号")
     @TableField("STAFF_ID")
     private Long staffId;
 
-    @ApiModelProperty(value = "审核人")
+    @ApiModelProperty(value = "员工名称")
     @TableField("STAFF_NAME")
     private String staffName;
 
-    @ApiModelProperty(value = "审核备注")
-    @TableField("AUDITFLOWDETAI_REMARKS")
-    private String auditflowdetaiRemarks;
+    @ApiModelProperty(value = "发起人部门")
+    @TableField("DEPT_ID")
+    private Long deptId;
 
-    @ApiModelProperty(value = "审核时间")
-    @TableField("AUDITFLOWDETAI_DATE")
-    private Date auditflowdetaiDate;
+    @ApiModelProperty(value = "出差地点")
+    @TableField("TRAVEL_PLACE")
+    private String travelPlace;
 
-    @ApiModelProperty(value = "审核状态")
-    @TableField("AUDITFLOWDETAI_STATE")
-    private Long auditflowdetaiState;
+    @ApiModelProperty(value = "出差事由")
+    @TableField("TRAVEL_MATTER")
+    private String travelMatter;
+
+    @ApiModelProperty(value = "出差开始时间")
+    @TableField("TRAVEL_S_DATE")
+    private Date travelSDate;
+
+    @ApiModelProperty(value = "出差结束时间")
+    @TableField("TRAVEL_E_DATE")
+    private Date travelEDate;
+
+    @ApiModelProperty(value = "出差总时长")
+    @TableField("TRAVEL_TOTAL_DATE")
+    private Long travelTotalDate;
+
+    @ApiModelProperty(value = "状态 0:不同意 1:同意")
+    @TableField("TRAVEL_STATE")
+    private Long travelState;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
@@ -64,19 +80,15 @@ public class Auditflowdetail implements Serializable {
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
-    @Version // 乐观锁注解
+    @Version
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
-    @TableLogic // 逻辑删除注解
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除")
     @TableField("IS_DELETED")
     private Long isDeleted;
-
-    @TableField(exist = false)
-    private Long isStaffState;
-
 
 
 }
