@@ -46,7 +46,7 @@ public interface WorkerVoMapper extends BaseMapper<WorkerVo> {
             "    where\n" +
             "        a.AUDITFLOW_ID=#{id} \n" +
             "    ORDER BY\n" +
-            "        b.CREATED_TIME")
+            "        b.AUDITFLOWDETAIL_ID")
 
     List<WorkerVo> findSelectById(@Param("id") Long id);
     //查询那个 步骤条的名称   废弃！！！！

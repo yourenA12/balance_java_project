@@ -1,36 +1,68 @@
-package com.trkj.balance.modules.login.entity;
+package com.trkj.balance.modules.examine_management.vo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
 
-/**
- * <p>
- * 员工表
- * </p>
- *
- * @author 友人A
- * @since 2022-03-02
- */
+import java.io.Serializable;
+import java.util.Date;
+
+//查询当前员工的部门 以及固定工资
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("STAFF")
-@ApiModel(value="Staff对象", description="员工表")
-public class Staff implements Serializable {
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class FixedVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "编号")
-    @TableId("STAFF_ID")
+    @ApiModelProperty(value = "固定工资编号")
+    @TableId("FIXEDWAGE_ID")
+    private Long fixedwageId;
+
+    @ApiModelProperty(value = "试用期基本工资")
+    @TableField("FIXEDWAGE_PERIODMONEY")
+    private Double fixedwagePeriodmoney;
+
+    @ApiModelProperty(value = "员工编号")
+    @TableField("STAFF_ID")
     private Long staffId;
+
+    @ApiModelProperty(value = "正式期基本工资")
+    @TableField("FIXEDWAGE_OFFICIALMONEY")
+    private Double fixedwageOfficialmoney;
+
+    @ApiModelProperty(value = "备注")
+    @TableField("FIXEDWAGE_REMARK")
+    private String fixedwageRemark;
+
+
+    @ApiModelProperty(value = "部门编号")
+    @TableId("DEPT_ID")
+    private Long deptId;
+
+    @ApiModelProperty(value = "上级部门编号")
+    @TableField("SUPERIOR_DEPT_ID")
+    private Long deptPid;
+
+    @ApiModelProperty(value = "状态;0：启用  1：禁用")
+    @TableField("DEPT_STATE")
+    private Long deptState;
+
+    @ApiModelProperty(value = "部门名称")
+    @TableField("DEPT_NAME")
+    private String deptName;
+
+ /*   @ApiModelProperty(value = "部门负责人;提供ID到员工表锁定具体的人")
+    @TableField("STAFF_ID")
+    private Long staffId;*/
+
+   /*  @ApiModelProperty(value = "获奖人编号")
+     @TableId("STAFF_ID")
+     private Long staffId;*/
 
     @ApiModelProperty(value = "员工姓名")
     @TableField("STAFF_NAME")
@@ -39,10 +71,6 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "性别")
     @TableField("STAFF_SEX")
     private String staffSex;
-
-    @ApiModelProperty(value = "年龄")
-    @TableField("STAFF_AGE")
-    private Long staffAge;
 
     @ApiModelProperty(value = "手机号码")
     @TableField("STAFF_PHONE")
@@ -56,6 +84,7 @@ public class Staff implements Serializable {
     @TableField("STAFF_PICTURE")
     private String staffPicture;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "出生日期")
     @TableField("STAFF_BIRTHDAY")
     private Date staffBirthday;
@@ -68,18 +97,20 @@ public class Staff implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "职位编号外键")
-    @TableField("POSITION_ID")
+    @ApiModelProperty(value = "职位编号")
+    @TableId("POSITION_ID")
     private Long positionId;
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
     private String staffPass;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "转正日期")
     @TableField("WORKER_DATE")
     private Date workerDate;
@@ -92,9 +123,9 @@ public class Staff implements Serializable {
     @TableField("STAFF_IDENTITY")
     private String staffIdentity;
 
-    @ApiModelProperty(value = "部门编号")
+    /*@ApiModelProperty(value = "部门编号")
     @TableField("DEPT_ID")
-    private Long deptId;
+    private Long deptId;*/
 
     @ApiModelProperty(value = "专业")
     @TableField("STAFF_MAJOR")
@@ -122,6 +153,10 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "星座")
     @TableField("STAFF_SIGN")
     private String staffSign;
+
+    @ApiModelProperty(value = "年龄")
+    @TableField("STAFF_AGE")
+    private String staffAge;
 
     @ApiModelProperty(value = "婚姻状态")
     @TableField("STAFF_MARITAL")
@@ -155,13 +190,11 @@ public class Staff implements Serializable {
     @TableField("UPDATED_TIME")
     private Date updatedTime;
 
-    @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
-    @TableField("IS_DELETED")
-    private Long isDeleted;
-
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
 
-
+    @ApiModelProperty(value = "逻辑删除;0：未删除，1：已删除")
+    @TableField("IS_DELETED")
+    private Long isDeleted;
 }
