@@ -25,6 +25,7 @@ public class AuditflowdetailController {
     //修改
     @Autowired
     private AuditflowdetailService auditflowdetailService;
+
     @PutMapping("/updateAuditflowdetail")
     public AjaxResponse updateAudiflowdetail(@RequestBody Auditflowdetail auditflowdetail){
         return AjaxResponse.success(auditflowdetailService.updateAuditflowdetail(auditflowdetail));
@@ -45,7 +46,7 @@ public class AuditflowdetailController {
         return AjaxResponse.success(auditflowdetailService.updateTransfer(auditflowdetail));
     }
     //修改 补打卡
-    @PutMapping("/updateTransfer")
+    @PutMapping("/updateCard")
     public AjaxResponse updateCard(@RequestBody Auditflowdetail auditflowdetail){
         return AjaxResponse.success(auditflowdetailService.updateCard(auditflowdetail));
     }

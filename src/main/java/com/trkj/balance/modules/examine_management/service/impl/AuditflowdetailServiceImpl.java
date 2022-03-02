@@ -8,6 +8,7 @@ import com.trkj.balance.modules.attendance_management.mapper.ClockRecordMapper;
 import com.trkj.balance.modules.employee_management.entity.Staff;
 import com.trkj.balance.modules.employee_management.mapper.StaffMapper;
 import com.trkj.balance.modules.examine_management.entity.*;
+import com.trkj.balance.modules.attendance_management.entity.ClockRecord;
 import com.trkj.balance.modules.examine_management.mapper.*;
 import com.trkj.balance.modules.examine_management.service.AuditflowdetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -389,8 +390,11 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 QueryWrapper wrapper2 = new QueryWrapper();
                 //拿到员工id
                 wrapper2.eq("STAFF_ID",card.getStaffId());
+                // 当前时间
+                wrapper2.eq("TO_CHAR(CREATED_TIME,'yyyy-MM-dd')","TO_CHAR(sysdate,'yyyy-MM-dd')");
                 //new 一个 打卡记录表
-                clockRecordMapper.selectOne(wrapper2);
+                ClockRecord clockRecord = clockRecordMapper.selectOne(wrapper2);
+                // 修改打卡记录
 
 
             }
