@@ -102,61 +102,163 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
         // 循环员工
         for (WagVo record : wagVos.getRecords()) {
 
-            // 按员工id查询加班表
-            QueryWrapper wrapper6 = new QueryWrapper();
-            wrapper6.eq("STAFF_ID", record.getStaffId());// 员工id
-            wrapper6.eq("TO_CHAR(CREATED_TIME,'yyyy-MM')", "TO_CHAR(sysdate,'yyyy-MM')");
-            List<Overtimeask> overtimeasks = overtimeasksMapper.selectList(wrapper6);
+            // 本月工资,
+            Double monthMoney = 0.0;
+
+            // 加班工资
+            if (record != null) {
+
+                // 按员工id查询加班表
+                List<Overtimeask> overtimeasks = overtimeasksMapper.selectByStaffId(record.getStaffId());
 
 
-            // 工作日加班工资
-            Double workdayMoney;
-            // 休息日加班工资
-            Double restMoney;
-            // 节假日加班工资
-            Double holidaysMoney;
+                if (record.getStaffState() == 2) { // 试用
+                    monthMoney = record.getFixedwagePeriodmoney();
+                } else {// 正式
+                    monthMoney = record.getFixedwageOfficialmoney();
+                }
 
-            for (Overtimeask overtimeask : overtimeasks) {
+                // 工作日加班工资
+                Double workdayMoney = 0.0;
+                // 休息日加班工资
+                Double restMoney = 0.0;
+                // 节假日加班工资
+                Double holidaysMoney = 0.0;
 
-                if( overtimeask.getOvertimeaskType() =="工作日加班" ){
+                // 循环加班表数据 // 计算加班工资
+                for (Overtimeask overtimeask : overtimeasks) {
 
-                    // 计算当前员工，工作日加班工资 （工作时长 * 工作日加班比例）
-//                    overtimeask.getOvertimeaskTotalDate() * workscheme.getWorkschemeWorkratio();
+                    if (overtimeask.getOvertimeaskType().equals("工作日加班")) {
 
-                }else if(overtimeask.getOvertimeaskType() =="休息日加班"){
+                        // 计算当前员工，工作日加班工资 （每小时工资 * 工作时长 * 工作日加班比例）
+                        workdayMoney += (monthMoney / 240) * overtimeask.getOvertimeaskTotalDate() * workscheme.getWorkschemeWorkratio() / 100;
 
-                    // 计算当前员工，工作日加班工资 （工作时长 * 休息日加班比例）
-//                    overtimeask.getOvertimeaskTotalDate() * workscheme.getWorkschemeDayoffratio();
+                    } else if (overtimeask.getOvertimeaskType().equals("休息日加班")) {
 
-                }else if(overtimeask.getOvertimeaskType() =="节假日加班"){
+                        // 计算当前员工，工作日加班工资 （每小时工资 * 工作时长 * 休息日加班比例）
+                        restMoney += (monthMoney / 240) * overtimeask.getOvertimeaskTotalDate() * workscheme.getWorkschemeDayoffratio() / 100;
 
-                    // 计算当前员工，工作日加班工资 （工作时长 * 节假日加班比例）
-//                    overtimeask.getOvertimeaskTotalDate() * workscheme.getWorkschemeHolidayratio();
+                    } else if (overtimeask.getOvertimeaskType().equals("节假日加班")) {
+
+                        // 计算当前员工，工作日加班工资 （每小时工资 * 工作时长 * 节假日加班比例）
+                        holidaysMoney += (monthMoney / 240) * overtimeask.getOvertimeaskTotalDate() * workscheme.getWorkschemeHolidayratio() / 100;
+
+                    }
 
                 }
 
+                // 工作日加班工资 存入实体类
+                record.setWorkdayMoney(workdayMoney);
+                // 休息日加班工资 存入实体类
+                record.setRestMoney(restMoney);
+                // 节假日加班工资 存入实体类
+                record.setHolidaysMoney(holidaysMoney);
+
             }
 
-            // 按员工id查询出差
-            QueryWrapper wrapper7 = new QueryWrapper();
-            wrapper7.eq("STAFF_ID", record.getStaffId());// 员工id
-            wrapper7.eq("TO_CHAR(CREATED_TIME,'yyyy-MM')", "TO_CHAR(sysdate,'yyyy-MM')");
-            List<Travel> travels = travelsMapper.selectList(wrapper7);
+            // 出差工资
+            if (record != null) {
 
-            // 按员工id查询请假
-            QueryWrapper wrapper8 = new QueryWrapper();
-            wrapper8.eq("STAFF_ID", record.getStaffId());// 员工id
-            wrapper8.eq("TO_CHAR(CREATED_TIME,'yyyy-MM')", "TO_CHAR(sysdate,'yyyy-MM')");
-            List<Leave> leaves = leavesMapper.selectList(wrapper8);
+                // 按员工id查询出差
+                List<Travel> travels = travelsMapper.selectByTravelStaffId(record.getStaffId());
+
+                // 出差工资
+                Double travelMoney = 0.0;
+
+                // 循环出差表
+                for (Travel travel : travels) {
+                    // 计算出差工资 （ 出差时长 * 出差每小时工资 ）
+                    travelMoney += travel.getTravelTotalDate() * business.getBusinessOnemoney();
+                }
+
+                // 出差工资 存入实体类
+                record.setEvection(travelMoney);
+
+            }
+
+            // 工资合计
+            Double totalMoney = 0.0;
+            // ( 基本工资 + 加班工资 + 出差工资 )
+            totalMoney = monthMoney + record.getWorkdayMoney() + record.getRestMoney() + record.getHolidaysMoney() + record.getEvection();
+            record.setTotalWages(totalMoney); // 合计工资
+
+            // 请假扣款
+            if (record != null) {
+
+                // 按员工id查询请假
+                List<Leave> leaves = leavesMapper.selectByLeaveStaffId(record.getStaffId());
+
+                // 事假扣款
+                Double matterLeave = 0.0;
+                // 病假扣款
+                Double fallLeave = 0.0;
+
+                // 循环员工请假数据
+                for (Leave leaf : leaves) {
+
+                    if (leaf.getLeaveType().equals("事假")) {
+                        // ( 每小时工资 * 请假时长 )
+                        matterLeave += monthMoney / 240 * leaf.getLeaveTotalDate();
+
+                    } else if (leaf.getLeaveType().equals("病假")) {
+                        fallLeave += monthMoney / 240 * leaf.getLeaveTotalDate();
+
+                    }
+                }
+
+                record.setMatterLeave(matterLeave); // 事假
+                record.setFallLeave(fallLeave); // 病假
+
+            }
+
+            // 考勤扣款
+
+            // 迟到扣款
+            Double tardy = 0.0;
+            // 早退扣款
+            Double leave = 0.0;
+            // 旷工扣款
+            Double absenteeism = 0.0;
 
             // 按员工id查询考勤归档
-            QueryWrapper wrapper9 = new QueryWrapper();
-            wrapper9.eq("STAFF_ID", record.getStaffId());// 员工id
-            wrapper9.eq("TO_CHAR(CREATED_TIME,'yyyy-MM')", "TO_CHAR(sysdate,'yyyy-MM')");
-            List<Archive> archives = archiveaMapper.selectList(wrapper9);
+            Archive archive = archiveaMapper.selectByArchiveStaffId(record.getStaffId());
+
+            // 迟到 （迟到次数 * 扣款金额/次）
+            tardy = archive.getLateFrequency() * attendandce.getAttendandceLitemoney();
+
+            // 早退 （早退次数 * 扣款金额/次）
+            leave = archive.getLeaveEarlyFrequency() * attendandce.getAttendandceLeavemoney();
+
+            // 旷工扣款（ 每小时工资 * 旷工时长 * 每小时扣款比例 ）
+            absenteeism = (monthMoney / 240) * archive.getAbsenteeismFrequency() * attendandce.getAttendandceAbscntmoney() / 100;
+
+            // 将迟到扣款加入到实体类中
+            record.setTardy(tardy);
+            // 将早退扣款加入到实体类中
+            record.setLeave(leave);
+            // 将旷工扣款加入到实体类中
+            record.setAbsenteeism(absenteeism);
+
+            // 计算应发工资
+            Double wagesShould = 0.0;
+            // 计算实发工资
+            Double payroll = 0.0;
+
+            // ( 工资合计 - 考勤扣款 - 请假扣款 )
+            wagesShould = record.getTotalWages() - record.getTardy() - record.getLeave()
+                    - record.getAbsenteeism() - record.getMatterLeave() - record.getFallLeave();
+            // 应发工资
+            record.setWagesShould(wagesShould);
+
+            // ( 工资合计 - 考勤扣款 - 请假扣款 - 社保/公积金缴纳 )
+            payroll = record.getTotalWages() - record.getTardy() - record.getLeave()
+                    - record.getAbsenteeism() - record.getMatterLeave() - record.getFallLeave()
+                    - record.getInsDetailSocialPersonPay() - record.getInsDetailFundPersonPay();
+            // 实发工资
+            record.setPayroll(payroll);
 
         }
 
-        return null;
+        return wagVos;
     }
 }
