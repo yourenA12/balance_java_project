@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 友人A
- * @since 2021-12-29
+ * @since 2022-03-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,7 +28,7 @@ public class Staff implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "获奖人编号")
+    @ApiModelProperty(value = "编号")
     @TableId("STAFF_ID")
     private Long staffId;
 
@@ -39,6 +39,10 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "性别")
     @TableField("STAFF_SEX")
     private String staffSex;
+
+    @ApiModelProperty(value = "年龄")
+    @TableField("STAFF_AGE")
+    private Long staffAge;
 
     @ApiModelProperty(value = "手机号码")
     @TableField("STAFF_PHONE")
@@ -64,9 +68,9 @@ public class Staff implements Serializable {
     @TableField("STAFF_EDUCATION")
     private String staffEducation;
 
-    @ApiModelProperty(value = "部门职位编号外键")
-    @TableField("DEPT_POST_ID")
-    private Long deptPostId;
+    @ApiModelProperty(value = "职位编号外键")
+    @TableField("POSITION_ID")
+    private Long positionId;
 
     @ApiModelProperty(value = "密码")
     @TableField("STAFF_PASS")
@@ -75,6 +79,10 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "入职日期")
     @TableField("STAFF_HIREDATE")
     private Date staffHiredate;
+
+    @ApiModelProperty(value = "转正日期")
+    @TableField("WORKER_DATE")
+    private Date workerDate;
 
     @ApiModelProperty(value = "转正编号")
     @TableField("WORKER_ID")
@@ -131,6 +139,14 @@ public class Staff implements Serializable {
     @TableField("STAFF_ADDRESS")
     private String staffAddress;
 
+    @ApiModelProperty(value = "员工状态;0：在职，1：离职，2：实习，3：正式")
+    @TableField("STAFF_STATE")
+    private Long staffState;
+
+    @ApiModelProperty(value = "工龄 显示：xx年xx月xx日")
+    @TableField("STAFF_WORKING_YEARS")
+    private String staffWorkingYears;
+
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATED_TIME")
     private Date createdTime;
@@ -146,9 +162,6 @@ public class Staff implements Serializable {
     @ApiModelProperty(value = "乐观锁")
     @TableField("REVISION")
     private Long revision;
-
-    @TableField("POST_ID")
-    private Long postId;
 
 
 }
