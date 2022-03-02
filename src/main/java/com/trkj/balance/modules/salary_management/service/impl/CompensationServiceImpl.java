@@ -271,4 +271,12 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
     public int deleteCompensation(Long id) {
         return compensationMapper.deleteById(id);
     }
+
+    // 按薪酬组查询 方案 （加班方案id，扣款方案id，出差方案id）
+    @Override
+    public Compensation selectCompensation(Long id) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("COMPENSATION",id);
+        return compensationMapper.selectOne(wrapper);
+    }
 }

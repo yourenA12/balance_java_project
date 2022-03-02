@@ -179,5 +179,7 @@ public class CompensationController {
         return AjaxResponse.success(compensationService.deleteCompensation(id));
     }
 
+
+
 }
 

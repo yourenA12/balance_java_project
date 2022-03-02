@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.salary_management.mapper.InsuredDetailsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.salary_management.entity.InsuredDetail">
+        <id column="INS_DETAIL_ID" property="insDetailId" />
+        <result column="STAFF_ID" property="staffId" />
+        <result column="INS_DETAIL_SOCIAL_PERSON_PAY" property="insDetailSocialPersonPay" />
+        <result column="INS_DETAIL_SOCIAL_FIRM_PAY" property="insDetailSocialFirmPay" />
+        <result column="INS_DETAIL_FUND_PERSON_PAY" property="insDetailFundPersonPay" />
+        <result column="INS_DETAIL_FUND_FIRM_PAY" property="insDetailFundFirmPay" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        INS_DETAIL_ID, STAFF_ID, INS_DETAIL_SOCIAL_PERSON_PAY, INS_DETAIL_SOCIAL_FIRM_PAY, INS_DETAIL_FUND_PERSON_PAY, INS_DETAIL_FUND_FIRM_PAY, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>

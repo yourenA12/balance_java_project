@@ -85,13 +85,21 @@ public class WagVo {
     @TableField(exist = false)
     private Double absenteeism;
 
-    @ApiModelProperty(value = "个人缴纳社保")
-    @TableField(exist = false)
-    private Double individual;
+    @ApiModelProperty(value = "社保个人缴费")
+    @TableField("INS_DETAIL_SOCIAL_PERSON_PAY")
+    private Double insDetailSocialPersonPay;
 
-    @ApiModelProperty(value = "公司缴纳社保")
-    @TableField(exist = false)
-    private Double  company;
+    @ApiModelProperty(value = "社保公司缴费")
+    @TableField("INS_DETAIL_SOCIAL_FIRM_PAY")
+    private Double insDetailSocialFirmPay;
+
+    @ApiModelProperty(value = "积金个人缴费")
+    @TableField("INS_DETAIL_FUND_PERSON_PAY")
+    private Double insDetailFundPersonPay;
+
+    @ApiModelProperty(value = "积金公司缴费")
+    @TableField("INS_DETAIL_FUND_FIRM_PAY")
+    private Double insDetailFundFirmPay;
 
     @ApiModelProperty(value = "应发工资")
     @TableField(exist = false)
