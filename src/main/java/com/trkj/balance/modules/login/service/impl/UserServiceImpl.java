@@ -47,8 +47,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, Staff> implements U
 //        System.out.println("1222222222222222");
 //        System.out.println(encode);
 
-        System.out.println( staff1.getStaffPass() );
-
         boolean rusult = passwordEncoder.matches(staff.getStaffPass(),staff1.getStaffPass());// 解密
 
         if(rusult){
