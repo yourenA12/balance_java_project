@@ -43,13 +43,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, Staff> implements U
 
 //        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
-        String encode = passwordEncoder.encode(staff.getStaffPass()); // 加密
-        System.out.println("1222222222222222");
-        System.out.println(encode);
+//        String encode = passwordEncoder.encode(staff.getStaffPass()); // 加密
+//        System.out.println("1222222222222222");
+//        System.out.println(encode);
 
         boolean rusult = passwordEncoder.matches(staff.getStaffPass(),staff1.getStaffPass());// 解密
 
         if(rusult){
+            staff1.setStaffPass("******");
             return staff1;
         }
 
