@@ -53,4 +53,9 @@ public class InsuredDetailVoServiceImpl extends ServiceImpl<InsuredDetailVoMappe
 
     }
 
+    @Override
+    public InsuredDetailVo selectInsuredDetailVo(Long id) {
+        return detailVoMapper.selectInsuredDetailVo(id);
+    }
+
 }

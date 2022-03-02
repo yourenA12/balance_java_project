@@ -54,6 +54,13 @@ public class InsuredDetailController {
         return AjaxResponse.success( detailService.deleteInsuredAll(ids) );
     }
 
+    //查询参保明细
+
+    @GetMapping("/selectDInsuredId/{id}")
+    public AjaxResponse selectDInsuredId(@PathVariable("id") Long id){
+        return AjaxResponse.success(detailVoService.selectInsuredDetailVo(id));
+    }
+
 
 }
 

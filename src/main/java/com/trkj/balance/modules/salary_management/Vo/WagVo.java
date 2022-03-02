@@ -55,15 +55,15 @@ public class WagVo {
 
     @ApiModelProperty(value = "工作日加班工资")
     @TableField(exist = false)
-    private Double dayOvertime;
+    private Double workdayMoney;
 
     @ApiModelProperty(value = "节假日加班工资")
     @TableField(exist = false)
-    private Double Holidays;
+    private Double holidaysMoney;
 
     @ApiModelProperty(value = "休息日加班工资")
     @TableField(exist = false)
-    private Double restOvertime;
+    private Double restMoney;
 
     @ApiModelProperty(value = "工资合计")
     @TableField(exist = false)
