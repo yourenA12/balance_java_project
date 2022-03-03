@@ -77,7 +77,7 @@ public class Wagenotfiled implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
-    @TableLogic // 逻辑删除注解
+//    @TableLogic // 逻辑删除注解
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")
     private Long isDeleted;
