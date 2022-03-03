@@ -3,7 +3,7 @@ package com.trkj.balance.modules.social_management.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.salary_management.Vo.WagVo;
+
 
 import com.trkj.balance.modules.social_management.entity.InsuredDetail;
 import com.trkj.balance.modules.social_management.service.InsuredDetailService;
