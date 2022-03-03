@@ -10,6 +10,7 @@ import com.trkj.balance.modules.salary_management.vo.WagVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,6 +110,10 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
         Double w_payroll=0.0;
         // 公司缴纳
         Double w_companyPay=0.0;
+
+        // 保留两位小数
+//        DecimalFormat df = new DecimalFormat("#.00");
+//        System.out.println(df.format(f));
 
         // 循环员工
         for (WagVo record : wagVos.getRecords()) {
@@ -278,7 +283,7 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
         }
 
         // 按薪酬组id查询未归档表
-        Wagenotfiled wagenotfiled = wagenotfiledMapper.selectOne(wrapper);
+        Wagenotfiled wagenotfiled = wagenotfiledMapper.selectBydate(compensationId);
         if(wagenotfiled==null){
             return wagVos;
         }
