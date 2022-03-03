@@ -14,7 +14,7 @@ public interface InsuredMonthVoMapper extends BaseMapper<InsuredMonthVo> {
     @Select("select TO_CHAR(CREATED_TIME,'yyyy-MM') as insuredMonth,COUNT(STAFF_ID) as insuredNumber,sum(INS_DETAIL_SOCIAL_PERSON_PAY+INS_DETAIL_FUND_PERSON_PAY) as Individual\n" +
             ",sum(INS_DETAIL_SOCIAL_FIRM_PAY+INS_DETAIL_FUND_FIRM_PAY) as companies\n" +
             "from INSURED_DETAIL\n" +
-            "GROUP BY TO_CHAR(CREATED_TIME,'yyyy-MM')")
+            "GROUP BY TO_CHAR(CREATED_TIME,'yyyy-MM') ORDER BY TO_CHAR(CREATED_TIME,'yyyy-MM') desc")
 
     List<InsuredMonthVo> selectInsuredMonthVo();
 }

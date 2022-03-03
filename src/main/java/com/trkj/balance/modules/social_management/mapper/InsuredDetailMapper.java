@@ -29,7 +29,8 @@ public interface InsuredDetailMapper extends BaseMapper<InsuredDetail> {
     int deleteByDate(@Param(Constants.WRAPPER) QueryWrapper<EntryhirdeVo> wrapper);
 
     //根据员工id查询参保明细
-    @Select("SELECT TO_CHAR(CREATED_TIME,'yyyy-MM') as insuredMonth,INS_DETAIL_SOCIAL_PERSON_PAY,INS_DETAIL_SOCIAL_FIRM_PAY,INS_DETAIL_FUND_PERSON_PAY,INS_DETAIL_FUND_FIRM_PAY FROM  INSURED_DETAIL WHERE STAFF_ID=#{id}")
-
+    @Select("SELECT TO_CHAR(CREATED_TIME,'yyyy-MM') as insuredMonth,INS_DETAIL_SOCIAL_PERSON_PAY," +
+            "INS_DETAIL_SOCIAL_FIRM_PAY,INS_DETAIL_FUND_PERSON_PAY,INS_DETAIL_FUND_FIRM_PAY " +
+            "FROM  INSURED_DETAIL WHERE STAFF_ID=#{id} ORDER BY CREATED_TIME desc")
     IPage<InsuredDetail> selectInsuredDetailPage(IPage<InsuredDetail> page,@Param("id") Long id);
 }
