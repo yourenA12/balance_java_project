@@ -25,9 +25,10 @@ public class InsuredDetailSonController {
     @Autowired
     private InsuredDetailSonService insuredDetailSonService;
 
-    @GetMapping("/selectDetailSonId/{id}")
-    public AjaxResponse selectDetailSonId(@PathVariable("id") Long id){
-        return AjaxResponse.success(insuredDetailSonService.selectInsuredDetailSon(id));
+    // 按员工id和月份查询参保明细详情
+    @GetMapping("/selectDetailSonId/{id}/{date}")
+    public AjaxResponse selectDetailSonId(@PathVariable("id") Long id,@PathVariable("date") String date){
+        return AjaxResponse.success(insuredDetailSonService.selectInsuredDetailSon(id,date));
     }
 
 }

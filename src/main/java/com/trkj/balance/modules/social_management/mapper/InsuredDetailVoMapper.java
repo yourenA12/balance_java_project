@@ -30,7 +30,7 @@ public interface InsuredDetailVoMapper extends BaseMapper<InsuredDetailVo> {
             "LEFT JOIN POSITION d on d.POSITION_ID=b.POSITION_ID\n" +
             "LEFT JOIN DEF_INSURED e on a.DEF_INSURED_ID=e.DEF_INSURED_ID\n" +
             "LEFT JOIN INSURED_DETAIL f on b.STAFF_ID=f.STAFF_ID\n" +
-            "where a.STAFF_ID =#{id}")
+            "where a.STAFF_ID =#{id} AND TO_CHAR(f.CREATED_TIME,'yyyy-MM')=TO_CHAR(TO_DATE(#{date},'yyyy-MM'),'yyyy-MM')")
 
-    InsuredDetailVo selectInsuredDetailVo(Long id);
+    InsuredDetailVo selectInsuredDetailVo(@Param("id") Long id,@Param("date") String date);
 }

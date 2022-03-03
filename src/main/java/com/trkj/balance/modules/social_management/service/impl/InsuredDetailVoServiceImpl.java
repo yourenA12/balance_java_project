@@ -53,9 +53,10 @@ public class InsuredDetailVoServiceImpl extends ServiceImpl<InsuredDetailVoMappe
 
     }
 
+    // 查询员工缴费信息
     @Override
-    public InsuredDetailVo selectInsuredDetailVo(Long id) {
-        return detailVoMapper.selectInsuredDetailVo(id);
+    public InsuredDetailVo selectInsuredDetailVo(Long id,String date) {
+        return detailVoMapper.selectInsuredDetailVo(id,date);
     }
 
 }

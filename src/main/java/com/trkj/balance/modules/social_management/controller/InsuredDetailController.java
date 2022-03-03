@@ -55,10 +55,9 @@ public class InsuredDetailController {
     }
 
     //查询参保明细
-
-    @GetMapping("/selectDInsuredId/{id}")
-    public AjaxResponse selectDInsuredId(@PathVariable("id") Long id){
-        return AjaxResponse.success(detailVoService.selectInsuredDetailVo(id));
+    @GetMapping("/selectDInsuredId/{id}/{date}")
+    public AjaxResponse selectDInsuredId(@PathVariable("id") Long id,@PathVariable("date") String date){
+        return AjaxResponse.success(detailVoService.selectInsuredDetailVo(id,date));
     }
 
 
