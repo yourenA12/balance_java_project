@@ -10,6 +10,7 @@ import com.trkj.balance.modules.social_management.service.InsuredDetailService;
 import com.trkj.balance.modules.social_management.service.InsuredDetailVoService;
 import com.trkj.balance.modules.social_management.vo.InsuredDetailVo;
 import com.trkj.balance.vo.AjaxResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.List;
  * @author 友人A
  * @since 2022-02-28
  */
+@Slf4j
 @RestController
 @RequestMapping("/insuredDetail")
 public class InsuredDetailController {
@@ -42,10 +44,11 @@ public class InsuredDetailController {
                                             @RequestParam("staffNameSearch") String staffNameSearch,
                                             @RequestParam("deptIds") ArrayList deptIds,
                                             @RequestParam("stateSearch") String stateSearch,
-                                            @RequestParam("scheme_name") String scheme_name){
+                                            @RequestParam("scheme_name") String scheme_name,
+                                            @RequestParam("date") String date){
 
         Page<InsuredDetailVo> page = new Page<>(currenPage,pagesize);
-        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch,scheme_name);
+        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch,scheme_name,date);
         return AjaxResponse.success(list);
 
     }
@@ -60,6 +63,9 @@ public class InsuredDetailController {
     //查询参保明细
     @GetMapping("/selectDInsuredId/{id}/{date}")
     public AjaxResponse selectDInsuredId(@PathVariable("id") Long id,@PathVariable("date") String date){
+        log.debug("1111111111");
+        log.debug(id+"");
+        log.debug(date);
         return AjaxResponse.success(detailVoService.selectInsuredDetailVo(id,date));
     }
 

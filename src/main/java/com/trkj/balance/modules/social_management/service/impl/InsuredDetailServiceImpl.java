@@ -105,7 +105,7 @@ public class InsuredDetailServiceImpl extends ServiceImpl<InsuredDetailMapper, I
         return 1;
     }
 
-    //根据id查询参保明细
+    //根据id查询参保记录
     @Override
     public IPage<InsuredDetail> selectInsuredDetailPage(IPage<InsuredDetail> page,Long id) {
         return detailMapper.selectInsuredDetailPage(page,id);

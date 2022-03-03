@@ -22,7 +22,7 @@ public class InsuredDetailVoServiceImpl extends ServiceImpl<InsuredDetailVoMappe
 
     // 查询社保缴费明细
     @Override
-    public IPage<InsuredDetailVo> selectInsuredDetail(IPage<InsuredDetailVo> page, String staffNameSearch, ArrayList deptIds, String stateSearch,String scheme_name) {
+    public IPage<InsuredDetailVo> selectInsuredDetail(IPage<InsuredDetailVo> page, String staffNameSearch, ArrayList deptIds, String stateSearch,String scheme_name, String date) {
         QueryWrapper<InsuredDetailVo> wrapper=new QueryWrapper();
 
         if(staffNameSearch!="" && staffNameSearch!=null ){
@@ -48,7 +48,7 @@ public class InsuredDetailVoServiceImpl extends ServiceImpl<InsuredDetailVoMappe
         // id 不为空
         wrapper.isNotNull("b.STAFF_ID");
 
-        return detailVoMapper.selectInsuredDetail(page,wrapper);
+        return detailVoMapper.selectInsuredDetail(page,wrapper,date);
 
 
     }
