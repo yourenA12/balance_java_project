@@ -8,6 +8,7 @@ import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * <p>
@@ -37,7 +38,21 @@ public interface CompensationService extends IService<Compensation> {
     //查询薪酬组
     IPage<Compensation> selectCompensationPage(IPage<Compensation> page);
 
+
+    // 按薪酬组id查询部门id
+    List<Integer> selectDeptId(int id);
+
+    // 按薪酬组id查询部门id
+    List<Integer> selectPostId(int id);
+
+    // 按薪酬组id查询员工
+    List<Integer> selectStaffId(int id);
+
+
     //删除薪酬组
     int deleteCompensation(Long id);
+
+    // 按薪酬组查询 方案 （加班方案id，扣款方案id，出差方案id）
+    Compensation selectCompensation(Long id);
 
 }

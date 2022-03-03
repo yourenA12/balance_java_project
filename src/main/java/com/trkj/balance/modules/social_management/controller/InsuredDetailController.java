@@ -38,10 +38,11 @@ public class InsuredDetailController {
     public AjaxResponse selectInsuredDetail(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
                                             @RequestParam("staffNameSearch") String staffNameSearch,
                                             @RequestParam("deptIds") ArrayList deptIds,
-                                            @RequestParam("stateSearch") String stateSearch){
+                                            @RequestParam("stateSearch") String stateSearch,
+                                            @RequestParam("scheme_name") String scheme_name){
 
         Page<InsuredDetailVo> page = new Page<>(currenPage,pagesize);
-        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch);
+        IPage<InsuredDetailVo> list=detailVoService.selectInsuredDetail(page,staffNameSearch,deptIds,stateSearch,scheme_name);
         return AjaxResponse.success(list);
 
     }
@@ -51,6 +52,13 @@ public class InsuredDetailController {
     @DeleteMapping("/deleteInsuredAll/{ids}")
     public AjaxResponse deleteInsuredAll(@PathVariable("ids") ArrayList<Integer> ids){
         return AjaxResponse.success( detailService.deleteInsuredAll(ids) );
+    }
+
+    //查询参保明细
+
+    @GetMapping("/selectDInsuredId/{id}")
+    public AjaxResponse selectDInsuredId(@PathVariable("id") Long id){
+        return AjaxResponse.success(detailVoService.selectInsuredDetailVo(id));
     }
 
 

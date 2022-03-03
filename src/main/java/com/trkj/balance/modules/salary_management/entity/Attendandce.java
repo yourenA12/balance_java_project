@@ -43,14 +43,6 @@ public class Attendandce implements Serializable {
     @TableField("ATTENDANDCE_LEAVEMONEY")
     private Double attendandceLeavemoney;
 
-    @ApiModelProperty(value = "未签到一次金额")
-    @TableField("ATTENDANDCE_DIDNOTMONEY")
-    private Double attendandceDidnotmoney;
-
-    @ApiModelProperty(value = "未签退一次金额")
-    @TableField("ATTENDANDCE_DIDBACKMONEY")
-    private Double attendandceDidbackmoney;
-
     @ApiModelProperty(value = "旷工一天金额")
     @TableField("ATTENDANDCE_ABSCNTMONEY")
     private Double attendandceAbscntmoney;
