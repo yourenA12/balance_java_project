@@ -3,7 +3,7 @@ package com.trkj.balance.modules.salary_management.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.trkj.balance.modules.salary_management.Vo.WagenotfiledVo;
+import com.trkj.balance.modules.salary_management.vo.WagenotfiledVo;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.service.WagenotfiledVoService;
 import com.trkj.balance.vo.AjaxResponse;

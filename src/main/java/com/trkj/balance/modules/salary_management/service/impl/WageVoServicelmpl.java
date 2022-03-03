@@ -3,10 +3,10 @@ package com.trkj.balance.modules.salary_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.trkj.balance.modules.salary_management.Vo.WagVo;
 import com.trkj.balance.modules.salary_management.entity.*;
 import com.trkj.balance.modules.salary_management.mapper.*;
 import com.trkj.balance.modules.salary_management.service.WageVoService;
+import com.trkj.balance.modules.salary_management.vo.WagVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +55,10 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
     @Autowired
     private ArchiveaMapper archiveaMapper;
 
+    // 薪酬组 _ 未归档表
+    @Autowired
+    private WagenotfiledMapper wagenotfiledMapper;
+
     //查询工资
     @Override
     public IPage<WagVo> selectWagVo(IPage<WagVo> page, int compensationId) {
@@ -98,6 +102,13 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
         QueryWrapper wrapper5 = new QueryWrapper();
         wrapper5.eq("BUSINESS_ID", compensation.getBusinessId());
         Business business = businessMapper.selectOne(wrapper5);
+
+        // 应发工资
+        Double w_wagesShould=0.0;
+        // 实发工资
+        Double w_payroll=0.0;
+        // 公司缴纳
+        Double w_companyPay=0.0;
 
         // 循环员工
         for (WagVo record : wagVos.getRecords()) {
@@ -257,7 +268,25 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
             // 实发工资
             record.setPayroll(payroll);
 
+            // 应发工资
+            w_wagesShould+=record.getWagesShould();
+            // 实发工资
+            w_payroll+=record.getPayroll();
+            // 公司缴纳 ( 社保 + 基金 )
+            w_companyPay+=record.getInsDetailSocialFirmPay()+record.getInsDetailFundFirmPay();
+
         }
+
+        // 按薪酬组id查询未归档表
+        Wagenotfiled wagenotfiled = wagenotfiledMapper.selectOne(wrapper);
+        if(wagenotfiled==null){
+            return wagVos;
+        }
+        wagenotfiled.setWagenotfiledSalary(w_wagesShould);// 应发工资
+        wagenotfiled.setWagenotfiledPayrollsalary(w_payroll);// 实发工资
+        wagenotfiled.setWagenotfiledFirmpayment(w_companyPay);// 公司缴纳
+        wagenotfiled.setWagenotfiledAskperson(wagVos.getTotal());// 计薪人数
+        wagenotfiledMapper.updateById(wagenotfiled);//修改
 
         return wagVos;
     }
