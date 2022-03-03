@@ -1,4 +1,4 @@
-package com.trkj.balance.modules.salary_management.Vo;
+package com.trkj.balance.modules.salary_management.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
