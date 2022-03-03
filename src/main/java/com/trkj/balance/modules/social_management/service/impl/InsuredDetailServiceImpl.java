@@ -1,6 +1,7 @@
 package com.trkj.balance.modules.social_management.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.social_management.entity.InsuredDetail;
 import com.trkj.balance.modules.social_management.entity.InsuredStaff;
 import com.trkj.balance.modules.social_management.mapper.*;
@@ -102,6 +103,12 @@ public class InsuredDetailServiceImpl extends ServiceImpl<InsuredDetailMapper, I
 //        defInsuredMapper.delete(wrapper3);
 
         return 1;
+    }
+
+    //根据id查询参保明细
+    @Override
+    public IPage<InsuredDetail> selectInsuredDetailPage(IPage<InsuredDetail> page,Long id) {
+        return detailMapper.selectInsuredDetailPage(page,id);
     }
 
 

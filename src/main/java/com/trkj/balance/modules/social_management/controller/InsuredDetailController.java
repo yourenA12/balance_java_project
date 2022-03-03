@@ -3,6 +3,9 @@ package com.trkj.balance.modules.social_management.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.salary_management.Vo.WagVo;
+
+import com.trkj.balance.modules.social_management.entity.InsuredDetail;
 import com.trkj.balance.modules.social_management.service.InsuredDetailService;
 import com.trkj.balance.modules.social_management.service.InsuredDetailVoService;
 import com.trkj.balance.modules.social_management.vo.InsuredDetailVo;
@@ -61,6 +64,15 @@ public class InsuredDetailController {
     }
 
 
+    //根据id查询参保明细
+    @GetMapping("/selectDInsuredbyId/{currenPage}/{pagesize}/{id}")
+    public AjaxResponse selectDInsuredbyId(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize, @PathVariable("id") Long id){
+
+        Page<InsuredDetail> page = new Page<>(currenPage,pagesize);
+        IPage<InsuredDetail> list=detailService.selectInsuredDetailPage(page,id);
+        return AjaxResponse.success(list);
+
+    }
 }
 
 
