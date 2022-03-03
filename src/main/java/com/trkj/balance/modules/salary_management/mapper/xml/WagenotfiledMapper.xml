@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.balance.modules.salary_management.mapper.WagenotfiledMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.trkj.balance.modules.salary_management.entity.Wagenotfiled">
+        <id column="WAGENOTFILED_ID" property="wagenotfiledId" />
+        <result column="COMPENSATION_ID" property="compensationId" />
+        <result column="WAGENOTFILED_ASKPERSON" property="wagenotfiledAskperson" />
+        <result column="WAGENOTFILED_SALARY" property="wagenotfiledSalary" />
+        <result column="WAGENOTFILED_PAYROLLSALARY" property="wagenotfiledPayrollsalary" />
+        <result column="WAGENOTFILED_FIRMPAYMENT" property="wagenotfiledFirmpayment" />
+        <result column="WAGENOTFILED_STAFFCOST" property="wagenotfiledStaffcost" />
+        <result column="WAGENOTFILED_DATE" property="wagenotfiledDate" />
+        <result column="WAGENOTFILED_STATE" property="wagenotfiledState" />
+        <result column="CREATED_TIME" property="createdTime" />
+        <result column="UPDATED_TIME" property="updatedTime" />
+        <result column="REVISION" property="revision" />
+        <result column="IS_DELETED" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        WAGENOTFILED_ID, COMPENSATION_ID, WAGENOTFILED_ASKPERSON, WAGENOTFILED_SALARY, WAGENOTFILED_PAYROLLSALARY, WAGENOTFILED_FIRMPAYMENT, WAGENOTFILED_STAFFCOST, WAGENOTFILED_DATE, WAGENOTFILED_STATE, CREATED_TIME, UPDATED_TIME, REVISION, IS_DELETED
+    </sql>
+
+</mapper>
