@@ -85,6 +85,14 @@ public class WagVo {
     @TableField(exist = false)
     private Double absenteeism;
 
+    @ApiModelProperty(value = "病假")
+    @TableField(exist = false)
+    private Double fallLeave;
+
+    @ApiModelProperty(value = "事假")
+    @TableField(exist = false)
+    private Double matterLeave;
+
     @ApiModelProperty(value = "社保个人缴费")
     @TableField("INS_DETAIL_SOCIAL_PERSON_PAY")
     private Double insDetailSocialPersonPay;
