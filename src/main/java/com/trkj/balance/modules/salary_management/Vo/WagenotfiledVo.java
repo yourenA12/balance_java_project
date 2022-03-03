@@ -1,6 +1,7 @@
 package com.trkj.balance.modules.salary_management.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,21 +16,10 @@ public class WagenotfiledVo {
     @TableField("COMPENSATION_ID")
     private Long compensationId;
 
-//    @ApiModelProperty(value = "薪酬组人数")
-//    @TableField("COMPENSATION_NUMBER")
-//    private Long compensationNumber;
-//
-//    @ApiModelProperty(value = "应发工资")
-//    @TableField(exist = false)
-//    private Double  wagesShould;
-//
-//    @ApiModelProperty(value = "实发工资")
-//    @TableField(exist = false)
-//    private Double  payroll;
-//
-//    @ApiModelProperty(value = "公司缴纳")
-//    @TableField(exist = false)
-//    private Double  companyMoney;
+    @ApiModelProperty(value = "工资归档编号")
+    @TableId("WAGENOTFILED_ID")
+    private Long wagenotfiledId;
+
 
     @ApiModelProperty(value = "计薪人数")
     @TableField("WAGENOTFILED_ASKPERSON")

@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,10 +25,18 @@ public class WagenotfiledVoServicelmpl extends ServiceImpl<WagenotfiledVoMapper,
 
     //查询工资未归档
     @Override
-    public IPage<WagenotfiledVo> selectWagenotfiledVoPage(IPage<WagenotfiledVo> page) {
+    public IPage<WagenotfiledVo> selectWagenotfiledVoPage(IPage<WagenotfiledVo> page,String seek) {
+
+        QueryWrapper wrapper=new QueryWrapper();
+        if(seek!="" && seek!=null ){
+            // 按薪酬组进行模糊查询
+            wrapper.like("c.COMPENSATION_NAME",seek);
+        }
+
+        wrapper.eq("w.WAGENOTFILED_STATE",0);
 
         // 查询工资未归档
-        IPage<WagenotfiledVo> iPages = wagenotfiledVoMapper.selectWagenotfiledVoPage(page);
+        IPage<WagenotfiledVo> iPages = wagenotfiledVoMapper.selectWagenotfiledVoPage(page,wrapper);
 
         Page<WagVo> page1 = new Page<>(1,999);// 分页
 
@@ -36,6 +45,21 @@ public class WagenotfiledVoServicelmpl extends ServiceImpl<WagenotfiledVoMapper,
             wageVoService.selectWagVo(page1, Math.toIntExact(record.getCompensationId()));
         }
 
-        return wagenotfiledVoMapper.selectWagenotfiledVoPage(page);
+        return wagenotfiledVoMapper.selectWagenotfiledVoPage(page,wrapper);
     }
+
+    //查询工资归档
+    @Override
+    public IPage<WagenotfiledVo> selectWagenotfiledVosPage(IPage<WagenotfiledVo> page,String seek) {
+
+        QueryWrapper wrapper=new QueryWrapper();
+        if(seek!="" && seek!=null ){
+            // 按薪酬组进行模糊查询
+            wrapper.like("c.COMPENSATION_NAME",seek);
+        }
+
+        wrapper.eq("w.WAGENOTFILED_STATE",1);
+        return wagenotfiledVoMapper.selectWagenotfiledVosPage(page,wrapper);
+    }
+
 }

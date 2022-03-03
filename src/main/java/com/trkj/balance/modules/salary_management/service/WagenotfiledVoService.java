@@ -8,5 +8,8 @@ import com.trkj.balance.modules.salary_management.entity.Wagenotfiled;
 public interface WagenotfiledVoService extends IService<WagenotfiledVo> {
 
     //查询工资未未归档
-    IPage<WagenotfiledVo> selectWagenotfiledVoPage(IPage<WagenotfiledVo> page);
+    IPage<WagenotfiledVo> selectWagenotfiledVoPage(IPage<WagenotfiledVo> page,String seek);
+
+    //查询工资归档
+    IPage<WagenotfiledVo> selectWagenotfiledVosPage(IPage<WagenotfiledVo> page,String seek);
 }

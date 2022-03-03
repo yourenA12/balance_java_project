@@ -52,14 +52,6 @@ public class Wagenotfiled implements Serializable {
     @TableField("WAGENOTFILED_FIRMPAYMENT")
     private Double wagenotfiledFirmpayment;
 
-    @ApiModelProperty(value = "员工成本")
-    @TableField("WAGENOTFILED_STAFFCOST")
-    private Double wagenotfiledStaffcost;
-
-    @ApiModelProperty(value = "日期")
-    @TableField("WAGENOTFILED_DATE")
-    private Date wagenotfiledDate;
-
     @ApiModelProperty(value = "状态;0：未归档，1：已归档")
     @TableField("WAGENOTFILED_STATE")
     private Long wagenotfiledState;
