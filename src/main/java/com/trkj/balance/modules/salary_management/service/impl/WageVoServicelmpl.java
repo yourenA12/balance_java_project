@@ -105,11 +105,11 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
         Business business = businessMapper.selectOne(wrapper5);
 
         // 应发工资
-        Double w_wagesShould=0.0;
+        Double w_wagesShould = 0.0;
         // 实发工资
-        Double w_payroll=0.0;
+        Double w_payroll = 0.0;
         // 公司缴纳
-        Double w_companyPay=0.0;
+        Double w_companyPay = 0.0;
 
         // 保留两位小数
 //        DecimalFormat df = new DecimalFormat("#.00");
@@ -239,15 +239,18 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
             // 按员工id查询考勤归档
             Archive archive = archiveaMapper.selectByArchiveStaffId(record.getStaffId());
 
-            // 迟到 （迟到次数 * 扣款金额/次）
-            tardy = archive.getLateFrequency() * attendandce.getAttendandceLitemoney();
+            if (archive != null) {
 
-            // 早退 （早退次数 * 扣款金额/次）
-            leave = archive.getLeaveEarlyFrequency() * attendandce.getAttendandceLeavemoney();
+                // 迟到 （迟到次数 * 扣款金额/次）
+                tardy = archive.getLateFrequency() * attendandce.getAttendandceLitemoney();
 
-            // 旷工扣款（ 每小时工资 * 旷工时长 * 每小时扣款比例 ）
-            absenteeism = (monthMoney / 240) * archive.getAbsenteeismFrequency() * attendandce.getAttendandceAbscntmoney() / 100;
+                // 早退 （早退次数 * 扣款金额/次）
+                leave = archive.getLeaveEarlyFrequency() * attendandce.getAttendandceLeavemoney();
 
+                // 旷工扣款（ 每小时工资 * 旷工时长 * 每小时扣款比例 ）
+                absenteeism = (monthMoney / 240) * archive.getAbsenteeismFrequency() * attendandce.getAttendandceAbscntmoney() / 100;
+
+            }
             // 将迟到扣款加入到实体类中
             record.setTardy(tardy);
             // 将早退扣款加入到实体类中
@@ -274,17 +277,17 @@ public class WageVoServicelmpl extends ServiceImpl<WageVoMapper, WagVo> implemen
             record.setPayroll(payroll);
 
             // 应发工资
-            w_wagesShould+=record.getWagesShould();
+            w_wagesShould += record.getWagesShould();
             // 实发工资
-            w_payroll+=record.getPayroll();
+            w_payroll += record.getPayroll();
             // 公司缴纳 ( 社保 + 基金 )
-            w_companyPay+=record.getInsDetailSocialFirmPay()+record.getInsDetailFundFirmPay();
+            w_companyPay += record.getInsDetailSocialFirmPay() + record.getInsDetailFundFirmPay();
 
         }
 
         // 按薪酬组id查询未归档表
         Wagenotfiled wagenotfiled = wagenotfiledMapper.selectBydate(compensationId);
-        if(wagenotfiled==null){
+        if (wagenotfiled == null) {
             return wagVos;
         }
         wagenotfiled.setWagenotfiledSalary(w_wagesShould);// 应发工资

@@ -291,7 +291,7 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
 
         compensationDeptPostMapper.delete(wrapper); // 按薪酬组id删除 部门职位
         compensationStaffMapper.delete(wrapper); // 删除员工
-        wagenotfiledMapper.delete(wrapper);// 删除未归档
+        wagenotfiledMapper.deleteByDate(wrapper);// 删除未归档
         compensationMapper.delete(wrapper); // 删除薪酬组
 
         return 1;

@@ -29,6 +29,6 @@ public interface InsuredDetailSonMapper extends BaseMapper<InsuredDetailSon> {
 
     // 按员工id和当前月份删除参保明细表
     @Delete("DELETE FROM INSURED_DETAIL_SON ${ew.customSqlSegment} AND TO_CHAR(CREATED_TIME,'yyyy-MM') = TO_CHAR(SYSDATE,'yyyy-MM')")
-    int deleteByDate(@Param(Constants.WRAPPER) QueryWrapper<EntryhirdeVo> wrapper);
+    int deleteByDate(@Param(Constants.WRAPPER) QueryWrapper wrapper);
 
 }

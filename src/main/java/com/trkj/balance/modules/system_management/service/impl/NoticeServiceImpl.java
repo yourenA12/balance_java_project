@@ -71,6 +71,8 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
             wrapper.eq("NOTICE_TYPE",noticeType);
         }
 
+        wrapper.orderByDesc("CREATED_TIME");
+
         return noticeMapper.selectPage(page,wrapper);
     }
 
