@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.organization_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.trkj.balance.modules.organization_management.mapper.PositionsMapper;
 import com.trkj.balance.modules.organization_management.entity.DeptPost;
 import com.trkj.balance.modules.organization_management.entity.Position;
@@ -33,6 +34,14 @@ public class DeptPoServiceImpl extends ServiceImpl<DeptPoMapper, DeptPost> imple
     @Override
     @Transactional
     public int insert(Position post, ArrayList<Integer> deptIds) {
+
+        // 如果职位id不为空，就删除当前职位再次新增
+        if(post.getPositionId()!=null){
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.eq("POSITION_ID",post.getPositionId());
+            wrapper.like("POSITION_NAME",post.getPositionName());
+            deptPostMapper.delete(wrapper);
+        }
 
         // 新增职位
         postMapper.insert(post);
