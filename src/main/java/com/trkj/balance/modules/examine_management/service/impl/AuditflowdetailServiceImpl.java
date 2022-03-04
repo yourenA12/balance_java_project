@@ -16,8 +16,14 @@ import com.trkj.balance.modules.organization_management.mapper.DeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * <p>
@@ -65,32 +71,32 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
         // 按照明细表id更改状态
         auditflowdetailMapper.updateById(auditflowdetail);
 
-        if (auditflowdetail.getAuditflowdetaiState()==2){
+        if (auditflowdetail.getAuditflowdetaiState() == 2) {
             // 按照主表id查询明细表数据，分页查询 第一页第一条
-            Page<Auditflowdetail> page = new Page<>(1,1);
+            Page<Auditflowdetail> page = new Page<>(1, 1);
             //声明一个条件构造器
             QueryWrapper wrapper = new QueryWrapper();
             //查询 明细表id 和 主表id
-            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
             //查询 明细表状态为0
-            wrapper.eq("AUDITFLOWDETAI_STATE",0);
+            wrapper.eq("AUDITFLOWDETAI_STATE", 0);
             //根据创建时间排序
             wrapper.orderByAsc("AUDITFLOWDETAIL_ID");
-            IPage a = auditflowdetailMapper.selectPage(page,wrapper);
+            IPage a = auditflowdetailMapper.selectPage(page, wrapper);
 
             // 获取第一条数据改状态为1
-            if (a.getTotal()>0){
+            if (a.getTotal() > 0) {
                 //获取查出来的明细表第一条数据 下表为0 的数据
-                Auditflowdetail auditflowdetail1=(Auditflowdetail)a.getRecords().get(0);
+                Auditflowdetail auditflowdetail1 = (Auditflowdetail) a.getRecords().get(0);
                 //new 一个明细表实体类对象
-                Auditflowdetail auditflowdetail2= new Auditflowdetail();
+                Auditflowdetail auditflowdetail2 = new Auditflowdetail();
                 //写入 获取的明细表id
                 auditflowdetail2.setAuditflowdetailId(auditflowdetail1.getAuditflowdetailId());
                 //将第一条明细表数据 的状态改为1
                 auditflowdetail2.setAuditflowdetaiState(1L);
                 //调用修改
                 auditflowdetailMapper.updateById(auditflowdetail2);
-            }else{// 如果没有就改主表状态为2
+            } else {// 如果没有就改主表状态为2
                 //new 一个 主表实体对象
                 Auditflow auditflow = new Auditflow();
                 //
@@ -111,7 +117,7 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 staffMapper.updateById(staff);
             }
             //驳回的修改
-        }else{
+        } else {
             // 按照主表id更改主表状态为3
             Auditflow auditflow = new Auditflow();
             auditflow.setAuditflowId(auditflowdetail.getAuditflowId());
@@ -129,32 +135,32 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
         // 按照明细表id更改状态
         auditflowdetailMapper.updateById(auditflowdetail);
 
-        if (auditflowdetail.getAuditflowdetaiState()==2){
+        if (auditflowdetail.getAuditflowdetaiState() == 2) {
             // 按照主表id查询明细表数据，分页查询 第一页第一条
-            Page<Auditflowdetail> page = new Page<>(1,1);
+            Page<Auditflowdetail> page = new Page<>(1, 1);
             //声明一个条件构造器
             QueryWrapper wrapper = new QueryWrapper();
             //查询 明细表id 和 主表id
-            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
             //查询 明细表状态为0
-            wrapper.eq("AUDITFLOWDETAI_STATE",0);
+            wrapper.eq("AUDITFLOWDETAI_STATE", 0);
             //根据创建时间排序
             wrapper.orderByAsc("AUDITFLOWDETAIL_ID");
-            IPage a = auditflowdetailMapper.selectPage(page,wrapper);
+            IPage a = auditflowdetailMapper.selectPage(page, wrapper);
 
             // 获取第一条数据改状态为1
-            if (a.getTotal()>0){
+            if (a.getTotal() > 0) {
                 //获取查出来的明细表第一条数据 下表为0 的数据
-                Auditflowdetail auditflowdetail1=(Auditflowdetail)a.getRecords().get(0);
+                Auditflowdetail auditflowdetail1 = (Auditflowdetail) a.getRecords().get(0);
                 //new 一个明细表实体类对象
-                Auditflowdetail auditflowdetail2= new Auditflowdetail();
+                Auditflowdetail auditflowdetail2 = new Auditflowdetail();
                 //写入 获取的明细表id
                 auditflowdetail2.setAuditflowdetailId(auditflowdetail1.getAuditflowdetailId());
                 //将第一条明细表数据 的状态改为1
                 auditflowdetail2.setAuditflowdetaiState(1L);
                 //调用修改
                 auditflowdetailMapper.updateById(auditflowdetail2);
-            }else{// 如果没有就改主表状态为2
+            } else {// 如果没有就改主表状态为2
                 //new 一个 主表实体对象
                 Auditflow auditflow = new Auditflow();
                 //
@@ -168,13 +174,13 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 // 按照审批编号查询调薪表中调薪后工资
                 QueryWrapper wrapper1 = new QueryWrapper();
                 // 获取主表id
-                wrapper1.eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+                wrapper1.eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
                 //查询 调动表的一条数据
-                Transfer transfer=transferMapper1.selectOne(wrapper1);
+                Transfer transfer = transferMapper1.selectOne(wrapper1);
                 //条件构造器
                 QueryWrapper wrapper2 = new QueryWrapper();
                 //拿到员工id
-                wrapper2.eq("STAFF_ID",auditflowx.getStaffId());
+                wrapper2.eq("STAFF_ID", auditflowx.getStaffId());
                 //new 一个 部门实体对象
                 Staff staff = new Staff();
                 //将 主表里的员工id 放到员工表里
@@ -186,7 +192,7 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 staffMapper.updateById(staff);
             }
             //驳回的修改
-        }else{
+        } else {
             // 按照主表id更改主表状态为3
             Auditflow auditflow = new Auditflow();
             auditflow.setAuditflowId(auditflowdetail.getAuditflowId());
@@ -204,32 +210,32 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
         // 按照明细表id更改状态
         auditflowdetailMapper.updateById(auditflowdetail);
 
-        if (auditflowdetail.getAuditflowdetaiState()==2){
+        if (auditflowdetail.getAuditflowdetaiState() == 2) {
             // 按照主表id查询明细表数据，分页查询 第一页第一条
-            Page<Auditflowdetail> page = new Page<>(1,1);
+            Page<Auditflowdetail> page = new Page<>(1, 1);
             //声明一个条件构造器
             QueryWrapper wrapper = new QueryWrapper();
             //查询 明细表id 和 主表id
-            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
             //查询 明细表状态为0
-            wrapper.eq("AUDITFLOWDETAI_STATE",0);
+            wrapper.eq("AUDITFLOWDETAI_STATE", 0);
             //根据创建时间排序
             wrapper.orderByAsc("AUDITFLOWDETAIL_ID");
-            IPage a = auditflowdetailMapper.selectPage(page,wrapper);
+            IPage a = auditflowdetailMapper.selectPage(page, wrapper);
 
             // 获取第一条数据改状态为1
-            if (a.getTotal()>0){
+            if (a.getTotal() > 0) {
                 //获取查出来的明细表第一条数据 下表为0 的数据
-                Auditflowdetail auditflowdetail1=(Auditflowdetail)a.getRecords().get(0);
+                Auditflowdetail auditflowdetail1 = (Auditflowdetail) a.getRecords().get(0);
                 //new 一个明细表实体类对象
-                Auditflowdetail auditflowdetail2= new Auditflowdetail();
+                Auditflowdetail auditflowdetail2 = new Auditflowdetail();
                 //写入 获取的明细表id
                 auditflowdetail2.setAuditflowdetailId(auditflowdetail1.getAuditflowdetailId());
                 //将第一条明细表数据 的状态改为1
                 auditflowdetail2.setAuditflowdetaiState(1L);
                 //调用修改
                 auditflowdetailMapper.updateById(auditflowdetail2);
-            }else{// 如果没有就改主表状态为2
+            } else {// 如果没有就改主表状态为2
                 //new 一个 主表实体对象
                 Auditflow auditflow = new Auditflow();
                 //
@@ -244,13 +250,13 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 // 按照审批编号查询调薪表中调薪后工资
                 QueryWrapper wrapper1 = new QueryWrapper();
                 // 获取主表id
-                wrapper1.eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+                wrapper1.eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
                 //查询 调薪表的一条数据
-                Salary salary=salaryEMapper.selectOne(wrapper1);
+                Salary salary = salaryEMapper.selectOne(wrapper1);
                 //
                 QueryWrapper wrapper2 = new QueryWrapper();
                 //拿到员工id
-                wrapper2.eq("STAFF_ID",auditflowx.getStaffId());
+                wrapper2.eq("STAFF_ID", auditflowx.getStaffId());
 
                 //new 一个 固定工资实体对象、
                 Fixedwage fixedwage = new Fixedwage();
@@ -259,10 +265,10 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 //将 调表的调薪后工资 set到工资表的 薪资里面
                 fixedwage.setFixedwageOfficialmoney(salary.getAfterSalary());
                 //调用 修改
-                fixedwageNMapper.update(fixedwage,wrapper2);
+                fixedwageNMapper.update(fixedwage, wrapper2);
             }
             //驳回的修改
-        }else{
+        } else {
             // 按照主表id更改主表状态为3
             Auditflow auditflow = new Auditflow();
             auditflow.setAuditflowId(auditflowdetail.getAuditflowId());
@@ -280,32 +286,32 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
         // 按照明细表id更改状态
         auditflowdetailMapper.updateById(auditflowdetail);
 
-        if (auditflowdetail.getAuditflowdetaiState()==2){
+        if (auditflowdetail.getAuditflowdetaiState() == 2) {
             // 按照主表id查询明细表数据，分页查询 第一页第一条
-            Page<Auditflowdetail> page = new Page<>(1,1);
+            Page<Auditflowdetail> page = new Page<>(1, 1);
             //声明一个条件构造器
             QueryWrapper wrapper = new QueryWrapper();
             //查询 明细表id 和 主表id
-            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
             //查询 明细表状态为0
-            wrapper.eq("AUDITFLOWDETAI_STATE",0);
+            wrapper.eq("AUDITFLOWDETAI_STATE", 0);
             //根据创建时间排序
             wrapper.orderByAsc("AUDITFLOWDETAIL_ID");
-            IPage a = auditflowdetailMapper.selectPage(page,wrapper);
+            IPage a = auditflowdetailMapper.selectPage(page, wrapper);
 
             // 获取第一条数据改状态为1
-            if (a.getTotal()>0){
+            if (a.getTotal() > 0) {
                 //获取查出来的明细表第一条数据 下表为0 的数据
-                Auditflowdetail auditflowdetail1=(Auditflowdetail)a.getRecords().get(0);
+                Auditflowdetail auditflowdetail1 = (Auditflowdetail) a.getRecords().get(0);
                 //new 一个明细表实体类对象
-                Auditflowdetail auditflowdetail2= new Auditflowdetail();
+                Auditflowdetail auditflowdetail2 = new Auditflowdetail();
                 //写入 获取的明细表id
                 auditflowdetail2.setAuditflowdetailId(auditflowdetail1.getAuditflowdetailId());
                 //将第一条明细表数据 的状态改为1
                 auditflowdetail2.setAuditflowdetaiState(1L);
                 //调用修改
                 auditflowdetailMapper.updateById(auditflowdetail2);
-            }else{// 如果没有就改主表状态为2
+            } else {// 如果没有就改主表状态为2
                 //new 一个 主表实体对象
                 Auditflow auditflow = new Auditflow();
                 //获取主表id
@@ -316,7 +322,7 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 auditflowMapper.updateById(auditflow);
             }
             //驳回的修改
-        }else{
+        } else {
             // 按照主表id更改主表状态为3
             Auditflow auditflow = new Auditflow();
             auditflow.setAuditflowId(auditflowdetail.getAuditflowId());
@@ -331,29 +337,29 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
     //修改补打卡
     @Override
     @Transactional
-    public int updateCard(Auditflowdetail auditflowdetail) {
+    public int updateCard(Auditflowdetail auditflowdetail) throws ParseException {
         // 按照明细表id更改状态
         auditflowdetailMapper.updateById(auditflowdetail);
 
-        if (auditflowdetail.getAuditflowdetaiState()==2){
+        if (auditflowdetail.getAuditflowdetaiState() == 2) {
             // 按照主表id查询明细表数据，分页查询 第一页第一条
-            Page<Auditflowdetail> page = new Page<>(1,1);
+            Page<Auditflowdetail> page = new Page<>(1, 1);
             //声明一个条件构造器
             QueryWrapper wrapper = new QueryWrapper();
             //查询 明细表id 和 主表id
-            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+            wrapper.select("AUDITFLOWDETAIL_ID").eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
             //查询 明细表状态为0
-            wrapper.eq("AUDITFLOWDETAI_STATE",0);
+            wrapper.eq("AUDITFLOWDETAI_STATE", 0);
             //根据创建时间排序
             wrapper.orderByAsc("AUDITFLOWDETAIL_ID");
-            IPage a = auditflowdetailMapper.selectPage(page,wrapper);
+            IPage a = auditflowdetailMapper.selectPage(page, wrapper);
 
             // 获取第一条数据改状态为1
-            if (a.getTotal()>0){
+            if (a.getTotal() > 0) {
                 //获取查出来的明细表第一条数据 下表为0 的数据
-                Auditflowdetail auditflowdetail1=(Auditflowdetail)a.getRecords().get(0);
+                Auditflowdetail auditflowdetail1 = (Auditflowdetail) a.getRecords().get(0);
                 //new 一个明细表实体类对象
-                Auditflowdetail auditflowdetail2= new Auditflowdetail();
+                Auditflowdetail auditflowdetail2 = new Auditflowdetail();
                 //写入 获取的明细表id
                 auditflowdetail2.setAuditflowdetailId(auditflowdetail1.getAuditflowdetailId());
                 //将第一条明细表数据 的状态改为1
@@ -361,7 +367,7 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
                 //调用修改
                 auditflowdetailMapper.updateById(auditflowdetail2);
 
-            }else{// 如果没有就改主表状态为2
+            } else {// 如果没有就改主表状态为2
                 //new 一个 主表实体对象
                 Auditflow auditflow = new Auditflow();
                 //获取主表id
@@ -376,33 +382,59 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
 
                 QueryWrapper wrapper1 = new QueryWrapper();
                 // 获取主表id
-                wrapper1.eq("AUDITFLOW_ID",auditflowdetail.getAuditflowId());
+                wrapper1.eq("AUDITFLOW_ID", auditflowdetail.getAuditflowId());
                 //查询 补打卡表的一条数据
-                Card card=cardNMapper.selectOne(wrapper1);
+                Card card = cardNMapper.selectOne(wrapper1);
 
-                if(card.getCardType()=="未签到"){
-                    // 补上午
-                    
+                // 补上午
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 
-                }else{
-                    // 补下午
-
-                }
+                //使用默认时区和语言环境获得一个日历。
+                Calendar rightNow = Calendar.getInstance();
+                    /*用Calendar的get(int field)方法返回给定日历字段的值。
+                    HOUR 用于 12 小时制时钟 (0 - 11)，HOUR_OF_DAY 用于 24 小时制时钟。*/
+                Integer year = rightNow.get(Calendar.YEAR);
+                Integer month = rightNow.get(Calendar.MONTH) + 1; //第一个月从0开始，所以得到月份＋1
+                Integer day = rightNow.get(rightNow.DAY_OF_MONTH);
+                String TimeNow24;
+                Date date;
 
                 //条件构造器
                 QueryWrapper wrapper2 = new QueryWrapper();
                 //拿到员工id
-                wrapper2.eq("STAFF_ID",card.getStaffId());
+                wrapper2.eq("STAFF_ID", card.getStaffId());
                 // 当前时间
-                wrapper2.eq("TO_CHAR(CREATED_TIME,'yyyy-MM-dd')","TO_CHAR(sysdate,'yyyy-MM-dd')");
+                wrapper2.eq("TO_CHAR(CREATED_TIME,'yyyy-MM-dd')", "TO_CHAR(sysdate,'yyyy-MM-dd')");
                 //new 一个 打卡记录表
-                ClockRecord clockRecord = clockRecordMapper.selectOne(wrapper2);
+                ClockRecord clockRecord = clockRecordMapper.selectBydate(card.getStaffId());
+                if(clockRecord==null){
+                    // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
+                    // 手动回滚
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                    return 0;
+                }
                 // 修改打卡记录
+                if (card.getCardType() == "未签到") {
+                    // 补上午
+                    TimeNow24 = year + "-" + month + "-" + day + " " + "07:59:00:000";
+                    // 转换date
+                    date = sdf.parse(TimeNow24);
+                    clockRecord.setMornClock(date);
 
+                } else {
+                    // 补下午
+                    TimeNow24 = year + "-" + month + "-" + day + " " + "17:01:00:000";
+                    // 转换date
+                    date = sdf.parse(TimeNow24);
+                    clockRecord.setAfternoonClock(date);
+
+                }
+                // 修改打卡时间
+                clockRecordMapper.updateById(clockRecord);
 
             }
             //驳回的修改
-        }else{
+        } else {
             // 按照主表id更改主表状态为3
             Auditflow auditflow = new Auditflow();
             auditflow.setAuditflowId(auditflowdetail.getAuditflowId());
@@ -412,8 +444,6 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
 
         return 1;
     }
-
-
 
 
 }

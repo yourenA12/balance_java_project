@@ -3,10 +3,7 @@ package com.trkj.balance.modules.examine_management.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.trkj.balance.modules.examine_management.entity.NoticeStaff;
-import com.trkj.balance.modules.examine_management.vo.WorkerVo;
 import com.trkj.balance.modules.system_management.entity.NoticeVo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

@@ -18,7 +18,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ClockRecordMapper extends BaseMapper<ClockRecord> {
 
-
-
+    @Select("SELECT * FROM CLOCK_RECORD  WHERE IS_DELETED=0  AND STAFF_ID = #{id} AND TO_CHAR(CREATED_TIME,'yyyy-MM-dd') = TO_CHAR(sysdate,'yyyy-MM-dd')")
+    ClockRecord selectBydate(Long id);
 
 }

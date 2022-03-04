@@ -30,13 +30,15 @@ public class FixedwageController {
 
     //查询固定工资
     @GetMapping("/selectFixedwage")
-    public AjaxResponse selectFixedwage(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
+    public AjaxResponse selectFixedwage(@RequestParam("compId") int compId,
+                                        @RequestParam("currentPage") int currenPage,
+                                        @RequestParam("pagesize") int pagesize,
                                         @RequestParam("staffNameSearch") String staffNameSearch,
                                         @RequestParam("deptIds") ArrayList deptIds,
                                         @RequestParam("postSearch") String postSearch){
 
         Page<Fixedwage> page = new Page<>(currenPage,pagesize);
-        IPage<Fixedwage> list=fixedwageService.selectFixedwagePage(page,staffNameSearch,deptIds,postSearch);
+        IPage<Fixedwage> list=fixedwageService.selectFixedwagePage(page,compId,staffNameSearch,deptIds,postSearch);
         return AjaxResponse.success(list);
 
     }

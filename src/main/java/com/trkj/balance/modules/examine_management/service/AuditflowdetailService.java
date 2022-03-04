@@ -3,6 +3,8 @@ package com.trkj.balance.modules.examine_management.service;
 import com.trkj.balance.modules.examine_management.entity.Auditflowdetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.text.ParseException;
+
 /**
  * <p>
  * 审批流明细表 服务类
@@ -22,5 +24,5 @@ public interface AuditflowdetailService extends IService<Auditflowdetail> {
     //修改加班表状态
     int updateOvertimeask(Auditflowdetail auditflowdetail);
     //修改补打卡
-    int updateCard(Auditflowdetail auditflowdetail);
+    int updateCard(Auditflowdetail auditflowdetail) throws ParseException;
 }
