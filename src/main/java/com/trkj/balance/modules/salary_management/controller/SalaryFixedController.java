@@ -49,11 +49,12 @@ public class SalaryFixedController {
     }
 
     //查询调薪表数据
-    @GetMapping("/selectSalary/{currenPage}/{pagesize}")
-    public AjaxResponse selectSalary(@PathVariable("currenPage") int currenPage, @PathVariable("pagesize") int pagesize){
+    @GetMapping("/selectSalary")
+    public AjaxResponse selectSalary(@RequestParam("currenPage") int currenPage, @RequestParam("pagesize") int pagesize,
+                                     @RequestParam("staffName") String staffName){
 
         Page<Salary> page = new Page<>(currenPage,pagesize);
-        IPage<Salary> list=salaryFixedService.selectSalaryPage(page);
+        IPage<Salary> list=salaryFixedService.selectSalaryPage(page,staffName);
         return AjaxResponse.success(list);
 
     }

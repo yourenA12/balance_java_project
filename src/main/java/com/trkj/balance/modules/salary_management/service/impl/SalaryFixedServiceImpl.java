@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.salary_management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.employee_management.entity.Fixedwage;
 import com.trkj.balance.modules.employee_management.mapper.FixedwageMapper;
@@ -42,7 +43,13 @@ public class SalaryFixedServiceImpl extends ServiceImpl<SalaryFixedMapper, Salar
 
     //查询调薪记录
     @Override
-    public IPage<Salary> selectSalaryPage(IPage<Salary> page) {
-        return salaryFixedMapper.selectSalaryPage(page);
+    public IPage<Salary> selectSalaryPage(IPage<Salary> page,String staffName) {
+        QueryWrapper wrapper=new QueryWrapper();
+
+        if(staffName!="" && staffName!=null ){
+            // 按员工名称进行模糊查询
+            wrapper.like("st.STAFF_NAME",staffName);
+        }
+        return salaryFixedMapper.selectSalaryPage(page,wrapper);
     }
 }

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -47,10 +49,12 @@ public class Glory implements Serializable {
     @TableField("GLORY_REMARK")
     private String gloryRemark;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "CREATED_TIME",fill = FieldFill.INSERT)
     private Date createdTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "修改时间")
     @TableField(value = "UPDATED_TIME",fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;

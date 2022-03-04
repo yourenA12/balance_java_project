@@ -19,7 +19,7 @@ public interface SalaryFixedService extends IService<Salary> {
     int insertFixedwage(Salary salary,Fixedwage fixedwage);
 
     //查询调薪记录
-    IPage<Salary> selectSalaryPage(IPage<Salary> page);
+    IPage<Salary> selectSalaryPage(IPage<Salary> page,String staffName);
 
 
 }
