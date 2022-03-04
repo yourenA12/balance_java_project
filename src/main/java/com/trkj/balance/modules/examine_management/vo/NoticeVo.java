@@ -88,6 +88,10 @@ public class NoticeVo implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    @ApiModelProperty(value = "员工名称")
+    @TableField("STAFF_NAME")
+    private String staffName;
+
     @TableLogic
     @ApiModelProperty(value = "逻辑删除 0:未删 1:已删 ")
     @TableField("IS_DELETED")

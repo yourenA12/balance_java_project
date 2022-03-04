@@ -18,9 +18,9 @@ public class WorkerVoController {
     //待办申请分页查询方法 返回ajaxlist
     @GetMapping("/findSelectPageWorker")
     public AjaxResponse findSelectPageWorker(@RequestParam("currentPage") int currenPage, @RequestParam("pagesize") int pagesize,
-        @RequestParam("auditflowTitle") String auditflowTitle,@RequestParam("auditflowdetaiState") String auditflowdetaiState,@RequestParam("staffName") String staffName){
+        @RequestParam("auditflowTitle") String auditflowTitle,@RequestParam("auditflowdetaiState") String auditflowdetaiState,@RequestParam("staffName") String staffName,@RequestParam("staffId") int staffId){
         Page<WorkerVo> page = new Page<>(currenPage,pagesize);
-        IPage<WorkerVo> list=workervoService.findSelectPageWorker(page,auditflowTitle,auditflowdetaiState,staffName);
+        IPage<WorkerVo> list=workervoService.findSelectPageWorker(page,auditflowTitle,auditflowdetaiState,staffName,staffId);
         return AjaxResponse.success(list);
     }
     //通过id 查询 审批数据的详情信息

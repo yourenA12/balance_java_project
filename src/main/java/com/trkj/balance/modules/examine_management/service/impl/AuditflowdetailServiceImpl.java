@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.crypto.Data;
+
 /**
  * <p>
  * 审批流明细表 服务实现类
@@ -380,6 +382,7 @@ public class AuditflowdetailServiceImpl extends ServiceImpl<AuditflowdetailMappe
 
                 if(card.getCardType()=="未签到"){
                     // 补上午
+                    
 
                 }else{
                     // 补下午

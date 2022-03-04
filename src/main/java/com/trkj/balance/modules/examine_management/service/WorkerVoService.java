@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface WorkerVoService extends IService<WorkerVo> {
     //分页查询
-    IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page, String auditflowTitle,String auditflowdetaiState, String staffName);
+    IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page, String auditflowTitle,String auditflowdetaiState, String staffName,int staffId);
     //根据id查询
     List<WorkerVo> findSelectById(Long id);
 

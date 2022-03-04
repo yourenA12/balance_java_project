@@ -20,9 +20,10 @@ public  class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> i
     @Autowired
     private WorkerVoMapper workerVoMapper;
 
+
     @Override
     public IPage<WorkerVo> findSelectPageWorker(Page<WorkerVo> page,String auditflowTitle,
-                                                String auditflowdetaiState,String staffName) {
+                                                String auditflowdetaiState,String staffName,int staffId) {
         // 声明一个条件构造器
         QueryWrapper<WorkerVo> wrapper = new QueryWrapper<>();
         // 审批流程为 (转正,异动,请假等) 的
@@ -39,7 +40,7 @@ public  class WorkerVoServiceImpl extends ServiceImpl<WorkerVoMapper,WorkerVo> i
         // 模糊查询申请人名称
         wrapper.like("ac.staff_name",staffName);
         //查询 审核人 员工id 为2 的审核人的审批数据// 当前登录人 id
-        wrapper.eq("bc.staff_id",2);
+        wrapper.eq("bc.staff_id",staffId);
 
         return workerVoMapper.findSelectPageWorker(page,wrapper);
     }

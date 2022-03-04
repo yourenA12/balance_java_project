@@ -24,4 +24,14 @@ public class NoticeVoController {
         IPage<NoticeVo> list=noticeVoService.findSelectNoticeVo(page,staffId);
         return AjaxResponse.success(noticeVoService.findSelectNoticeVo(page,staffId));
     }
+    //根据id 查询 公司公告
+    @GetMapping("/findSelectNoticeById/{id}")
+    public AjaxResponse findSelectNoticeById(@PathVariable("id")Long id ){
+        return AjaxResponse.success(noticeVoService.findSelectNotice(id));
+    }
+    //根据id 查询 公司公告
+    @GetMapping("/findSelectNoticeById1/{id}")
+    public AjaxResponse findSelectNoticeById1(@PathVariable("id")Long id ){
+        return AjaxResponse.success(noticeVoService.findSelectByIdNotice1(id));
+    }
 }
