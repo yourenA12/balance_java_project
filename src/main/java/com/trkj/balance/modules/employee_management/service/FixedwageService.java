@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public interface FixedwageService extends IService<Fixedwage> {
     //分页查询固定工资表数据
-    IPage<Fixedwage> selectFixedwagePage(IPage<Fixedwage> page, String staffNameSearch, ArrayList deptIds, String postSearch);
+    IPage<Fixedwage> selectFixedwagePage(IPage<Fixedwage> page,int compId, String staffNameSearch, ArrayList deptIds, String postSearch);
 
 
 
