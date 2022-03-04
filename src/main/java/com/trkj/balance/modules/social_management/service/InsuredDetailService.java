@@ -1,5 +1,6 @@
 package com.trkj.balance.modules.social_management.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.trkj.balance.modules.social_management.entity.InsuredDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -18,5 +19,8 @@ public interface InsuredDetailService extends IService<InsuredDetail> {
 
     // 按员工id删除参保
     int deleteInsuredAll(ArrayList<Integer> staffIds);
+
+    //根据id查询参保记录
+    IPage<InsuredDetail> selectInsuredDetailPage(IPage<InsuredDetail> page,Long id);
 
 }

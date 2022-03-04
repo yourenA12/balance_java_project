@@ -74,5 +74,9 @@ public class Auditflowdetail implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
+    @TableField(exist = false)
+    private Long isStaffState;
+
+
 
 }

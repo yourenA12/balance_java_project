@@ -399,9 +399,9 @@ public class DefInsuredServiceImpl extends ServiceImpl<DefInsuredMapper, DefInsu
         }
         QueryWrapper wrapper1 = new QueryWrapper<>();
         wrapper1.in("STAFF_ID",staffIds);
-        detailMapper.delete(wrapper1);// 按员工id删除参保明细表
+        detailMapper.deleteByDate(wrapper1);// 按员工id删除参保明细表
 
-        detailSonMapper.delete(wrapper1);// 按员工id删除参保明细详情表
+        detailSonMapper.deleteByDate(wrapper1);// 按员工id删除参保明细详情表
 
 
         return 1;

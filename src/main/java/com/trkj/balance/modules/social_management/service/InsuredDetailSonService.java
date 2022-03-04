@@ -16,6 +16,6 @@ import java.util.List;
 public interface InsuredDetailSonService extends IService<InsuredDetailSon> {
 
     //根据员工id查询参保明细详情信息
-    List<InsuredDetailSon> selectInsuredDetailSon(Long id);
+    List<InsuredDetailSon> selectInsuredDetailSon(Long id,String date);
 
 }

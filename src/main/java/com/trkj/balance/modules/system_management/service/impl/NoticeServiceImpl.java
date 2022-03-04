@@ -3,8 +3,11 @@ package com.trkj.balance.modules.system_management.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.trkj.balance.modules.employee_management.entity.Staff;
+import com.trkj.balance.modules.employee_management.mapper.StaffMapper;
 import com.trkj.balance.modules.system_management.entity.Notice;
 import com.trkj.balance.modules.system_management.entity.NoticeDept;
+import com.trkj.balance.modules.system_management.entity.NoticeStaff;
 import com.trkj.balance.modules.system_management.mapper.Dept_NoticeMapper;
 import com.trkj.balance.modules.system_management.mapper.NoticeDeptMapper;
 import com.trkj.balance.modules.system_management.mapper.NoticeMapper;
@@ -46,6 +49,10 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
     // 公告员工表
     @Autowired
     private NoticeStaffMapper noticeStaffMapper;
+
+    // 员工表
+    @Autowired
+    private StaffMapper staffMapper;
 
     // 分页查询公告
     @Override
@@ -100,7 +107,18 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
     public int insertOneNotice(Notice notice) {
 
         // 先新增公告表
-        return noticeMapper.insert(notice);
+        noticeMapper.insert(notice);
+        // 新增公告部门表
+        NoticeDept noticeDept = new NoticeDept();
+        noticeDept.setNoticeId(notice.getNoticeId());// 公告id
+        // 循环部门id
+        for (Long deptId : notice.getDeptIds()) {
+            noticeDept.setDeptId(deptId);// 部门id
+            noticeDeptMapper.insert(noticeDept);// 新增公告部门表
+        }
+
+
+        return 1;
 
     }
 
@@ -120,17 +138,32 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
         // 修改原公告表中的数据
         noticeMapper.updateById(notice);
 
+        // 新建一个部门公告表对象
+        NoticeDept noticeDept = new NoticeDept();
+        noticeDept.setNoticeId( notice.getNoticeId() );// 公告表id
         // 再添加公告部门表
         for( int i =0;i<notice.getDeptIds().size();i++ ){
 
-            // 新建一个部门公告表对象
-            NoticeDept noticeDept = new NoticeDept();
-            noticeDept.setNoticeId( notice.getNoticeId() );// 公告表id
             noticeDept.setDeptId(notice.getDeptIds().get(i));// 部门表id
             // 添加公告部门表
             noticeDeptMapper.insert(noticeDept);
 
         }
+
+        // 按部门id查询员工表
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.in("DEPT_ID",notice.getDeptIds());
+        List<Staff> staffs = staffMapper.selectList(wrapper);
+
+        // 新增公告员工表
+        NoticeStaff noticeStaff = new NoticeStaff();
+        noticeStaff.setNoticeId(notice.getNoticeId());// 公告id
+        //循环员工id
+        for (Staff staff : staffs) {
+            noticeStaff.setStaffId(staff.getStaffId());// 员工id
+            noticeStaffMapper.insert(noticeStaff);// 新增公告员工表
+        }
+
         return 1;
     }
 

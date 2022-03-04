@@ -82,4 +82,8 @@ public class QuitnVo implements Serializable {
     @TableField("dept_name")
     private String deptName;
 
+    @ApiModelProperty(value = "审核状态")
+    @TableField("AUDITFLOWDETAI_STATE")
+    private Long auditflowdetaiState;
+
 }

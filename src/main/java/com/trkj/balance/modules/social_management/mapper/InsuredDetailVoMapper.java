@@ -18,7 +18,20 @@ public interface InsuredDetailVoMapper extends BaseMapper<InsuredDetailVo> {
     @Select("select * from INSURED_DETAIL a \n" +
             "LEFT JOIN STAFF b on a.STAFF_ID=b.STAFF_ID LEFT JOIN dept de on b.DEPT_ID=de.DEPT_ID left JOIN  POSITION p  on b.POSITION_ID=p.POSITION_ID\n" +
             "RIGHT JOIN INSURED_STAFF c on c.STAFF_ID=b.STAFF_ID\n" +
-            "LEFT JOIN DEF_INSURED d on c.DEF_INSURED_ID=d.DEF_INSURED_ID ${ew.customSqlSegment} and TO_CHAR(a.CREATED_TIME,'yyyy-MM')=TO_CHAR(sysdate,'yyyy-MM')")
-    IPage<InsuredDetailVo> selectInsuredDetail(IPage<InsuredDetailVo> page,@Param(Constants.WRAPPER) QueryWrapper<InsuredDetailVo> wrapper);
+            "LEFT JOIN DEF_INSURED d on c.DEF_INSURED_ID=d.DEF_INSURED_ID ${ew.customSqlSegment} " +
+            "and TO_CHAR(a.CREATED_TIME,'yyyy-MM')=TO_CHAR(TO_DATE(#{date},'yyyy-MM'),'yyyy-MM')") // 传递月份
+    IPage<InsuredDetailVo> selectInsuredDetail(IPage<InsuredDetailVo> page,@Param(Constants.WRAPPER) QueryWrapper<InsuredDetailVo> wrapper,@Param("date") String date);
 
+    //查询参保明细
+    @Select("select b.STAFF_NAME,c.DEPT_NAME,d.POSITION_NAME,e.DEF_INSURED_NAME,f.INS_DETAIL_SOCIAL_PERSON_PAY\n" +
+            ",f.INS_DETAIL_SOCIAL_FIRM_PAY,f.INS_DETAIL_FUND_PERSON_PAY,f.INS_DETAIL_FUND_FIRM_PAY,TO_CHAR(f.CREATED_TIME,'yyyy-MM') as insuredMonth\n" +
+            "from INSURED_STAFF a \n" +
+            "LEFT JOIN STAFF b on a.STAFF_ID=b.STAFF_ID\n" +
+            "LEFT JOIN DEPT c on c.DEPT_ID=b.DEPT_ID\n" +
+            "LEFT JOIN POSITION d on d.POSITION_ID=b.POSITION_ID\n" +
+            "LEFT JOIN DEF_INSURED e on a.DEF_INSURED_ID=e.DEF_INSURED_ID\n" +
+            "LEFT JOIN INSURED_DETAIL f on b.STAFF_ID=f.STAFF_ID\n" +
+            "where a.STAFF_ID =#{id} AND TO_CHAR(f.CREATED_TIME,'yyyy-MM')=TO_CHAR(TO_DATE(#{date},'yyyy-MM'),'yyyy-MM')")
+
+    InsuredDetailVo selectInsuredDetailVo(@Param("id") Long id,@Param("date") String date);
 }

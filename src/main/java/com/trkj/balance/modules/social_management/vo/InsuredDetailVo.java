@@ -76,4 +76,7 @@ public class InsuredDetailVo implements Serializable {
     @TableField("STAFF_STATE")
     private Long staffState;
 
+    @TableField(exist = false)
+    private String insuredMonth; // 参保月份
+
 }

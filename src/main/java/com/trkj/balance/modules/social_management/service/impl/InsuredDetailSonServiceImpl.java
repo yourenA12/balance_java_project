@@ -24,10 +24,9 @@ public class InsuredDetailSonServiceImpl extends ServiceImpl<InsuredDetailSonMap
     @Autowired
     private InsuredDetailSonMapper insuredDetailSonMapper;
 
+    // 按员工id和月份查询参保明细详情
     @Override
-    public List<InsuredDetailSon> selectInsuredDetailSon(Long id) {
-        QueryWrapper wrapper=new QueryWrapper<>();
-        wrapper.eq("STAFF_ID",id);
-        return insuredDetailSonMapper.selectList(wrapper);
+    public List<InsuredDetailSon> selectInsuredDetailSon(Long id,String date) {
+        return insuredDetailSonMapper.selectByIdByDate(id,date);
     }
 }
