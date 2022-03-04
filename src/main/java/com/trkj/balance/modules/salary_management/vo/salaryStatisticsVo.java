@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalaryStatisticsVo {
+public class salaryStatisticsVo {
 
     @TableField(exist = false)
     private String month; // 计薪月份

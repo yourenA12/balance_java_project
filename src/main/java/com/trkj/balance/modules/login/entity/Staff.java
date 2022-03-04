@@ -163,5 +163,12 @@ public class Staff implements Serializable {
     @TableField("REVISION")
     private Long revision;
 
+    // 部门
+    @TableField(exist = false)
+    private String deptName;
+
+    // 职位
+    @TableField(exist = false)
+    private String postName;
 
 }
