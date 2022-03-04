@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+
 /**
  * <p>
  * 审批流明细表 前端控制器
@@ -47,7 +49,7 @@ public class AuditflowdetailController {
     }
     //修改 补打卡
     @PutMapping("/updateCard")
-    public AjaxResponse updateCard(@RequestBody Auditflowdetail auditflowdetail){
+    public AjaxResponse updateCard(@RequestBody Auditflowdetail auditflowdetail) throws ParseException {
         return AjaxResponse.success(auditflowdetailService.updateCard(auditflowdetail));
     }
 }
