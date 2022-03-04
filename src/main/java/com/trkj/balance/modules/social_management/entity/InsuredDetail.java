@@ -70,5 +70,8 @@ public class InsuredDetail implements Serializable {
     @TableField("IS_DELETED")
     private Long isDeleted;
 
+    @TableField(exist = false)
+    private String insuredMonth;
+
 
 }

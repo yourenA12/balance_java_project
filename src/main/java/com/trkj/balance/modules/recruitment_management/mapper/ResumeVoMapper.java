@@ -54,7 +54,7 @@ public interface ResumeVoMapper extends BaseMapper<ResumeVo> {
             "ON R.RECRUITMENT_PLAN_ID = Z.RECRUITMENT_PLAN_ID \n" +
             "LEFT JOIN POSITION P \n" +
             "ON Z.POSITION_ID = P.POSITION_ID\n " +
-            "where R.RESUME_ZT=3")
+            "where R.RESUME_ZT=3 or R.RESUME_ZT=11")
     IPage<ResumeVo> ResumePage_D(Page<ResumeVo> page);
 
     //已邀约

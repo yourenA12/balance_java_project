@@ -9,13 +9,12 @@ import com.trkj.balance.modules.employee_management.vo.StaffVo;
 import com.trkj.balance.modules.salary_management.entity.Compensation;
 import com.trkj.balance.modules.salary_management.entity.CompensationDeptPost;
 import com.trkj.balance.modules.salary_management.entity.CompensationStaff;
-import com.trkj.balance.modules.salary_management.mapper.CompensationDeptPostMapper;
-import com.trkj.balance.modules.salary_management.mapper.CompensationMapper;
-import com.trkj.balance.modules.salary_management.mapper.CompensationStaffMapper;
-import com.trkj.balance.modules.salary_management.mapper.DeptPostMapper;
+import com.trkj.balance.modules.salary_management.entity.Wagenotfiled;
+import com.trkj.balance.modules.salary_management.mapper.*;
 import com.trkj.balance.modules.salary_management.service.CompensationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trkj.balance.modules.salary_management.service.CompensationStaffService;
+import com.trkj.balance.modules.social_management.entity.InsuredStaff;
 import com.trkj.balance.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +61,10 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
     // 薪酬组员工中间表service
     @Autowired
     private CompensationStaffService compensationStaffService;
+
+    // 未归档表
+    @Autowired
+    private WagenotfiledMapper wagenotfiledMapper;
 
     // 新增薪酬组
     @Override
@@ -174,6 +177,18 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
             }
 
         }
+
+        // 添加薪酬组-未归档表
+        Wagenotfiled wagenotfiled = new Wagenotfiled();// 实体类
+        wagenotfiled.setCompensationId(compensation.getCompensationId());// 薪酬组id
+        wagenotfiled.setWagenotfiledAskperson(compensation.getCompensationNumber());// 计薪人数
+        if ( wagenotfiledMapper.insert(wagenotfiled) <1){
+            // 如果小于1，就是添加失败，则回滚，前台会提示添加失败
+            // 手动回滚
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+
         // 执行完成，添加成功
         return 1;
     }
@@ -268,8 +283,18 @@ public class CompensationServiceImpl extends ServiceImpl<CompensationMapper, Com
 
     //删除薪酬组
     @Override
+    @Transactional
     public int deleteCompensation(Long id) {
-        return compensationMapper.deleteById(id);
+
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.eq("COMPENSATION_ID", id);
+
+        compensationDeptPostMapper.delete(wrapper); // 按薪酬组id删除 部门职位
+        compensationStaffMapper.delete(wrapper); // 删除员工
+        wagenotfiledMapper.deleteByDate(wrapper);// 删除未归档
+        compensationMapper.delete(wrapper); // 删除薪酬组
+
+        return 1;
     }
 
     // 按薪酬组查询 方案 （加班方案id，扣款方案id，出差方案id）

@@ -64,12 +64,12 @@ public class CompensationController {
 
         log.debug(staffIds.toString());
 
-//        // 判断删除
-//        if(compensation.getCompensationId()+""!="" && compensation.getCompensationId()!=null){
-//            if( defInsuredService.deleteDefInsured(Math.toIntExact(defInsured.getDefInsuredId()))<1){
-//                return AjaxResponse.success("出错了，请稍后再试");
-//            }
-//        }
+        // 判断删除
+        if(compensation.getCompensationId()+""!="" && compensation.getCompensationId()!=null){
+            if( compensationService.deleteCompensation(compensation.getCompensationId())<1){
+                return AjaxResponse.success("出错了，请稍后再试");
+            }
+        }
 
         // 查询薪酬组名称是否重复
         String a=compensationService.selectCompensationNames(compensation.getCompensationName());

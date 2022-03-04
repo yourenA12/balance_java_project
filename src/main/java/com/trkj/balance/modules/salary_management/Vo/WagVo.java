@@ -1,4 +1,4 @@
-package com.trkj.balance.modules.salary_management.Vo;
+package com.trkj.balance.modules.salary_management.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -55,15 +55,15 @@ public class WagVo {
 
     @ApiModelProperty(value = "工作日加班工资")
     @TableField(exist = false)
-    private Double dayOvertime;
+    private Double workdayMoney;
 
     @ApiModelProperty(value = "节假日加班工资")
     @TableField(exist = false)
-    private Double Holidays;
+    private Double holidaysMoney;
 
     @ApiModelProperty(value = "休息日加班工资")
     @TableField(exist = false)
-    private Double restOvertime;
+    private Double restMoney;
 
     @ApiModelProperty(value = "工资合计")
     @TableField(exist = false)
@@ -84,6 +84,14 @@ public class WagVo {
     @ApiModelProperty(value = "旷工")
     @TableField(exist = false)
     private Double absenteeism;
+
+    @ApiModelProperty(value = "病假")
+    @TableField(exist = false)
+    private Double fallLeave;
+
+    @ApiModelProperty(value = "事假")
+    @TableField(exist = false)
+    private Double matterLeave;
 
     @ApiModelProperty(value = "社保个人缴费")
     @TableField("INS_DETAIL_SOCIAL_PERSON_PAY")
